@@ -190,6 +190,7 @@ main.container{
   flex-direction:column;
   gap:12px;
   min-height:240px;
+  min-width:240px;
   transition:transform .14s;
   position:relative;
   width:25%;
@@ -447,4 +448,5 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
 
