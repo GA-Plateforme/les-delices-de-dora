@@ -670,3 +670,19 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
   search.addEventListener('input', positionSuggestions);
   positionSuggestions();
 })();
+
+
+  (function syncHeaderSpacing(){
+    const header = document.querySelector('header.appbar');
+    if(!header) return;
+    function update(){
+      const h = Math.ceil(header.getBoundingClientRect().height) || 72;
+      document.documentElement.style.setProperty('--header-height', h + 'px');
+      document.body.style.paddingTop = h + 'px';
+    }
+    update();
+    new ResizeObserver(update).observe(header);
+    window.addEventListener('load', update);
+    window.addEventListener('resize', update);
+  })();
+
