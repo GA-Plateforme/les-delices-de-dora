@@ -66,7 +66,7 @@ header.appbar{
   gap:12px;
   position:sticky;
   top:0;
-  z-index:400;
+  z-index:9999;
   width:100%;
   left:0;
   right:0;
@@ -447,6 +447,7 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
 
 
 
