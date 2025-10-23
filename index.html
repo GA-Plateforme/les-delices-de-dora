@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Les Délices de Dora — Boutique</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  
+  <!-- SDK EmailJS -->
+  <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+  
+</head>
+<body>
+
+<header class="appbar">
+  <div class="brand">
+    <div class="logo" aria-hidden>🛍️</div>
+    <div class="title">
+      <div class="name emph">Les Délices de Dora</div>
+      <div class="tag">Produits africains</div>
+    </div>
+  </div>
+  <div class="actions">
+    <button id="openCart" class="icon-btn" aria-label="Ouvrir le panier">🛒 <span id="cartBadge" class="cart-badge">0</span></button>
+  </div>
+</header>
+
+<!-- Bouton panier flottant (toujours visible) -->
+<button id="openCartFloat" class="fab-cart" aria-label="Ouvrir le panier" style="display:none;">
+  🛒 <span style="font-weight:700;margin-left:6px">Panier</span>
+  <span id="cartBadgeFloat" class="badge">0</span>
+</button>
+
+<main class="container" role="main">
+
+  <!-- HERO -->
+  <section class="hero" id="heroBlock" aria-hidden="false">
+    <div style="z-index:2;max-width:960px;padding:0 8px">
+      <div class="top-title">Bienvenu chez</div>
+      <h1>Les Délices de Dora</h1>
+      <p class="subtitle">Produits africains authentiques — chikwangue et spécialités</p>
+
+      <div class="search" style="margin-top:6px">
+        <input id="searchInput" placeholder="Rechercher un produit..." aria-label="Rechercher" autocomplete="off" />
+        <button id="clearSearch" class="btn-ghost" aria-label="Effacer la recherche">Effacer</button>
+
+        <div class="suggestions" id="suggestions" role="listbox" aria-label="Suggestions de produit"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grille des produits -->
+  <section>
+    <div class="grid" id="productGrid" aria-live="polite"></div>
+  </section>
+
+  <!-- Espace avant la section À propos (espacement demandé) -->
+  <section style="grid-column:1/-1; margin-top:28px;">
+    <div class="about">
+      <button class="about-toggle" aria-expanded="false" aria-controls="about-content">
+        <strong>À propos de l’entreprise</strong>
+        <span class="caret">▸</span>
+      </button>
+      <div id="about-content" class="about-content" hidden>
+        <p><strong>Les Délices de Dora</strong> a été fondée en 2025 pour importer et distribuer des produits alimentaires africains authentiques, avec comme produit phare la chikwangue, aliment de base d'Afrique centrale.</p>
+        <p><strong>Vision :</strong> Devenir la référence de la chikwangue authentique au Canada.</p>
+        <p><strong>Mission :</strong> Offrir à la diaspora africaine et aux curieux des produits traditionnels de qualité, accessibles et fidèles au goût d'origine.</p>
+        <p><strong>Valeurs :</strong> Qualité et authenticité; proximité avec la clientèle; esprit familial et collaboration.</p>
+
+        <h4>Faits saillants</h4>
+        <p>Mme Raïssa, immigrée au Canada en 2012, a constaté l'absence de chikwangue authentique. En 2019, la redécouverte du produit via une visite familiale a inspiré le projet. En 2024 elle décide d'importer en s'inspirant de modèles européens. En juin 2025, la première importation de 3 400 unités s'est vendue en une semaine à 3,25 $ l'unité.</p>
+
+        <h4>Objectifs</h4>
+        <ul>
+          <li><strong>Court terme (1 an)</strong> : présence dans au moins 10 épiceries africaines au Québec et en Ontario, volume régulier de 3 000 unités toutes les deux semaines.</li>
+          <li><strong>Moyen terme (2–3 ans)</strong> : élargir le portefeuille client dans tout le Québec et l'Ontario.</li>
+          <li><strong>Long terme (5 ans)</strong> : positionner Les Délices de Dora comme acteur de référence au Canada, avec distribution en grandes surfaces.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Panneau panier -->
+<div class="cart-panel" id="cartPanel" aria-hidden="true">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <strong>Votre panier</strong>
+    <button id="closeCart" class="btn-ghost" aria-label="Fermer le panier">Fermer</button>
+  </div>
+  <div id="cartItems" style="display:flex;flex-direction:column;gap:8px;padding-top:8px"></div>
+  <div style="margin-top:auto">
+    <div class="cart-footer">
+      <div>
+        <div class="small muted">Articles : <strong id="cartCount">0</strong></div>
+        <div class="small muted">Total : <strong id="cartTotal">0.00 $</strong></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+        <button id="clearCart" class="btn-ghost">Vider</button>
+        <button id="checkoutCart" class="btn-primary">Valider la commande</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Superposition pour la modal (state hidden inline to avoid flash) -->
+<div class="overlay" id="overlay" aria-hidden="true" style="display:none"></div>
+
+<!-- Modal de commande (initially hidden inline to prevent flash) -->
+<div class="payment-modal" id="orderModal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none">
+  <div class="modal-header">
+    <strong>Finaliser la commande</strong>
+    <button id="closeOrder" class="modal-close" aria-label="Fermer la commande">✖</button>
+  </div>
+
+  <form id="orderForm" class="modal-body" autocomplete="off" novalidate>
+    <!-- Gauche : champs du formulaire -->
+    <div class="form-row" style="grid-column:1">
+      <div>
+        <div class="label-row">
+          <label class="small">Nom au complet <span class="required" aria-hidden>*</span></label>
+          <div class="small" style="color:var(--muted)">Obligatoire</div>
+        </div>
+        <input id="fullName" name="full_name" class="input" required />
+        <div id="err-fullName" class="field-error">Le nom doit contenir au moins 4 lettres.</div>
+      </div>
+
+      <div class="two-cols" style="margin-top:6px">
+        <div>
+          <div class="label-row">
+            <label class="small">Numéro de téléphone (Canada) <span class="required" aria-hidden>*</span></label>
+          </div>
+          <input id="phone" name="phone" class="input" placeholder="+1 000 000 0000" required />
+          <div id="err-phone" class="field-error">Numéro invalide, vérifiez et réessayez</div>
+        </div>
+
+        <div>
+          <div class="label-row">
+            <label class="small">Adresse courriel</label>
+            <div class="small" style="color:var(--muted)">Facultatif</div>
+          </div>
+          <input id="email" name="email" class="input" type="email" />
+          <div id="err-email" class="field-error">Adresse courriel invalide.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:6px">
+        <div class="label-row">
+          <label class="small">Adresse de livraison <span class="required" aria-hidden>*</span></label>
+          <div class="small" style="color:var(--muted)">Indiquez rue, ville, code postal</div>
+        </div>
+        <input id="address" name="address" class="input" required />
+        <div id="err-address" class="field-error">Adresse de livraison requise.</div>
+      </div>
+
+      <div style="margin-top:6px">
+        <div class="label-row">
+          <label class="small">Autre demande</label>
+          <div class="small" style="color:var(--muted)">Ex: horaires de livraison, instructions</div>
+        </div>
+        <textarea id="notes" name="notes" class="input" rows="4" style="resize:vertical"></textarea>
+      </div>
+    </div>
+
+    <!-- Droite : récapitulatif de commande -->
+    <div class="order-summary" id="orderSummary" aria-live="polite">
+      <!-- rempli par JS -->
+    </div>
+
+    <!-- Champs cachés -->
+    <input type="hidden" name="items_html" id="itemsHtmlField" />
+    <input type="hidden" name="total" id="totalField" />
+    <input type="hidden" name="created_at" id="createdAtField" />
+
+    <div class="modal-actions">
+      <button type="button" id="orderCancel" class="btn-ghost">Annuler</button>
+      <button type="button" id="orderSend" class="btn-primary">Envoyer la commande</button>
+    </div>
+    <div id="orderFeedback" class="feedback" aria-live="polite"></div>
+  </form>
+</div>
+
+<footer class="footer">
+  <div><strong style="color:var(--accent-dark)">Les Délices de Dora</strong> — Fondée en 2025 • Produit phare : la chikwangue<br>&copy; 2025 GA_PlateForme Tous droits réservés.</div>
+</footer>
+
+<!-- Script -->
+<script src="script.js"></script>
+</body>
+</html>
