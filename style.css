@@ -192,6 +192,7 @@ main.container{
   min-height:240px;
   transition:transform .14s;
   position:relative;
+  width:25%;
 }
 .card:hover{transform:translateY(-6px)}
 
@@ -446,3 +447,4 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
