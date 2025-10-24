@@ -15,13 +15,11 @@ const PRODUCTS = [
   {id:'p05', name:"Saka Saka, Pondu", subtitle:"(paquet)", price:5.00, img:'assets/images/saka-saka.png', alt: "🖼️"},
   {id:'p06', name:"Asperge Africaine", subtitle:"(paquet)", price:10.00, img:'assets/images/asperge-africaine.png', alt: "🖼️"},
   {id:'p07', name:"Poisson Fumé - Nzombo", subtitle:"(1kg)", price:12.00, img:'assets/images/poisson-nzombo.png',alt: "🖼️"},
-  {id:'p08', name:"Mboto", subtitle:"(1kg)", price:9.00, img:'assets/images/mboto.jpg', alt: "Poisson Mboto frais ou salé"},
+  {id:'p08', name:"Poisson - Sol", subtitle:"(1kg)", price:9.00, img:'assets/images/sol.jpg', alt: "🖼️"},
   {id:'p09', name:"Poisson Salée - Bouaka Boueni", subtitle:"(1kg)", price:11.00, img:'assets/images/bouaka-boueni.jpg', alt: "🖼️"},
   {id:'p10', name:"Arachides", subtitle:"(sac)", price:20.00, img:'assets/images/arachides.jpg', alt: "🖼️"},
   {id:'p11', name:"Foufou", subtitle:"(1kg)", price:8.00, img:'assets/images/foufou.jpeg', alt: "🖼️"},
-  
-  {id:'p12', name:"Piment Africain", subtitle:"(1kg)", price:6.00, img:'assets/images/piment-africain.jpg', alt: "Piments africains rouges ou verts, frais ou séchés"},
-  
+  {id:'p12', name:"Piment Africain", subtitle:"(1kg)", price:6.00, img:'assets/images/piment.jpg', alt: "🖼️"},
   {id:'p13', name:"Gombo / Oka", subtitle:"(1kg)", price:6.00, img:'assets/images/gombo.jpg', alt: "🖼️"},
   {id:'p14', name:"Petit Kola", subtitle:"(paquet)", price:10.00, img:'assets/images/kola.jpg', alt: "🖼️"},
   {id:'p15', name:"Tondolo", subtitle:"(paquet)", price:10.00, img:'assets/images/tondolo.png', alt: "🖼️"},
@@ -29,7 +27,7 @@ const PRODUCTS = [
   {id:'p17', name:"Citronnelle", subtitle:"(1kg)", price:3.50, img:'assets/images/citronnelle.png', alt: "🖼️"},
   
   {id:'p18', name:"Boukouloutou", subtitle:"(1kg)", price:7.00, img:'assets/images/boukouloutou.jpg', alt: "Feuilles ou racines de boukouloutou"},
-  {id:'p19', name:"NGaï NGaï", subtitle:"(sac)", price:5.00, img:'assets/images/gai-gai.jpg', alt: "Arbre de bissap"},
+  {id:'p19', name:"NGaï NGaï", subtitle:"(sac)", price:5.00, img:'assets/images/ngai-ngai.jpg', alt: "Arbre de bissap"},
   
   {id:'p20', name:"Poisson Salée - Mboto", subtitle:"", price:0.00, img:'assets/images/mboto.png', alt: "🖼️"},
   {id:'p21', name:"Tilapia rouge", subtitle:"", price:0.00, img:'assets/images/Tilapiarouge.png', alt: "🖼️"},
@@ -696,6 +694,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
 
 
