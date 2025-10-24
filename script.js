@@ -13,10 +13,9 @@ const PRODUCTS = [
   {id:'p03', name:"Fumbwa / Okok", subtitle:"(paquet)", price:5.00, img:'assets/images/fumbwa.png', alt: "🖼️"},
   {id:'p04', name:"Noix de palme pilé", subtitle:"(paquet)", price:5.00, img:'assets/images/noix-de-palme.png', alt: "🖼️"},
   {id:'p05', name:"Saka Saka, Pondu", subtitle:"(paquet)", price:5.00, img:'assets/images/saka-saka.png', alt: "🖼️"},
+  {id:'p06', name:"Asperge Africaine", subtitle:"(paquet)", price:10.00, img:'assets/images/asperge-africaine.png', alt: "🖼️"},
+  {id:'p07', name:"Poisson Fumé - Nzombo", subtitle:"(1kg)", price:12.00, img:'assets/images/poisson-nzombo.png',alt: "🖼️"},
   
-  {id:'p06', name:"Asperge Africaine", subtitle:"(paquet)", price:10.00, img:'assets/images/asperge-africaine.jpg', alt: "🖼️"},
-  
-  {id:'p07', name:"Poisson Fumé - Nzombo", subtitle:"(1kg)", price:12.00, img:'assets/images/poisson-nzombo.jpg', alt: "Poisson Nzombo fumé, prêt à cuisiner"},
   {id:'p08', name:"Mboto", subtitle:"(1kg)", price:9.00, img:'assets/images/mboto.jpg', alt: "Poisson Mboto frais ou salé"},
   {id:'p09', name:"Poisson Salée - Bouaka Boueni", subtitle:"(1kg)", price:11.00, img:'assets/images/bouaka-boueni.jpg', alt: "Poisson salé Bouaka Boueni, tranché et conservé"},
   {id:'p10', name:"Arachides", subtitle:"(sac)", price:20.00, img:'assets/images/arachides.jpg', alt: "Arachides entières ou décortiquées en sac"},
@@ -687,6 +686,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
 
 
