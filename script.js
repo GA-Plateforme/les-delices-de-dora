@@ -8,26 +8,28 @@
     status3: "rabais(15.00)"   -> applique promo, affiche ancien prix barré et nouveau prix 15.00 $
 */
 const PRODUCTS = [
-  {id:'p01',name:"Chikwangues", subtitle:"(Carton de 20)",price:60.00,img:'',status: "stokepuise"},
-  {id:'p02',name:"Safou", subtitle:"(1kg)",price:20.00,img:'',status2: "bientot" },
-  {id:'p03',name:"Fumbwa / Okok", subtitle:"(paquet)",price:5.00,img:'',status3: "rabais(3.00)"},
-  {id:'p04',name:"Noix de palme", subtitle:"(paquet)",price:5.00,img:''},
-  {id:'p05',name:"Saka Saka", subtitle:"(paquet)",price:5.00,img:''},
-  {id:'p06',name:"Asperge Africaine", subtitle:"(paquet)",price:10.00,img:''},
-  {id:'p07',name:"Poisson Fumé - Nzombo", subtitle:"(1kg)",price:12.00,img:''},
-  {id:'p08',name:"Mboto", subtitle:"(1kg)",price:9.00,img:''},
-  {id:'p09',name:"Poisson Salée - Bouaka Boueni", subtitle:"(1kg)",price:11.00,img:''},
-  {id:'p10',name:"Arachides", subtitle:"(sac)",price:20.00,img:''},
-  {id:'p11',name:"Foufou", subtitle:"(1kg)",price:8.00,img:''},
-  {id:'p12',name:"Piment Africain", subtitle:"(1kg)",price:6.00,img:''},
-  {id:'p13',name:"Gombo / Oka", subtitle:"(1kg)",price:6.00,img:''},
-  {id:'p14',name:"Petit Kola", subtitle:"(paquet)",price:10.00,img:''},
-  {id:'p15',name:"Tondolo", subtitle:"(paquet)",price:10.00,img:''},
-  {id:'p16',name:"Aubergine", subtitle:"(1kg)",price:4.00,img:''},
-  {id:'p17',name:"Citronnelle", subtitle:"(1kg)",price:3.50,img:''},
-  {id:'p18',name:"Boukouloutou", subtitle:"(1kg)",price:7.00,img:''},
-  {id:'p19',name:"Gaï Gaï", subtitle:"(sac)",price:5.00,img:''},
-  {id:'p20',name:"Autre spécialité", subtitle:"",price:5.00,img:''}
+  {id:'p01', name: "Chikwangues, Manioc", subtitle: "(Carton de 20)", price: 65.00, img: 'assets/images/chikwangues.png', alt: "🖼️"},
+  {id:'p02', name:"Safou", subtitle:"(1kg)", price:20.00, img:'assets/images/safou.png', alt: "🖼️"},
+  {id:'p03', name:"Fumbwa / Okok", subtitle:"(paquet)", price:5.00, img:'assets/images/fumbwa.png', alt: "🖼️"},
+  {id:'p04', name:"Noix de palme pilé", subtitle:"(paquet)", price:5.00, img:'assets/images/noix-de-palme.png', alt: "🖼️"},
+  {id:'p05', name:"Saka Saka, Pondu", subtitle:"(paquet)", price:5.00, img:'assets/images/saka-saka.png', alt: "🖼️"},
+  
+  {id:'p06', name:"Asperge Africaine", subtitle:"(paquet)", price:10.00, img:'assets/images/asperge-africaine.jpg', alt: "🖼️"},
+  
+  {id:'p07', name:"Poisson Fumé - Nzombo", subtitle:"(1kg)", price:12.00, img:'assets/images/poisson-nzombo.jpg', alt: "Poisson Nzombo fumé, prêt à cuisiner"},
+  {id:'p08', name:"Mboto", subtitle:"(1kg)", price:9.00, img:'assets/images/mboto.jpg', alt: "Poisson Mboto frais ou salé"},
+  {id:'p09', name:"Poisson Salée - Bouaka Boueni", subtitle:"(1kg)", price:11.00, img:'assets/images/bouaka-boueni.jpg', alt: "Poisson salé Bouaka Boueni, tranché et conservé"},
+  {id:'p10', name:"Arachides", subtitle:"(sac)", price:20.00, img:'assets/images/arachides.jpg', alt: "Arachides entières ou décortiquées en sac"},
+  {id:'p11', name:"Foufou", subtitle:"(1kg)", price:8.00, img:'assets/images/foufou.jpg', alt: "Farine de foufou en sachet"},
+  {id:'p12', name:"Piment Africain", subtitle:"(1kg)", price:6.00, img:'assets/images/piment-africain.jpg', alt: "Piments africains rouges ou verts, frais ou séchés"},
+  {id:'p13', name:"Gombo / Oka", subtitle:"(1kg)", price:6.00, img:'assets/images/gombo.jpg', alt: "Gombo frais ou séché, prêt à cuisiner"},
+  {id:'p14', name:"Petit Kola", subtitle:"(paquet)", price:10.00, img:'assets/images/petit-kola.jpg', alt: "Noix de petit kola emballées"},
+  {id:'p15', name:"Tondolo", subtitle:"(paquet)", price:10.00, img:'assets/images/tondolo.jpg', alt: "Feuilles de tondolo fraîches ou séchées"},
+  {id:'p16', name:"Aubergine", subtitle:"(1kg)", price:4.00, img:'assets/images/aubergine.jpg', alt: "Aubergines africaines rondes ou allongées"},
+  {id:'p17', name:"Citronnelle", subtitle:"(1kg)", price:3.50, img:'assets/images/citronnelle.jpg', alt: "Tiges de citronnelle fraîches ou séchées"},
+  {id:'p18', name:"Boukouloutou", subtitle:"(1kg)", price:7.00, img:'assets/images/boukouloutou.jpg', alt: "Feuilles ou racines de boukouloutou"},
+  {id:'p19', name:"Gaï Gaï", subtitle:"(sac)", price:5.00, img:'assets/images/gai-gai.jpg', alt: "Graines ou farine de Gaï Gaï en sac"},
+  {id:'p20', name:"Autre spécialité", subtitle:"", price:5.00, img:'assets/images/autre-specialite.jpg', alt: "Produit africain spécial, selon disponibilité"}
 ];
 
 const CART_KEY = 'demo_cart_v4';
@@ -685,5 +687,6 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
 
