@@ -8,9 +8,9 @@
     status3: "rabais(15.00)"   -> applique promo, affiche ancien prix barré et nouveau prix 15.00 $
 */
 const PRODUCTS = [
-  {id:'p01',name:"Chikwangues", subtitle:"(Carton de 20)",price:60.00,img:''},
-  {id:'p02',name:"Safou", subtitle:"(1kg)",price:20.00,img:''},
-  {id:'p03',name:"Fumbwa / Okok", subtitle:"(paquet)",price:5.00,img:''},
+  {id:'p01',name:"Chikwangues", subtitle:"(Carton de 20)",price:60.00,img:'',status: "stokepuise"},
+  {id:'p02',name:"Safou", subtitle:"(1kg)",price:20.00,img:'',status2: "bientot" },
+  {id:'p03',name:"Fumbwa / Okok", subtitle:"(paquet)",price:5.00,img:'',status3: "rabais(3.00)"},
   {id:'p04',name:"Noix de palme", subtitle:"(paquet)",price:5.00,img:''},
   {id:'p05',name:"Saka Saka", subtitle:"(paquet)",price:5.00,img:''},
   {id:'p06',name:"Asperge Africaine", subtitle:"(paquet)",price:10.00,img:''},
@@ -685,4 +685,5 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
