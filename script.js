@@ -22,12 +22,19 @@ const PRODUCTS = [
   {id:'p12', name:"Piment Africain", subtitle:"(1kg)", price:6.00, img:'assets/images/piment-africain.jpg', alt: "Piments africains rouges ou verts, frais ou séchés"},
   {id:'p13', name:"Gombo / Oka", subtitle:"(1kg)", price:6.00, img:'assets/images/gombo.jpg', alt: "Gombo frais ou séché, prêt à cuisiner"},
   {id:'p14', name:"Petit Kola", subtitle:"(paquet)", price:10.00, img:'assets/images/petit-kola.jpg', alt: "Noix de petit kola emballées"},
+  
   {id:'p15', name:"Tondolo", subtitle:"(paquet)", price:10.00, img:'assets/images/tondolo.png', alt: "🖼️"},
-  {id:'p16', name:"Aubergine", subtitle:"(1kg)", price:4.00, img:'assets/images/aubergine.jpg', alt: "Aubergines africaines rondes ou allongées"},
-  {id:'p17', name:"Citronnelle", subtitle:"(1kg)", price:3.50, img:'assets/images/citronnelle.png', alt: "Tiges de citronnelle fraîches ou séchées"},
+  {id:'p16', name:"Aubergine", subtitle:"(1kg)", price:4.00, img:'assets/images/Aubergine.jpg', alt: "🖼️"},
+  {id:'p17', name:"Citronnelle", subtitle:"(1kg)", price:3.50, img:'assets/images/citronnelle.png', alt: "🖼️"},
+  
   {id:'p18', name:"Boukouloutou", subtitle:"(1kg)", price:7.00, img:'assets/images/boukouloutou.jpg', alt: "Feuilles ou racines de boukouloutou"},
   {id:'p19', name:"Gaï Gaï", subtitle:"(sac)", price:5.00, img:'assets/images/gai-gai.jpg', alt: "Graines ou farine de Gaï Gaï en sac"},
-  {id:'p20', name:"Autre spécialité", subtitle:"", price:5.00, img:'assets/images/autre-specialite.jpg', alt: "Produit africain spécial, selon disponibilité"}
+  {id:'p20', name:"Autre spécialité", subtitle:"", price:5.00, img:'assets/images/autre-specialite.jpg'},
+  
+  {id:'p21', name:"Tilapia rouge", subtitle:"", price:0.00, img:'assets/images/Tilapiarouge.png', alt: "🖼️"},
+  {id:'p22', name:"Tilapia", subtitle:"", price:0.00, img:'assets/images/Tilapia.png', alt: "🖼️"},
+  {id:'p23', name:"Poisson chat", subtitle:"", price:0.00, img:'assets/images/Poissonchat.png', alt: "🖼️"},
+  
 ];
 
 const CART_KEY = 'demo_cart_v4';
@@ -685,6 +692,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
 
 
