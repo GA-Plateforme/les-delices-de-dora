@@ -118,7 +118,7 @@ main.container{
   position:absolute;
   inset:0;
   border-radius:12px;
-  background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder');
+  background-image: url('assets/images/logo.jpg');
   background-size:cover;
   background-position:center center;
   opacity:0.60;
@@ -458,6 +458,7 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
 
 
 
