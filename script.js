@@ -16,7 +16,7 @@ const PRODUCTS = [
   {id:'p06', name:"Asperge Africaine", subtitle:"(paquet)", price:10.00, img:'assets/images/asperge-africaine.png', alt: "🖼️"},
   {id:'p07', name:"Poisson Fumé - Nzombo", subtitle:"(1kg)", price:40.00, img:'assets/images/poisson-nzombo.png',alt: "🖼️"},
   {id:'p08', name:"Poisson - Sol", subtitle:"(carton)", price:80.00, img:'assets/images/sol.jpg', alt: "🖼️"},
-  {id:'p09', name:"Poisson Salée - Bouaka Boueni", subtitle:"(carton)", price:28.00, img:'assets/images/bouaka-boueni.jpg', alt: "🖼️"},
+  {id:'p09', name:"Poisson Salée - Congo ya sika", subtitle:"(carton)", price:28.00, img:'assets/images/bouaka-boueni.jpg', alt: "🖼️"},
   {id:'p10', name:"Arachides", subtitle:"(sac)", price:20.00, img:'assets/images/arachides.jpg', alt: "🖼️"},
   {id:'p11', name:"Foufou", subtitle:"(1kg)", price:8.00, img:'assets/images/foufou.jpeg', alt: "🖼️"},
   {id:'p12', name:"Piment Africain", subtitle:"(1kg)", price:6.00, img:'assets/images/piment.jpg', alt: "🖼️"},
@@ -35,6 +35,12 @@ const PRODUCTS = [
   {id:'p25', name:"Poisson Maquerelle", subtitle:"(carton)", price:50.00, img:'assets/images/PoissonMaquerelle.jpg', alt: "🖼️"},
   {id:'p26', name:"Banane plantain", subtitle:"(1kg)", price:1.80, img:'assets/images/Bananeplantain.jpg', alt: "🖼️"},
   {id:'p27', name:"Attiéké", subtitle:"(1kg)", price:5.00, img:'assets/images/attiéké.jpg', alt: "🖼️"},
+  {id:'p28', name:"Poulet fumé", subtitle:"", price:11.00, img:'assets/images/poulet.jpg', alt: "🖼️"},
+  {id:'p29', name:"Cote fumé", subtitle:"", price:20.00, img:'assets/images/cote.jpg', alt: "🖼️"},
+  {id:'p30', name:"Dinde fumé", subtitle:"", price:15.00, img:'assets/images/dinde.png', alt: "🖼️"},
+  {id:'p31', name:"Moseka, chinchard", subtitle:"(carton)", price:50.00, img:'assets/images/moseka.png', alt: "🖼️"},
+  {id:'p32', name:"Crevette surgelées", subtitle:"", price:10.00, img:'assets/images/Crevettesurgelées.png', alt: "🖼️"},
+  {id:'p33', name:"Moussaka, Mwmaba", subtitle:"(paquet)", price:5.00, img:'assets/images/moussaka.png', alt: "🖼️"},
 ];
 
 const CART_KEY = 'demo_cart_v4';
@@ -692,6 +698,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
 
 
