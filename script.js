@@ -35,7 +35,7 @@ const PRODUCTS = [
   {id:'p21', name:"Tilapia rouge", subtitle:"", price:0.00, img:'assets/images/Tilapiarouge.png', alt: "🖼️"},
   {id:'p22', name:"Tilapia", subtitle:"", price:0.00, img:'assets/images/Tilapia.png', alt: "🖼️"},
   {id:'p23', name:"Poisson chat", subtitle:"", price:0.00, img:'assets/images/Poissonchat.png', alt: "🖼️"},
-  {id:'p24', name:"Bissap", subtitle:"", price:0.00, img:'assets/images/Poissonchat.png', alt: "🖼️"},
+  {id:'p24', name:"Bissap", subtitle:"", price:0.00, img:'assets/images/bissap.png', alt: "🖼️"},
   {id:'p25', name:"Poisson Maquerelle", subtitle:"", price:0.00, img:'assets/images/PoissonMaquerelle.jpg', alt: "🖼️"},
   {id:'p26', name:"Banane plantain", subtitle:"", price:0.00, img:'assets/images/Bananeplantain.png', alt: "🖼️"},
   {id:'p27', name:"Attiéké", subtitle:"", price:0.00, img:'assets/images/attiéké.jpg', alt: "🖼️"},
@@ -696,6 +696,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
 
 
