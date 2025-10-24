@@ -41,7 +41,7 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:20px 0 0 0;
+  margin:10px 0 0 0;
   min-height:100vh;
   background:var(--bg-grad);
   color:#071126;
@@ -191,15 +191,14 @@ main.container{
   flex-direction:column;
   gap:20px;
   min-height:150px;
-  min-width:150px;
-  margin-bottom: 20px;
+  min-width:100px;
   transition:transform .14s;
   position:relative;
 }
 .card:hover{transform:translateY(-6px)}
 
 .img{
-  height: clamp(120px, 22vw, 300px);
+  height: clamp(120px, 25vw, 224px);
   background:#f1f5f9;
   border-radius:8px;
   background-position:center;
@@ -449,6 +448,7 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
 
 
 
