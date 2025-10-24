@@ -9,7 +9,6 @@
   --hero-foreground:#012438;
   --input-bg:#ffffff;
   --input-border:#e6e9ee;
-  --header-height: 72px;
   --focus-shadow:0 12px 30px rgba(14,120,190,0.12);
   font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
   -webkit-font-smoothing:antialiased;
@@ -42,9 +41,8 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
-  margin:0;
+  margin:100px 0 0 0;
   min-height:100vh;
-  padding-top: var(--header-height);
   background:var(--bg-grad);
   color:#071126;
   display:flex;
@@ -73,8 +71,6 @@ header.appbar{
   left:0;
   right:0;
   box-shadow:0 2px 10px rgba(2,6,23,0.06);
-  height: var(--header-height);
-  will-change:transform;
 }
 
 .brand{display:flex;align-items:center;gap:12px}
@@ -453,4 +449,8 @@ main.container{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
 
-/* Script inline (conserver la logique d'ajustement dynamique du header) */
+
+
+
+
+
