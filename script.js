@@ -8,9 +8,9 @@
     status3: "rabais(15.00)"   -> applique promo, affiche ancien prix barré et nouveau prix 15.00 $
 */
 const PRODUCTS = [
-  {id:'p01', name: "Chikwangues, Manioc", subtitle: "(Carton de 20)", price: 65.00, img: 'assets/images/chikwangues.png', alt: "🖼️"},
-  {id:'p02', name:"Safou", subtitle:"(1kg)", price:20.00, img:'assets/images/safou.png', alt: "🖼️"},
-  {id:'p03', name:"Fumbwa / Okok", subtitle:"(paquet)", price:5.00, img:'assets/images/fumbwa.png', alt: "🖼️"},
+  {id:'p01', name: "Chikwangues, Manioc", subtitle: "(Carton de 20)", price: 65.00, img: 'assets/images/chikwangues.png', alt: "🖼️", status: "stokepuise"},
+  {id:'p02', name:"Safou", subtitle:"(1kg)", price:20.00, img:'assets/images/safou.png', alt: "🖼️",status2: "bientot"  },
+  {id:'p03', name:"Fumbwa / Okok", subtitle:"(paquet)", price:5.00, img:'assets/images/fumbwa.png', alt: "🖼️",status3: "rabais(3.00)"},
   {id:'p04', name:"Noix de palme pilé", subtitle:"(paquet)", price:5.00, img:'assets/images/noix-de-palme.png', alt: "🖼️"},
   {id:'p05', name:"Saka Saka, Pondu", subtitle:"(paquet)", price:5.00, img:'assets/images/saka-saka.png', alt: "🖼️"},
   {id:'p06', name:"Asperge Africaine", subtitle:"(paquet)", price:10.00, img:'assets/images/asperge-africaine.png', alt: "🖼️"},
@@ -26,12 +26,12 @@ const PRODUCTS = [
   {id:'p16', name:"Aubergine", subtitle:"(1kg)", price:15.00, img:'assets/images/Aubergine.jpg', alt: "🖼️"},
   {id:'p17', name:"Citronnelle", subtitle:"(1kg)", price:5.00, img:'assets/images/citronnelle.png', alt: "🖼️"},
   {id:'p18', name:"Boukouloutou", subtitle:"(1kg)", price:5.00, img:'assets/images/boukouloutou.jpg', alt: "🖼️"},
-  {id:'p19', name:"NGaï NGaï", subtitle:"(sac)", price:5.00, img:'assets/images/ngaï-ngaï.jpg', alt: "🖼️"},
+  {id:'p19', name:"NGaï NGaï", subtitle:"(sac)", price:5.00, img:'assets/images/ngaï-ngaï.png', alt: "🖼️"},
   {id:'p20', name:"Poisson Salée - Mboto", subtitle:"(carton)", price:28.00, img:'assets/images/mboto.png', alt: "🖼️"},
   {id:'p21', name:"Tilapia rouge", subtitle:"(carton)", price:50.00, img:'assets/images/Tilapiarouge.png', alt: "🖼️"},
   {id:'p22', name:"Tilapia", subtitle:"(carton)", price:50.00, img:'assets/images/Tilapia.png', alt: "🖼️"},
   {id:'p23', name:"Poisson chat", subtitle:"(carton)", price:50.00, img:'assets/images/Poissonchat.png', alt: "🖼️"},
-  {id:'p24', name:"Bissap", subtitle:"(sac)", price:10.00, img:'assets/images/bissap.png', alt: "🖼️"},
+  {id:'p24', name:"Bissap", subtitle:"(sac)", price:10.00, img:'assets/images/Bissap.png', alt: "🖼️"},
   {id:'p25', name:"Poisson Maquerelle", subtitle:"(carton)", price:50.00, img:'assets/images/PoissonMaquerelle.jpg', alt: "🖼️"},
   {id:'p26', name:"Banane plantain", subtitle:"(1kg)", price:1.80, img:'assets/images/Bananeplantain.jpg', alt: "🖼️"},
   {id:'p27', name:"Attiéké", subtitle:"(1kg)", price:5.00, img:'assets/images/attiéké.jpg', alt: "🖼️"},
@@ -692,6 +692,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
 
 
