@@ -25,17 +25,15 @@ const PRODUCTS = [
   {id:'p15', name:"Tondolo", subtitle:"(paquet)", price:10.00, img:'assets/images/tondolo.png', alt: "🖼️"},
   {id:'p16', name:"Aubergine", subtitle:"(1kg)", price:4.00, img:'assets/images/Aubergine.jpg', alt: "🖼️"},
   {id:'p17', name:"Citronnelle", subtitle:"(1kg)", price:3.50, img:'assets/images/citronnelle.png', alt: "🖼️"},
-  
-  {id:'p18', name:"Boukouloutou", subtitle:"(1kg)", price:7.00, img:'assets/images/boukouloutou.jpg', alt: "Feuilles ou racines de boukouloutou"},
-  {id:'p19', name:"NGaï NGaï", subtitle:"(sac)", price:5.00, img:'assets/images/ngai-ngai.jpg', alt: "Arbre de bissap"},
-  
+  {id:'p18', name:"Boukouloutou", subtitle:"(1kg)", price:7.00, img:'assets/images/boukouloutou.jpg', alt: "🖼️"},
+  {id:'p19', name:"NGaï NGaï", subtitle:"(sac)", price:5.00, img:'assets/images/ngaï-ngaï.jpg', alt: "🖼️"},
   {id:'p20', name:"Poisson Salée - Mboto", subtitle:"", price:0.00, img:'assets/images/mboto.png', alt: "🖼️"},
   {id:'p21', name:"Tilapia rouge", subtitle:"", price:0.00, img:'assets/images/Tilapiarouge.png', alt: "🖼️"},
   {id:'p22', name:"Tilapia", subtitle:"", price:0.00, img:'assets/images/Tilapia.png', alt: "🖼️"},
   {id:'p23', name:"Poisson chat", subtitle:"", price:0.00, img:'assets/images/Poissonchat.png', alt: "🖼️"},
   {id:'p24', name:"Bissap", subtitle:"", price:0.00, img:'assets/images/bissap.png', alt: "🖼️"},
   {id:'p25', name:"Poisson Maquerelle", subtitle:"", price:0.00, img:'assets/images/PoissonMaquerelle.jpg', alt: "🖼️"},
-  {id:'p26', name:"Banane plantain", subtitle:"", price:0.00, img:'assets/images/Bananeplantain.png', alt: "🖼️"},
+  {id:'p26', name:"Banane plantain", subtitle:"", price:0.00, img:'assets/images/Bananeplantain.jpg', alt: "🖼️"},
   {id:'p27', name:"Attiéké", subtitle:"", price:0.00, img:'assets/images/attiéké.jpg', alt: "🖼️"},
 ];
 
@@ -694,6 +692,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
 
 
