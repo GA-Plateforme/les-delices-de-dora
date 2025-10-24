@@ -8,9 +8,9 @@
     status3: "rabais(15.00)"   -> applique promo, affiche ancien prix barré et nouveau prix 15.00 $
 */
 const PRODUCTS = [
-  {id:'p01', name: "Chikwangues, Manioc", subtitle: "(Carton de 20)", price: 65.00, img: 'assets/images/chikwangues.png', alt: "🖼️", status: "stokepuise"},
-  {id:'p02', name:"Safou", subtitle:"(1kg)", price:20.00, img:'assets/images/safou.png', alt: "🖼️",status2: "bientot"  },
-  {id:'p03', name:"Fumbwa / Okok", subtitle:"(paquet)", price:5.00, img:'assets/images/fumbwa.png', alt: "🖼️",status3: "rabais(3.00)"},
+  {id:'p01', name: "Chikwangues, Manioc", subtitle: "(Carton de 20)", price: 65.00, img: 'assets/images/chikwangues.png', alt: "🖼️"},
+  {id:'p02', name:"Safou", subtitle:"(1kg)", price:20.00, img:'assets/images/safou.png', alt: "🖼️" },
+  {id:'p03', name:"Fumbwa / Okok", subtitle:"(paquet)", price:5.00, img:'assets/images/fumbwa.png', alt: "🖼️"},
   {id:'p04', name:"Noix de palme pilé", subtitle:"(paquet)", price:5.00, img:'assets/images/noix-de-palme.png', alt: "🖼️"},
   {id:'p05', name:"Saka Saka, Pondu", subtitle:"(paquet)", price:5.00, img:'assets/images/saka-saka.png', alt: "🖼️"},
   {id:'p06', name:"Asperge Africaine", subtitle:"(paquet)", price:10.00, img:'assets/images/asperge-africaine.png', alt: "🖼️"},
@@ -698,6 +698,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
 
 
