@@ -40,39 +40,16 @@
 /* Mise en page de base */
 *{box-sizing:border-box}
 
-
-
 /* Empêche tout débordement horizontal global */
 html, body {
   max-width: 100%;
   overflow-x: hidden;
 }
-/* Assure que le conteneur principal ne dépasse pas la largeur de la fenêtre */
-main.container,
-.container {
-  width: 100%;
-  max-width: 100vw;
-  box-sizing: border-box;
-}
-/* Évite que les éléments utilisant 100vw provoquent un débordement à cause de la scrollbar */
-.full-bleed {
-  width: calc(100vw - 0px);
-  max-width: 100%;
-  box-sizing: border-box;
-}
-/* Pour les éléments avec padding + 100% : utilisez calc pour inclure le padding */
-.element-avec-padding {
-  width: calc(100% - 24px); /* remplacer 24px par la somme des paddings horizontaux */
-  box-sizing: border-box;
-}
-
-
-
-
 
 body{
   margin:10px 0 0 0;
   min-height:100vh;
+  max-width: 100%;
   background:var(--bg-grad);
   color:#071126;
   display:flex;
@@ -489,6 +466,7 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
 
 
 
