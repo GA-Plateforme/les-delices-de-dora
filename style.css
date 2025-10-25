@@ -84,7 +84,7 @@ header.appbar{
 
 /* Conteneur principal - colonne unique, contenu centré */
 main.container{
-  overflow-x: hidden;
+  
   width:95%;
   max-width:var(--max-page-width);
   margin:28px auto;
