@@ -86,7 +86,7 @@ header.appbar{
    Conteneur principal responsive
    ========================= */
 main.container{
-  width:95%;
+  width:100%;
   max-width:var(--max-page-width);
   margin:28px auto;
   display:grid;
