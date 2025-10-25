@@ -90,7 +90,6 @@ header.appbar{
 
 /* Conteneur principal - colonne unique, contenu centré */
 main.container{
-  width:95%;
   max-width:var(--max-page-width);
   margin:28px auto;
   display:grid;
@@ -159,7 +158,6 @@ main.container{
   box-shadow:0 6px 18px rgba(11,116,222,0.03);transition:box-shadow .18s, transform .12s, border-color .12s;
   outline:none;
   background:rgba(255,255,255,0.96);
-  max-width:95%;
 }
 .search input::placeholder{color:#9aa4b2}
 .search input:focus{
@@ -464,6 +462,7 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
 
 
 
