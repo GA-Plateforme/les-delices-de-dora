@@ -192,7 +192,7 @@ main.container{
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap:16px;
   margin-top:14px;
-  width:100%;
+  max-width:100%;
 }
 
 /* Carte produit (taille ajustée) */
@@ -204,15 +204,15 @@ main.container{
   display:flex;
   flex-direction:column;
   gap:20px;
-  min-height:150px;
-  min-width:50px;
+  min-height:200px;
+  min-width:100px;
   transition:transform .14s;
   position:relative;
 }
 .card:hover{transform:translateY(-6px)}
 
 .img{
-  height: clamp(120px, 25vw, 224px);
+  min-height:150px;
   background:#f1f5f9;
   border-radius:8px;
   background-position:center;
@@ -462,6 +462,7 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
 
 
 
