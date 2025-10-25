@@ -24,11 +24,11 @@
 
 <!-- Bouton panier flottant (toujours visible) -->
 <button id="openCartFloat" class="fab-cart" aria-label="Ouvrir le panier" style="display:none;">
-  🛒 <span style="font-weight:700;margin-left:6px;max-width:100%">Panier</span>
+  🛒 <span style="font-weight:700;margin-left:6px">Panier</span>
   <span id="cartBadgeFloat" class="badge">0</span>
 </button>
 
-<main class="container" role="main" style="max-width:100%">
+<main class="container" role="main">
 
   <!-- HERO -->
   <section class="hero" id="heroBlock" aria-hidden="false">
@@ -80,7 +80,7 @@
 </main>
 
 <!-- Panneau panier -->
-<div class="cart-panel" id="cartPanel" aria-hidden="true" style="max-width:100%">
+<div class="cart-panel" id="cartPanel" aria-hidden="true">
   <div style="display:flex;justify-content:space-between;align-items:center">
     <strong>Votre panier</strong>
     <button id="closeCart" class="btn-ghost" aria-label="Fermer le panier">Fermer</button>
@@ -104,7 +104,7 @@
 <div class="overlay" id="overlay" aria-hidden="true" style="display:none"></div>
 
 <!-- Modal de commande (initially hidden inline to prevent flash) -->
-<div class="payment-modal" id="orderModal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;max-width:100%">
+<div class="payment-modal" id="orderModal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none">
   <div class="modal-header">
     <strong>Finaliser la commande</strong>
     <button id="closeOrder" class="modal-close" aria-label="Fermer la commande">✖</button>
@@ -185,9 +185,6 @@
   <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
 
 
 
