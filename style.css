@@ -43,7 +43,6 @@
 /* Empêche tout débordement horizontal global */
 html, body {
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 body{
@@ -466,6 +465,7 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
 
 
 
