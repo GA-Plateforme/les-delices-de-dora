@@ -18,6 +18,95 @@
 
 
 
+
+
+
+
+
+
+
+
+
+/* Variables */
+:root{
+  --header-height:64px; /* ajuster si besoin */
+}
+
+/* Header — hauteur fixe et box-sizing */
+header.appbar{
+  height:var(--header-height);
+  padding:12px 18px;
+  box-sizing:border-box;
+}
+
+/* Réserver l'espace du header pour éviter chevauchement/décalage */
+body{
+  margin:0;
+  padding-top:calc(var(--header-height) + 6px);
+  min-height:100vh;
+  width:100%;
+  overflow-x:auto; /* temporaire pour debug, changez à clip après vérif */
+  box-sizing:border-box;
+}
+
+/* Main container — centrage propre et padding latéral contrôlé */
+main.container{
+  width:100%;
+  max-width:var(--max-page-width);
+  margin:0 auto;
+  padding:0 16px;
+  box-sizing:border-box;
+}
+
+/* Défense contre débordements causés par éléments internes */
+*, *::before, *::after{
+  box-sizing:border-box;
+  max-width:100%;
+}
+
+/* Grille et cartes qui s'adaptent à la largeur disponible */
+.grid{
+  margin:14px auto 0 auto;
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+/* Hero et pseudo-éléments protégés pour ne pas élargir le viewport */
+.hero, .hero::before{
+  box-sizing:border-box;
+  max-width:100%;
+  overflow:hidden;
+  min-width:0;
+  min-height:0;
+}
+
+/* Ajustements ciblés petits écrans */
+@media (max-width:560px){
+  main.container{ padding:0 12px; }
+  .grid{ margin-left:0; margin-right:0; }
+  .card{ width:100%; max-width:100%; }
+  .img{ width:100%; max-width:100%; object-fit:cover; }
+  .cart-panel{ right:10px; left:10px; }
+  .img{ height:140px; }
+  .qtybox span{ min-width:36px; }
+}
+
+/* Option debug pour repérer l'élément qui déborde
+   Enlevez ou commentez cette règle une fois le problème localisé */
+body[data-debug="true"] *{ outline: 1px solid rgba(255,0,0,0.06); }
+
+/* Remise en production : désactiver le scroll horizontal quand tout est OK */
+body[data-debug="false"]{ overflow-x:clip; }
+
+
+
+
+
+
+
+
+
 /* {
   outline: 1px solid rgba(255, 0, 0, 0.2);
 }*/
