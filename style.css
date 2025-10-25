@@ -201,7 +201,7 @@ main.container{
   display:flex;
   flex-direction:column;
   gap:20px;
-  min-height:150px;
+  min-height:200px;
   min-width:100px;
   transition:transform .14s;
   position:relative;
@@ -209,7 +209,7 @@ main.container{
 .card:hover{transform:translateY(-6px)}
 
 .img{
-  height: clamp(120px, 25vw, 224px);
+  height: clamp(150px, 25vw, 250px);
   background:#f1f5f9;
   border-radius:8px;
   background-position:center;
@@ -459,6 +459,7 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
 
 
 
