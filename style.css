@@ -100,11 +100,10 @@ main.container{
   padding:0 6px;
 }
 
-/* HERO (centré). Utilise pseudo-élément pour image de fond avec 60% visible */
+/* HERO (centré). Utilise pseudo-élément pour image de fond avec 60% visible 1180*/
 .hero{
   grid-column:1/-1;
   width:100%;
-  max-width:1180px;
   margin:0 auto;
   border-radius:12px;
   box-shadow:0 8px 30px rgba(2,6,23,0.06);
@@ -465,6 +464,7 @@ main.container{
 .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
   background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
 }
+
 
 
 
