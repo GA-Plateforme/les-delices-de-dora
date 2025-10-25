@@ -15,6 +15,17 @@
   -moz-osx-font-smoothing:grayscale;
 }
 
+
+
+
+* {
+  outline: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+
+
+
+
 /* Badges & promo small styles (keeps overall styling intact) */
 /* Default badge style (keeps existing appearance) */
 .product-badge{
@@ -53,6 +64,7 @@ body{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   -webkit-overflow-scrolling:touch;
+  overflow-x: clip;
 }
 
 /* Header full width (importé de 1mod.txt) */
