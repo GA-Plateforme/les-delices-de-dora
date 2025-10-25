@@ -109,6 +109,59 @@ body[data-debug="true"] * {
 
 
 
+
+
+
+/* Cartes carrées et plus grandes sur petits écrans */
+@media (max-width: 880px) {
+  /* Augmente la taille des vignettes et force un ratio 1:1 pour les cartes */
+  .grid { gap: 14px; }
+  .card {
+    padding: 16px;
+    min-height: auto;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:stretch;
+  }
+
+  /* Partie visuelle : zone image carrée qui prend ~60% de la hauteur de la carte */
+  .card .img {
+    aspect-ratio: 1 / 1; /* force le carré */
+    width: 100%;
+    height: auto;
+    max-height: calc(56vw); /* taille relative à l'écran pour plus de présence */
+    border-radius: 10px;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 12px;
+    flex: 0 0 auto;
+  }
+
+  /* Garder le contenu texte en dessous avec bon espacement */
+  .card .card-header,
+  .card .card-title,
+  .card .card-sub,
+  .card .controls {
+    width:100%;
+    box-sizing:border-box;
+  }
+
+  /* Option: augmenter la typographie pour meilleure lisibilité mobile */
+  .card .card-title { font-size: 16px; }
+  .card .price { font-size: 15px; }
+}
+
+/* Variante pour très petits écrans */
+@media (max-width: 420px) {
+  .card .img { max-height: calc(72vw); }
+  .card { padding:14px; gap:10px; }
+  .card .card-title { font-size:15px; }
+  .card .price { font-size:14px; }
+}
+
+
 /* {
   outline: 1px solid rgba(255, 0, 0, 0.2);
 }*/
