@@ -26,80 +26,86 @@
 
 
 
+/* --- Fix final pour petits décalages et centrage fin --- */
 
-/* Défense forte contre débordement horizontal */
+/* 1) Forcer viewport sain et empêcher tout débordement horizontal résiduel */
 html, body {
-  max-width:100vw;     /* jamais dépasser la largeur de la fenêtre */
-  overflow-x:hidden;   /* coupe tout débordement horizontal */
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip; /* verrouille horizontal scroll quand tout est OK */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 2) Header : s'assurer qu'il n'ajoute pas de décalage latéral (fixe + full width) */
+header.appbar{
+  position:fixed;
+  left:0;
+  right:0;
+  width:100%;
+  box-sizing:border-box;
+  transform:none; /* neutralise éventuels translate hérités */
+}
+
+/* 3) Conteneur principal : centrage et padding symétrique responsive */
+main.container{
+  margin-left:auto;
+  margin-right:auto;
+  width:100%;
+  max-width:var(--max-page-width);
+  padding-left:clamp(12px, 4vw, 24px);
+  padding-right:clamp(12px, 4vw, 24px);
   box-sizing:border-box;
 }
 
-/* S'assure que le header reste collé et ne génère pas de débordement */
-header.appbar {
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-width: 100vw;
+/* 4) Neutraliser marges négatives/transforms suspects (ciblé, sans brutal !important) */
+[class*="-wrap"], .brand, .actions, .hero, .grid, .card {
+  transform: none;
+  margin-left: 0;
+  margin-right: 0;
+  min-width: 0; /* important pour enfants flex/grid qui débordent */
   box-sizing: border-box;
 }
 
-/* Centering safe pour le contenu principal */
-main.container {
-  margin-left: auto;
-  margin-right: auto;
+/* 5) Hero background / pseudo-élément : ne doit pas repousser la page */
+.hero, .hero::before {
   left: 0;
   right: 0;
-  width: 100%;
-  max-width: var(--max-page-width);
-  padding-left: clamp(12px, 3vw, 24px);
-  padding-right: clamp(12px, 3vw, 24px);
-  box-sizing: border-box;
-}
-
-/* Neutraliser tout élément positionné absolument qui pourrait décaler le flux */
-* {
-  min-width: 0; /* important pour flex/grid children overflow */
-}
-
-/* Éviter que pseudo-éléments ou images de fond ne poussent la page */
-.hero::before, .img, .ci-thumb {
-  min-width: 0;
   max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 6) Images / vignettes : éviter qu'une image large casse le viewport */
+.img, .ci-thumb, img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
   box-sizing: border-box;
 }
 
-/* Éviter translations horizontales non contrôlées */
-[class*="translate"], [style*="translateX"], [style*="translate("] {
-  transform: none !important;
-}
-
-/* Neutraliser marges négatives problématiques */
-* {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-/* Règles spécifiques plus douces pour les composants usuels (réactive les marges locales ensuite si besoin) */
-.brand, .actions, .grid, .card {
-  margin-left: auto;
-  margin-right: auto;
+/* 7) Grille et cartes : s'assurer qu'elles respectent la colonne disponible */
+.grid {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
   box-sizing: border-box;
 }
 
-/* Petits écrans : s'assurer que tout tient */
-@media (max-width: 560px) {
-  html, body { overflow-x:hidden; }
-  main.container { padding-left:12px; padding-right:12px; }
-  .hero { padding-left:12px; padding-right:12px; }
-  .grid { gap:12px; width:100%; }
+/* 8) Petits écrans : conserver symétrie et espacement */
+@media (max-width: 880px) {
+  main.container { padding-left: 12px; padding-right: 12px; }
+  .hero { padding-left: 12px; padding-right: 12px; }
+  .grid { gap: 12px; }
 }
 
-/* Mode debug ciblé : activer manuellement data-debug="true" sur <body> pour repérer l'élément qui dépasse */
+/* 9) Outil de debug léger (activer manuellement en ajoutant data-debug="true" sur <body>) */
 body[data-debug="true"] * {
   outline: 1px solid rgba(255, 0, 0, 0.06);
 }
-
-
 
 
 
