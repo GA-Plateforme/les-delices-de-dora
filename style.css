@@ -39,7 +39,7 @@
 
 /* Mise en page de base */
 *{box-sizing:border-box}
-html,body{height:100%; overflow-x: hidden;}
+html,body{height:100%; }
 body{
   margin:10px 0 0 0;
   min-height:100vh;
@@ -85,7 +85,7 @@ header.appbar{
 /* Conteneur principal - colonne unique, contenu centré */
 main.container{
   
-  width:95%;
+  width:;
   max-width:var(--max-page-width);
   margin:28px auto;
   display:grid;
