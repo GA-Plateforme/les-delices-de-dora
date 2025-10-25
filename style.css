@@ -184,11 +184,32 @@ main.container{
 .suggestions .item:hover,.suggestions .item.active{background:#f6fbff;outline: none}
 
 
-@media (max-width:560px){
+/*_____ici______*/
+@media (max-width: 560px) {
   main.container {
-    padding: 0 12px;
+    padding: 0 16px; /* plus équilibré que 12px ou 6px */
+  }
+
+  .grid {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .img {
+    width: 100%;
+    max-width: 100%;
   }
 }
+
+
+
+
+
 
 /* Grille produits : augmenter légèrement la taille des vignettes */
 .grid{
@@ -208,8 +229,7 @@ main.container{
   display:flex;
   flex-direction:column;
   gap:20px;
-  min-height:150px;
-  min-width:100px;
+  min-height:150px;
   transition:transform .14s;
   position:relative;
 }
