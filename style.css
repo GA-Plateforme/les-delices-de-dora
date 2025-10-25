@@ -1,0 +1,513 @@
+### style.css (version complète et améliorée)
+
+:root{
+  --accent:#7ec8ff;
+  --accent-dark:#0b74de;
+  --muted:#6b7280;
+  --card:#fff;
+  --danger:#ef4444;
+  --bg-grad: linear-gradient(180deg,#fff 0%,#f3f7fb 100%);
+  --max-page-width:1180px;
+  --hero-foreground:#012438;
+  --input-bg:#ffffff;
+  --input-border:#e6e9ee;
+  --focus-shadow:0 12px 30px rgba(14,120,190,0.12);
+  font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+  text-size-adjust:100%;
+  font-size:16px;
+}
+
+/* Badges & promo small styles (keeps overall styling intact) */
+/* Default badge style (keeps existing appearance) */
+.product-badge{
+  display:inline-block;
+  padding:6px 8px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+  color:#fff;
+  background:var(--danger);
+  position:absolute;
+  left:14px;
+  top:14px;
+  z-index:3;
+  box-shadow:0 6px 18px rgba(2,6,23,0.12);
+}
+/* Variants */
+.product-badge.soon{ background:linear-gradient(90deg,#ffb44d,#ff8a4d); color:#012438; }
+.product-badge.promo{ background:linear-gradient(90deg,#ffe082,#ffd54f); color:#06324b; }
+.price-old{ text-decoration:line-through; color: #9aa4b2; margin-right:8px; font-weight:600; }
+.price-new{ color: #071126; font-weight:800; }
+
+/* Mise en page de base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:10px 0 0 0;
+  min-height:100vh;
+  background:var(--bg-grad);
+  color:#071126;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  line-height:1.4;
+  font-size:15px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* Header full width (importé de 1mod.txt) */
+header.appbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 18px;
+  background:#05293a;
+  color:#fff;
+  gap:12px;
+  position:fixed;
+  top:0;
+  z-index:9999;
+  width:100%;
+  left:0;
+  right:0;
+  box-shadow:0 2px 10px rgba(2,6,23,0.06);
+}
+
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:10px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:22px}
+.brand .title{display:flex;flex-direction:column}
+.brand .name{font-size:18px;font-weight:800;color:#fff;letter-spacing:0.2px}
+.brand .tag{font-size:12px;color:rgba(255,255,255,0.85)}
+.actions{display:flex;align-items:center;gap:8px}
+.icon-btn{background:transparent;border:0;color:#fff;cursor:pointer;padding:8px;border-radius:8px;font-size:16px}
+.cart-badge{position:relative;left:-8px;top:-6px;background:var(--danger);color:#fff;border-radius:999px;padding:2px 6px;font-size:12px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
+
+/* Conteneur principal - colonne unique, contenu centré */
+main.container{
+  width:95%;
+  max-width:var(--max-page-width);
+  margin:28px auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:28px;
+  align-items:start;
+  padding:0 6px;
+}
+
+/* HERO (centré). Utilise pseudo-élément pour image de fond avec 60% visible */
+.hero{
+  grid-column:1/-1;
+  width:100%;
+  max-width:1180px;
+  margin:0 auto;
+  border-radius:12px;
+  box-shadow:0 8px 30px rgba(2,6,23,0.06);
+  overflow:visible;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:28px 20px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.85));
+}
+
+/* couche de fond avec 60% visible et comportement responsive */
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:12px;
+  background-image: url('assets/images/logo.jpg');
+  background-size:cover;
+  background-position:center center;
+  opacity:0.60;
+  z-index:0;
+  pointer-events:none;
+}
+@media (min-width:1400px){
+  .hero::before{ background-size:contain; background-position:center center; }
+}
+
+/* Assure que le contenu est au-dessus de l'image */
+.hero > *{ position:relative; z-index:2; }
+
+/* Textes du hero utilisent la variable CSS pour la couleur adaptative */
+.hero .top-title{font-size:20px;color:var(--hero-foreground);font-weight:600;margin:0}
+.hero h1{margin:6px 0;font-size:34px;line-height:1.02;color:var(--hero-foreground)}
+.hero .subtitle{margin:8px 0 14px;color:var(--muted);font-size:15px}
+
+/* Recherche : stylisée et animation au focus */
+.search{display:flex;gap:8px;margin-top:12px;max-width:95%;position:relative;z-index:1002}
+.icon-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.09);
+  transition: all 0.2s ease;
+}
+.fab-cart:hover {
+  background-color: rgba(126, 200, 255, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.2s ease;
+}
+.search input{
+  flex:1;padding:12px 100px;border-radius:12px;border:1px solid var(--input-border);font-size:15px;
+  box-shadow:0 6px 18px rgba(11,116,222,0.03);transition:box-shadow .18s, transform .12s, border-color .12s;
+  outline:none;
+  background:rgba(255,255,255,0.96);
+  max-width:95%;
+}
+.search input::placeholder{color:#9aa4b2}
+.search input:focus{
+  box-shadow:var(--focus-shadow);transform:translateY(-2px);
+  border-color:var(--accent-dark);
+}
+
+/* Bouton effacer stylisé dans la recherche */
+.search .btn-ghost{
+  padding:10px 12px;border-radius:10px;border:1px solid #e6eef6;background:#fff;color:var(--accent-dark);cursor:pointer;
+  transition:background .12s,color .12s,box-shadow .12s,transform .08s;
+  box-shadow:0 4px 12px rgba(11,116,222,0.04);
+}
+.search .btn-ghost:hover{background:rgba(11,116,222,0.06);color:var(--accent-dark)}
+.search .btn-ghost:active{transform:translateY(1px);box-shadow:0 2px 6px rgba(11,116,222,0.06)}
+.search .btn-ghost:focus{outline:2px solid rgba(11,116,222,0.12);outline-offset:2px}
+
+/* Dropdown de suggestions placé au-dessus et non découpé par le hero */
+.suggestions{
+  position:absolute;left:0;right:0;top:100%;margin-top:8px;background:var(--card);
+  border:1px solid #e9eef6;border-radius:10px;box-shadow:0 20px 60px rgba(2,6,23,0.12);
+  max-height:320px;overflow:auto;z-index:22000;display:none;
+}
+.suggestions.open{display:block}
+.suggestions .item{padding:10px 12px;border-bottom:1px solid #f3f6fb;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.suggestions .item:last-child{border-bottom:0}
+.suggestions .item:hover,.suggestions .item.active{background:#f6fbff;outline: none}
+
+/* Grille produits : augmenter légèrement la taille des vignettes */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap:16px;
+  margin-top:14px;
+  width:100%;
+}
+
+/* Carte produit (taille ajustée) */
+.card{
+  background:var(--card);
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #e9eef6;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  min-height:150px;
+  min-width:100px;
+  transition:transform .14s;
+  position:relative;
+}
+.card:hover{transform:translateY(-6px)}
+
+/* IMAGE: ajustée pour meilleure visibilité sur mobile */
+.img{
+  height: clamp(140px, 34vw, 224px);
+  background:#f1f5f9;
+  border-radius:8px;
+  background-position:center;
+  background-size:cover;
+  width:100%;
+  flex-shrink:0;
+  position:relative;
+}
+
+/* Ensure product badge sits on image and does not cover the header */
+.card .product-badge{
+  left:10px;
+  top:10px;
+  z-index:4;
+}
+
+/* méta & contrôles */
+.card-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.card-title{font-weight:600}
+.card-sub{color:var(--muted);font-size:13px;margin-top:6px}
+.price{font-weight:700;color:#071126}
+.controls{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:0;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.qtybox{
+  display:inline-flex;
+  align-items:center;
+  border:1px solid var(--input-border);
+  border-radius:8px;
+  overflow:hidden;
+  background:#fff;
+}
+.qtybox button{
+  background:#fff;border:0;padding:8px 12px;cursor:pointer;font-weight:700;color:#07304a;
+}
+.qtybox span{min-width:48px;text-align:center;padding:6px 8px;display:inline-block}
+
+/* Ensure interactive elements are at least 16px on small screens to prevent iOS auto-zoom */
+@media (max-width:880px) {
+  .input,
+  .search input,
+  .btn-ghost,
+  .btn-primary,
+  .qtybox button,
+  .qtybox span,
+  .icon-btn {
+    font-size:16px;
+    line-height:1.2;
+  }
+  .search input { font-size:16px; padding:12px 90px; }
+}
+
+/* Small screen specific: keep comfortable touch targets */
+@media (max-width:560px){
+  .img{ height:160px }
+  .qtybox span{min-width:36px}
+  .modal-body{grid-template-columns:1fr}
+  .order-summary{order:2}
+}
+
+/* Buttons */
+.btn-primary{
+  background:linear-gradient(180deg,var(--accent),var(--accent-dark));
+  color:#06324b;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700;
+  box-shadow:0 8px 20px rgba(14,120,190,0.12);
+}
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(14,120,190,0.18); color:#fff;}
+.btn-ghost{background:transparent;border:1px solid #e6eef6;padding:8px 10px;border-radius:8px;cursor:pointer}
+.small{font-size:13px;color:var(--muted)}
+
+/* Panneau panier */
+.cart-panel{
+  position:fixed;right:16px;top:72px;width:360px;max-height:78vh;background:var(--card);
+  border-radius:12px;box-shadow:0 20px 50px rgba(2,6,23,0.18);overflow:auto;padding:12px;display:none;
+  flex-direction:column;gap:10px;z-index:20050;
+}
+.cart-panel.open{display:flex}
+.cart-item{display:flex;gap:10px;align-items:center;border-bottom:1px solid #f1f4f8;padding-bottom:10px}
+.ci-thumb{width:56px;height:56px;border-radius:8px;background-position:center;background-size:cover}
+.cart-footer{display:flex;justify-content:space-between;align-items:center;padding-top:8px}
+.remove{background:transparent;border:0;color:var(--danger);cursor:pointer}
+
+/* Animation hover pour 'Fermer' et 'Vider' - bleu ciel */
+.cart-panel .btn-ghost:hover, .cart-panel .remove:hover{
+  color:var(--accent-dark); background:rgba(126,200,255,0.10); border-color:rgba(126,200,255,0.18);
+  transform:translateY(-2px);
+}
+
+/* Désactivé pour bouton Vider si panier vide */
+.btn-ghost:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+  box-shadow:none;
+}
+.btn-ghost:disabled:hover{ transform:none; background:transparent; border-color:#e6eef6; color:var(--muted); }
+/* show 🚫 when hovering the disabled clear button */
+.btn-ghost:disabled:hover::after{ content: " 🚫"; margin-left:6px; }
+
+/* À propos & footer centrés; espacement augmenté entre about et footer */
+.about{margin-top:28px;display:flex;flex-direction:column;align-items:center;margin-bottom:64px}
+.about-toggle{width:100%;max-width:980px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px;background:#fff;border:1px solid #e6eef6;border-radius:10px;cursor:pointer;font-size:16px}
+.about-content{width:100%;max-width:980px;margin-top:18px;background:#fff;padding:18px;border-radius:8px;border:1px solid #eef4fb;line-height:1.45}
+.footer{margin-top:64px;padding:18px;text-align:center;color:var(--muted);font-size:13px;width:100%}
+
+/* dynamic overlays and alerts centered both axes now */
+.dynamic-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  z-index:30999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+}
+.dynamic-alert{
+  background:#fff;color:#000;padding:18px;border-radius:10px;border:1px solid rgba(0,0,0,0.08);box-shadow:0 8px 30px rgba(2,6,23,0.18);max-height:80vh;overflow:auto;width:100%;max-width:640px;font-size:16px;z-index:31000;
+}
+.dynamic-alert .btn { padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:700; }
+.dynamic-alert .btn.primary{ background:linear-gradient(180deg,var(--accent),var(--accent-dark)); color:#06324b }
+.dynamic-alert .btn.ghost{ background:transparent;border:1px solid #e6eef6;color:var(--accent-dark) }
+
+.loading-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(7,17,38,0.45);
+  z-index:32000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+}
+.loading-box{background:linear-gradient(180deg,#fff,#f6fbff);padding:18px;border-radius:12px;box-shadow:0 12px 40px rgba(2,6,23,0.25);display:flex;flex-direction:column;align-items:center;gap:12px;min-width:220px}
+
+/* Overlay used for modal background - centralised and matches dynamic windows z-index ordering */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  z-index:24000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+}
+
+/* Modal de paiement et style du formulaire */
+/* Centré verticalement+horizontalement */
+.payment-modal{
+  display:none;
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:94%;
+  max-width:920px;
+  background:var(--card);
+  padding:0;
+  border-radius:12px;
+  box-shadow:0 20px 60px rgba(2,6,23,0.25);
+  z-index:24500;
+  max-height:90vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+/* En-tête modal stylisé, coloré et bouton fermer stylisé */
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:16px 18px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-dark));
+  color:#06324b;
+  border-top-left-radius:12px;border-top-right-radius:12px;
+}
+.modal-header strong{font-size:18px;color:#06324b}
+.modal-close{
+  background:transparent;border:0;color:#06324b;font-size:18px;padding:8px;border-radius:8px;cursor:pointer;
+  transition:background .12s, transform .08s;
+}
+.modal-close:hover{ background:rgba(255,255,255,0.6); transform:scale(1.03); }
+
+/* Body modal scrollable */
+.modal-body{
+  margin-top:0;
+  display:grid;
+  gap:12px;
+  align-items:start;
+  padding:18px;
+  overflow:auto;
+  grid-template-columns:1fr 360px;
+}
+@media (max-width:880px){ .modal-body{ grid-template-columns:1fr; } .order-summary{ order:2 } }
+
+/* Mise en page du formulaire : ligne deux colonnes pour téléphone + courriel responsive */
+.form-row{ display:grid; gap:12px; grid-template-columns:1fr; }
+.two-cols{ display:grid; gap:12px; grid-template-columns: 1fr 1fr; align-items:start; }
+.two-cols > div{ display:flex; flex-direction:column; gap:6px; }
+@media (max-width:620px){ .two-cols{ grid-template-columns:1fr } }
+
+/* Inputs avec zone de message de validation inline */
+.input{
+  width:100%;
+  padding:12px 14px;
+  height: 35px;
+  border-radius:5px;
+  border:1px solid var(--input-border);
+  background:var(--input-bg);
+  font-size:15px;
+  transition:box-shadow .14s, border-color .12s, transform .06s;
+}
+.input:focus{
+  outline:none;
+  border-color:var(--accent-dark);
+  box-shadow:var(--focus-shadow);
+  transform:translateY(-1px);
+}
+
+/* Lignes de label */
+.label-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.label-row .small{margin:0;color:var(--muted);font-size:13px}
+.required{color:var(--danger);margin-left:6px;font-weight:700}
+
+/* Petit texte d'aide sous inputs et messages d'erreur */
+.field-help{font-size:13px;color:var(--muted);margin-top:6px}
+.field-error{font-size:13px;color:var(--danger);margin-top:6px;font-weight:700;display:none}
+
+/* Récapitulatif de commande à l'intérieur de la modal */
+.order-summary{
+  max-height:420px;
+  overflow:auto;
+  border-radius:8px;
+  border:1px solid #f1f4f8;
+  padding:12px;
+  background:#fff;
+}
+
+/* Boutons d'action modal */
+.modal-actions{
+  display:flex;
+  gap:8px;
+  justify-content:flex-end;
+  margin-top:12px;
+  grid-column:1 / -1;
+}
+
+/* Feedback / erreurs */
+.feedback{font-size:14px;color:var(--muted);margin-top:6px}
+.feedback.error{color:var(--danger);font-weight:700}
+
+/* Scrollbars personnalisés pour modal et listes */
+.modal-body::-webkit-scrollbar, .order-summary::-webkit-scrollbar, .suggestions::-webkit-scrollbar, .cart-panel::-webkit-scrollbar{
+  height:10px;width:10px;
+}
+.modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
+}
+
+/* Spinner keyframes injection safe */
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* Small adjustments for touch targets and layout stability */
+@media (max-width:480px){
+  header.appbar{padding:10px 12px}
+  .brand .name{font-size:16px}
+  .search input{padding:12px 80px}
+  .cart-panel{top:80px; right:10px; left:10px}
+}
+
+/* Keep touch accessibility while preventing unexpected initial zoom:
+   - 16px font-size on interactive elements on smaller viewports
+   - text-size-adjust already set in :root
+*/
+.ui-touch-target{
+  min-height:44px;
+  min-width:44px;
+  touch-action:manipulation;
+}
+
+/* Utility: visually-hidden (for accessibility if needed) */
+.visually-hidden{
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* Fin du fichier - styles optimisés pour afficher correctement sur mobile sans changement JS */
