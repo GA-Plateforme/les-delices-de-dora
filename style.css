@@ -183,10 +183,17 @@ main.container{
 .suggestions .item:last-child{border-bottom:0}
 .suggestions .item:hover,.suggestions .item.active{background:#f6fbff;outline: none}
 
+
+@media (max-width:560px){
+  main.container {
+    padding: 0 12px;
+  }
+}
+
 /* Grille produits : augmenter légèrement la taille des vignettes */
 .grid{
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap:16px;
   margin-top:14px;
   width:100%;
@@ -209,7 +216,8 @@ main.container{
 .card:hover{transform:translateY(-6px)}
 
 .img{
-  height: clamp(120px, 25vw, 224px);
+    aspect-ratio:3/4;
+height: auto;
   background:#f1f5f9;
   border-radius:8px;
   background-position:center;
@@ -461,21 +469,4 @@ main.container{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+
