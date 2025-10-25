@@ -262,7 +262,7 @@ main.container{
 
 /* Image / vignette : ratio contrôlé, responsive, et ne dépasse jamais */
 .img{
-  width:100%;
+  width:auto;
   height:auto;
   aspect-ratio:3/4; /* desktop default */
   background:#f1f5f9;
