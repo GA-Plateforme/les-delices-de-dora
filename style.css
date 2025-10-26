@@ -481,7 +481,7 @@ main.container{
 
   /* Cards and images */
   .card{ padding:16px; gap:20px; border-radius:12px; }
-  .card .img{ height:auto; aspect-ratio:1/1; object-fit:cover; }
+  .card .img{ height:auto; aspect-ratio:1/1; object-fit:contain; background-size:contain; background-repeat: no-repeat;}
 
   /* Cart panel comfortable width */
   .cart-panel{ width:360px; right:16px; top:84px; max-height:78vh; }
