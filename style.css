@@ -267,7 +267,7 @@
       transition: all 0.2s ease;
     }
     .search input{
-      flex:1;padding:auto;border-radius:12px;border:1px solid var(--input-border);font-size:15px;
+      flex:1;10px 14px;border-radius:12px;border:1px solid var(--input-border);font-size:15px;
       box-shadow:0 6px 18px rgba(11,116,222,0.03);transition:box-shadow .18s, transform .12s, border-color .12s;
       outline:none;
       background:rgba(255,255,255,0.96);
