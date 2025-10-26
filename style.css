@@ -78,7 +78,7 @@
     }
     
     /* Augmente la taille des vignettes et force un ratio 1:1 pour les cartes */
-    @media (max-width: 2500px) {
+    @media (max-width: 880px) {
       .hero { padding-left: 12px; padding-right: 12px; }
       .grid { gap: 14px; }
       .card {
