@@ -506,7 +506,7 @@
       background:transparent;border:0;color:#06324b;font-size:18px;padding:8px;border-radius:8px;cursor:pointer;
       transition:background .12s, transform .08s;
     }
-    .modal-close:hover{ background:red; transform:scale(1.03); }
+    .modal-close:hover{ background:red; color: White;  transform:scale(1.03); }
     
     /* Body modal scrollable */
     .modal-body{
