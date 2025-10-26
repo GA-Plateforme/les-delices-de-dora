@@ -94,13 +94,12 @@
       
 .card .img {
   aspect-ratio: 1/1;
-  max-width: 50%;
+  max-width: 100%;
   border-radius: 5px;
   background-size: cover;   
   background-position: center;
   background-repeat: no-repeat; 
-
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   flex: 0 0 auto;
 }
 
