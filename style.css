@@ -91,19 +91,22 @@
       }
 
       /* Partie visuelle : zone image carrée qui prend ~60% de la hauteur de la carte */
-      .card .img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
+      
+    
+
+.card .img {
+  aspect-ratio: 1 / 1;
+  width: 100%;
   border-radius: 5px;
-  object-fit: contain;
-  background-size: contain;
+  background-size: contain;   
   background-position: center;
-  background-repeat: no-repeat; /* ← C’est ça qui manquait */
+  background-repeat: no-repeat; 
+
   margin-bottom: 12px;
   flex: 0 0 auto;
 }
-    
+
+
       /* Garder le contenu texte en dessous avec bon espacement */
       .card .card-header,
       .card .card-title,
