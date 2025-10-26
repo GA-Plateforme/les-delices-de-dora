@@ -97,8 +97,8 @@
         width: 100%;
         height: auto;
         border-radius: 5px;
-        object-fit: cover;
-        background-size: cover;
+        object-fit: contain;
+        background-size: contain;
         background-position: center;
         background-color: #ffffff;
         margin-bottom: 12px;
