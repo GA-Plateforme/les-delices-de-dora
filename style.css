@@ -93,18 +93,17 @@
       /* Partie visuelle : zone image carrée qui prend ~60% de la hauteur de la carte */
       
 .card .img {
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   max-width: 100%;
-  heigth: auto;
-  Width: auto;
+  height: auto;
+  width: auto;
   border-radius: 5px;
-  background-size: cover;   
+  background-size: contain;       /* contain => toute l'image visible */
   background-position: center;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
   margin-bottom: 10px;
   flex: 0 0 auto;
 }
-
 
       /* Garder le contenu texte en dessous avec bon espacement */
       .card .card-header,
