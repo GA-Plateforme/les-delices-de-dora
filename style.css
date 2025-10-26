@@ -92,8 +92,10 @@
 
       /* Partie visuelle : zone image carrée qui prend ~60% de la hauteur de la carte */
       .card .img {
-        aspect-ratio: 1 / 1; 
-        width: 90%;
+        aspect-ratio: ; 
+        width: auto;
+        heigth: auto;
+        max-width: 100%;
         border-radius: 5px;
         object-fit: contain;
         background-size: contain;
