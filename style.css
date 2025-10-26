@@ -95,6 +95,8 @@
 .card .img {
   aspect-ratio: 1/1;
   max-width: 100%;
+  heigth: auto;
+  Width: auto;
   border-radius: 5px;
   background-size: cover;   
   background-position: center;
