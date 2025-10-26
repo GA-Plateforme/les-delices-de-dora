@@ -198,6 +198,7 @@ main.container{
   background-position:center;
   background-size:contain;
   background-repeat: no-repeat;
+  background-color: #ffffff;
   width:auto;
   flex-shrink:0;
   position:relative;
@@ -481,7 +482,7 @@ main.container{
 
   /* Cards and images */
   .card{ padding:16px; gap:20px; border-radius:12px; }
-  .card .img{ height:auto; aspect-ratio:1/1; object-fit:contain; background-size:contain; background-repeat: no-repeat;}
+  .card .img{ height:auto; aspect-ratio:1/1; object-fit:contain; background-size:contain; background-repeat: no-repeat; background-color: #ffffff;}
 
   /* Cart panel comfortable width */
   .cart-panel{ width:360px; right:16px; top:84px; max-height:78vh; }
@@ -552,7 +553,7 @@ main.container{
 
 
 
-repeat
+
 /* Mobile (phones)
 @media (max-width: 480px) {
    règles pour téléphones jusqu'à 480px
