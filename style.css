@@ -196,7 +196,7 @@ main.container{
   background:#f1f5f9;
   border-radius:8px;
   background-position:center;
-  background-size:cover;
+  background-size:contain;
   width:auto;
   flex-shrink:0;
   position:relative;
@@ -542,3 +542,29 @@ main.container{
   .card .card-title{ font-size:15px; }
   .card .price{ font-size:14px; }
 }
+
+
+
+
+
+
+
+
+
+
+/* Mobile (phones)
+@media (max-width: 480px) {
+   règles pour téléphones jusqu'à 480px
+}
+ Tablette (portrait à paysage)
+@media (min-width: 600px) and (max-width: 1024px) {
+   règles tablettes
+}
+ PC / desktop small
+@media (min-width: 1025px) and (max-width: 1366px) {
+   règles desktop small
+}
+ Desktop large
+@media (min-width: 1367px) {
+   règles desktop large
+}*/
