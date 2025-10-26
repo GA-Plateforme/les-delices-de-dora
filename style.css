@@ -70,6 +70,7 @@ header.appbar{
 .brand .tag{ font-size:12px; color:rgba(255,255,255,0.85); }
 .actions{ display:flex; align-items:center; gap:8px; }
 .icon-btn{ background:transparent; border:0; color:#fff; cursor:pointer; padding:8px; border-radius:8px; font-size:16px; }
+.icon-btn:hover {background-color: rgba(255, 255, 255, 0.1);transform: scale(1.09);transition: all 0.2s ease;}
 .cart-badge{ position:relative; left:-8px; top:-6px; background:var(--danger); color:#fff; border-radius:999px; padding:2px 6px; font-size:12px; font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
 
 /* Main container (centered) */
