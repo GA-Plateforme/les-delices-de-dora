@@ -175,6 +175,7 @@ main.container{
   border-radius:10px;
   border:1px solid #e9eef6;
   display:flex;
+  background-color: #ffffff;
   flex-direction:column;
   gap:20px;
   transition:transform .14s;
