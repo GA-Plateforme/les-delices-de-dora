@@ -121,6 +121,23 @@
       .card .price { font-size: 15px; }
     }
 
+
+
+card .img {
+        aspect-ratio: 1 / 1; 
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        object-fit: contain;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #ffffff;
+        margin-bottom: 12px;
+        flex: 0 0 auto;
+      }
+
+
     /* Variante pour très petits écrans */
     @media (max-width: 420px) {
       .card .img { max-height: calc(72vw); }
