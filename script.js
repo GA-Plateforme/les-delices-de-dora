@@ -6,7 +6,7 @@
     status3: "rabais(15.00)"   -> applique promo, affiche ancien prix barré et nouveau prix 15.00 $
 */
 const PRODUCTS = [
-  {id:'p01', name: "Chikwangues, Manioc", subtitle: "(Carton de 20)", price: 65.00, img: 'assets/images/chikwangues.png', alt: "🖼️"},
+  {id:'p01', name: "Chikwangues, Manioc", subtitle: "(Carton de 20)", price: 65.00, img: 'assets/images/chikwangues.jpg', alt: "🖼️"},
   {id:'p02', name:"Safou", subtitle:"(1kg)", price:20.00, img:'assets/images/safou.png', alt: "🖼️" },
   {id:'p03', name:"Fumbwa / Okok", subtitle:"(paquet)", price:5.00, img:'assets/images/fumbwa.png', alt: "🖼️"},
   {id:'p04', name:"Noix de palme pilé", subtitle:"(paquet)", price:5.00, img:'assets/images/noix-de-palme.png', alt: "🖼️"},
