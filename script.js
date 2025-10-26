@@ -1,14 +1,12 @@
 /* ---------- Données produits ---------- */
 /*
-  Pour activer vos marqueurs ICI(1), ICI(2), ICI(3) vous pouvez ajouter
-  des propriétés aux produits : status, status2, status3.
-  Exemples :
+  Propriétés aux produits : status, status2, status3.
     status: "stokepuise"       -> rend le produit non cliquable + badge "Stock épuisé"
     status2: "bientot"         -> badge "Bientôt épuisé"
     status3: "rabais(15.00)"   -> applique promo, affiche ancien prix barré et nouveau prix 15.00 $
 */
 const PRODUCTS = [
-  {id:'p01', name: "Chikwangues, Manioc", subtitle: "(Carton de 20)", price: 65.00, img: 'assets/images/chikwangues.jpg', alt: "🖼️"},
+  {id:'p01', name: "Chikwangues, Manioc", subtitle: "(Carton de 20)", price: 65.00, img: 'assets/images/chikwangues.png', alt: "🖼️"},
   {id:'p02', name:"Safou", subtitle:"(1kg)", price:20.00, img:'assets/images/safou.png', alt: "🖼️" },
   {id:'p03', name:"Fumbwa / Okok", subtitle:"(paquet)", price:5.00, img:'assets/images/fumbwa.png', alt: "🖼️"},
   {id:'p04', name:"Noix de palme pilé", subtitle:"(paquet)", price:5.00, img:'assets/images/noix-de-palme.png', alt: "🖼️"},
@@ -16,7 +14,7 @@ const PRODUCTS = [
   {id:'p06', name:"Asperge Africaine", subtitle:"(paquet)", price:10.00, img:'assets/images/asperge-africaine.png', alt: "🖼️"},
   {id:'p07', name:"Poisson Fumé - Nzombo", subtitle:"(1kg)", price:40.00, img:'assets/images/poisson-nzombo.png',alt: "🖼️"},
   {id:'p08', name:"Poisson - Sol", subtitle:"(carton)", price:80.00, img:'assets/images/sol.jpg', alt: "🖼️"},
-  {id:'p09', name:"Poisson Salée - Congo ya sika", subtitle:"(carton)", price:28.00, img:'assets/images/bouaka-boueni.jpg', alt: "🖼️"},
+  {id:'p09', name:"Poisson Salée - Congo ya sika", subtitle:"(carton)", price:28.00, img:'assets/images/bouaka-boueni.png', alt: "🖼️"},
   {id:'p10', name:"Arachides", subtitle:"(sac)", price:20.00, img:'assets/images/arachides.jpg', alt: "🖼️"},
   {id:'p11', name:"Foufou", subtitle:"(1kg)", price:8.00, img:'assets/images/foufou.jpeg', alt: "🖼️"},
   {id:'p12', name:"Piment Africain", subtitle:"(1kg)", price:6.00, img:'assets/images/piment.jpg', alt: "🖼️"},
@@ -34,7 +32,7 @@ const PRODUCTS = [
   {id:'p24', name:"Bissap", subtitle:"(sac)", price:10.00, img:'assets/images/Bissap.png', alt: "🖼️"},
   {id:'p25', name:"Poisson Maquerelle", subtitle:"(carton)", price:50.00, img:'assets/images/PoissonMaquerelle.jpg', alt: "🖼️"},
   {id:'p26', name:"Banane plantain", subtitle:"(1kg)", price:1.80, img:'assets/images/Bananeplantain.jpg', alt: "🖼️"},
-  {id:'p27', name:"Attiéké", subtitle:"(1kg)", price:5.00, img:'assets/images/attiéké.jpg', alt: "🖼️"},
+  {id:'p27', name:"Attiéké", subtitle:"(1kg)", price:5.00, img:'assets/images/attiéké.png', alt: "🖼️"},
   {id:'p28', name:"Poulet fumé", subtitle:"", price:11.00, img:'assets/images/poulet.jpg', alt: "🖼️"},
   {id:'p29', name:"Cote fumé", subtitle:"", price:20.00, img:'assets/images/cote.jpg', alt: "🖼️"},
   {id:'p30', name:"Dinde fumé", subtitle:"", price:15.00, img:'assets/images/dinde.png', alt: "🖼️"},
@@ -698,6 +696,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
     window.addEventListener('load', update);
     window.addEventListener('resize', update);
   })();
+
 
 
 
