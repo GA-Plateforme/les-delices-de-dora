@@ -197,6 +197,7 @@ main.container{
   border-radius:8px;
   background-position:center;
   background-size:contain;
+  background-repeat: no-repeat;
   width:auto;
   flex-shrink:0;
   position:relative;
@@ -551,7 +552,7 @@ main.container{
 
 
 
-
+repeat
 /* Mobile (phones)
 @media (max-width: 480px) {
    règles pour téléphones jusqu'à 480px
