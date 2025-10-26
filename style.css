@@ -1,4 +1,4 @@
-
+ <style>
     :root{
       --accent:#7ec8ff;
       --accent-dark:#0b74de;
@@ -16,6 +16,12 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
+    input[type="search"] {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    
     /* Empêcher tout débordement horizontal résiduel */
     html, body {
       width: 100%;
@@ -97,7 +103,7 @@
         width: 100%;
         height: auto;
         border-radius: 5px;
-        object-fit: cover;
+        object-fit: contain;
         background-size: cover;
         background-position: center;
         margin-bottom: 12px;
@@ -340,6 +346,12 @@
     }
     .card:hover{transform:translateY(-6px)}
 
+    .card img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+    
     .img{
       aspect-ratio:1/1;
       height: auto;
@@ -551,7 +563,7 @@
     .required{color:var(--danger);margin-left:6px;font-weight:700}
     
     /* Petit texte d'aide sous inputs et messages d'erreur */
-    .field-help{font-size:13px;color:var(--muted);margin-top:6px}
+        .field-help{font-size:13px;color:var(--muted);margin-top:6px}
     .field-error{font-size:13px;color:var(--danger);margin-top:6px;font-weight:700;display:none}
     
     /* Récapitulatif de commande à l'intérieur de la modal */
@@ -594,4 +606,3 @@
     .modal-body::-webkit-scrollbar-thumb, .order-summary::-webkit-scrollbar-thumb, .suggestions::-webkit-scrollbar-thumb, .cart-panel::-webkit-scrollbar-thumb{
       background:linear-gradient(180deg,var(--accent),var(--accent-dark));border-radius:8px;
     }
-
