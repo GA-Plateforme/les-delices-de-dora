@@ -635,7 +635,10 @@ main.container{
   }
   .contact-grid {
     display: grid;
+    width: 100%;
     gap: 14px;
+    flex-direction: row;
+    flex-wrap: wrap;
     grid-template-columns: 1fr;
   }
   @media (min-width: 520px) {
@@ -716,6 +719,7 @@ main.container{
 @media (min-width: 1367px) {
    règles desktop large
 }*/
+
 
 
 
