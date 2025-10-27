@@ -12,7 +12,7 @@ const PRODUCTS = [
   {id:'p04', name:"Noix de palme pilé", subtitle:"(paquet)", price:5.00, img:'assets/images/noix-de-palme.png', alt: "🖼️"},
   {id:'p05', name:"Saka Saka, Pondu", subtitle:"(paquet)", price:5.00, img:'assets/images/saka-saka.png', alt: "🖼️"},
   {id:'p06', name:"Asperge Africaine", subtitle:"(paquet)", price:10.00, img:'assets/images/asperge-africaine.png', alt: "🖼️"},
-  {id:'p07', name:"Poisson Fumé - Nzombo", subtitle:"(1kg)", price:40.00, img:'assets/images/poisson-nzombo.png',alt: "🖼️"},
+  {id:'p07', name:"Poisson Fumé", subtitle:"(1kg)", price:40.00, img:'assets/images/poisson-nzombo.png',alt: "🖼️"},
   {id:'p08', name:"Poisson - Sol", subtitle:"(carton)", price:80.00, img:'assets/images/sol.jpg', alt: "🖼️"},
   {id:'p09', name:"Poisson Salé", subtitle:"(carton)", price:28.00, img:'assets/images/bouaka-boueni.png', alt: "🖼️"},
   {id:'p10', name:"Arachides", subtitle:"(sac)", price:20.00, img:'assets/images/arachides.jpg', alt: "🖼️"},
@@ -732,6 +732,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
       if (e.target === overlayy) closeContactModal();
     });
     document.addEventListener('keydown', escHandler);
+
 
 
 
