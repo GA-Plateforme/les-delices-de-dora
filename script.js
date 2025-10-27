@@ -705,19 +705,19 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
 
 
 
-    const overlay = document.getElementById('contactOverlay');
+    const overlayy = document.getElementById('contactOverlay');
     const modal = document.getElementById('contactModal');
     const openBtn = document.getElementById('openContactBtn');
     const closeBtn = document.getElementById('modalCloseBtn');
 
     function openContactModal() {
-      overlay.classList.add('show');
+      overlayy.classList.add('show');
       modal.classList.add('show');
       closeBtn.focus();
     }
 
     function closeContactModal() {
-      overlay.classList.remove('show');
+      overlayy.classList.remove('show');
       modal.classList.remove('show');
       openBtn.focus();
     }
@@ -728,10 +728,11 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
 
     openBtn.addEventListener('click', openContactModal);
     closeBtn.addEventListener('click', closeContactModal);
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) closeContactModal();
+    overlayy.addEventListener('click', function(e) {
+      if (e.target === overlayy) closeContactModal();
     });
     document.addEventListener('keydown', escHandler);
+
 
 
 
