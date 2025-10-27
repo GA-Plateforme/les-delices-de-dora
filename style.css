@@ -552,12 +552,122 @@ main.container{
 
 
 
+/* Fenêtre modal : contacter */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100; /* Arrière-plan */
+}
+
+/* Modale : avant-plan, centrée, invisible au départ */
+.contact-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(2,6,23,0.25);
+  width: 94%;
+  max-width: 640px;
+  overflow: hidden;
+  flex-direction: column;
+  z-index: 1000; /* Avant-plan */
+  display: flex;
+}
+
+/* En-tête de la modale */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  background: linear-gradient(90deg, #00aaff, #0077cc);
+  color: white;
+  font-weight: bold;
+}
+
+/* Bouton de fermeture */
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Corps de la modale */
+.modal-body {
+  padding: 20px;
+  background: #fff;
+}
+
+/* Grille de contact */
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Carte de contact */
+.contact-card {
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  max-width: 240px;
+}
+
+/* Icône de contact */
+.contact-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+/* Titre de carte */
+.contact-card h4 {
+  margin: 10px 0 5px;
+  font-size: 16px;
+  color: #06324b;
+}
+
+/* Texte de carte */
+.contact-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
 
 
 
 
 
-searchInput
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Mobile (phones)
 @media (max-width: 480px) {
    règles pour téléphones jusqu'à 480px
