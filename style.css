@@ -13,6 +13,17 @@
   font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
+
+
+
+ 
+  --overlay-bg: rgba(0,0,0,0.45);
+  --modal-bg: #fff;
+  --card-bg: #f7fbff;
+  --accent: #0077cc;
+  --radius: 10px;
+
+  
 }
 
 /* Prevent horizontal overflow globally */
@@ -559,13 +570,7 @@ main.container{
 
 
 
-:root {
-  --overlay-bg: rgba(0,0,0,0.45);
-  --modal-bg: #fff;
-  --card-bg: #f7fbff;
-  --accent: #0077cc;
-  --radius: 10px;
-}
+
 
 .open-btn {
   padding: 10px 14px;
@@ -727,4 +732,5 @@ main.container{
 @media (min-width: 1367px) {
    règles desktop large
 }*/
+
 
