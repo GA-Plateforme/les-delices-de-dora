@@ -19,6 +19,7 @@
   </div>
   <div class="actions">
     <button id="openCart" class="icon-btn" aria-label="Ouvrir le panier">🛒 <span id="cartBadge" class="cart-badge">0</span></button>
+ <button class="icon-btn contact-btn"> 📞 </button>
   </div>
 </header>
 
@@ -176,6 +177,50 @@
   </form>
 </div>
 
+
+<!-- Overlay contenant la modale -->
+<div class="overlay" id="contactOverlay">
+<!-- Fenêtre modale de contact -->
+<div class="contact-modal" id="contactModal" style='display: none;'>
+  <div class="modal-header">
+    <strong>📞 Contactez-nous</strong>
+    <button class="modal-close" onclick="closeContactModal()">✕</button>
+  </div>
+  <div class="modal-body contact-body">
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <h4>Adresse</h4>
+        <p>40 Rue Arboit, L'Assomption, QC J5W 4P5, CA</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">☎️</div>
+        <h4>Téléphone</h4>
+        <p>+1 (263) 384‑1618</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📧</div>
+        <h4>Courriel</h4>
+        <p>lesdelices2dora@gmail.com</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">🕒</div>
+        <h4>Heures d'ouverture</h4>
+        <p>Lundi à Vendredi : 9h – 17h<br>Samedi & Dimanche : Fermé<br> 🚚 Livraison disponible durant les heures de fermeture</p>
+      </div>
+    </div>
+    <p style="text-align: center; margin-top: 20px;">
+      Notre équipe est disponible pour répondre à toutes vos questions.
+    </p>
+  </div>
+</div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="contactOverlay" onclick="closeContactModal()"></div>
+  
+
+
 <footer class="footer">
   <div><strong style="color:var(--accent-dark)">Les Délices de Dora .Inc</strong><br>&copy; 2025 GA_PlateForme Tous droits réservés.</div>
 </footer>
