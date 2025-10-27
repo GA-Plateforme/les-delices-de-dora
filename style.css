@@ -565,13 +565,6 @@ main.container{
     --accent: #0077cc;
     --radius: 10px;
   }
-
-  body {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    margin: 0;
-    padding: 24px;
-  }
-
   .open-btn {
     padding: 10px 14px;
     background: var(--accent);
@@ -581,8 +574,7 @@ main.container{
     cursor: pointer;
     font-weight: 600;
   }
-
-  .overlay {
+  .overlayy {
     display: none;
     position: fixed;
     inset: 0;
@@ -593,7 +585,7 @@ main.container{
     padding: 20px;
   }
 
-  .overlay.show { display: flex; }
+  .overlayy.show { display: flex; }
 
   .contact-modal {
     background: var(--modal-bg);
@@ -609,12 +601,10 @@ main.container{
     transform: translateY(8px) scale(.99);
     transition: transform .18s ease, opacity .18s ease;
   }
-
   .contact-modal.show {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-
   .modal-header {
     background: linear-gradient(90deg,#00aaff,#0077cc);
     color: #fff;
@@ -624,7 +614,6 @@ main.container{
     align-items: center;
     font-weight: 700;
   }
-
   .modal-close {
     background: transparent;
     border: 1px solid rgba(255,255,255,0.18);
@@ -637,22 +626,18 @@ main.container{
     display: grid;
     place-items: center;
   }
-
   .modal-body {
     padding: 18px;
     overflow-y: auto;
   }
-
   .contact-grid {
     display: grid;
     gap: 14px;
     grid-template-columns: 1fr;
   }
-
   @media (min-width: 520px) {
     .contact-grid { grid-template-columns: repeat(2, 1fr); }
   }
-
   .contact-card {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -662,7 +647,6 @@ main.container{
     align-items: center;
     box-shadow: 0 6px 18px rgba(2,6,23,0.06);
   }
-
   .contact-icon {
     font-size: 34px;
     width: 72px;
@@ -673,33 +657,28 @@ main.container{
     border-radius: 12px;
     flex-shrink: 0;
   }
-
   .contact-card h4 {
     margin: 0;
     font-size: 15px;
     font-weight: 700;
     color: #06324b;
   }
-
   .contact-card p {
     margin: 0;
     font-size: 14px;
     color: #264048;
   }
-
   .contact-link {
     color: inherit;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.15s ease;
   }
-
   .contact-link:hover,
   .contact-link:focus {
     color: var(--accent);
     text-decoration: underline;
   }
-
   .modal-note {
     text-align: center;
     margin-top: 14px;
@@ -734,6 +713,7 @@ main.container{
 @media (min-width: 1367px) {
    règles desktop large
 }*/
+
 
 
 
