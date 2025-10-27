@@ -591,7 +591,7 @@ main.container{
     background: var(--modal-bg);
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(2,6,23,0.25);
-    width: 90%;
+    width: 100%;
     height: auto;
     position: relative;
     z-index: 9999;
@@ -608,7 +608,7 @@ main.container{
     transform: translateY(0) scale(1);
   }
   .modal-header {
-    background: linear-gradient(100deg,#00aaff,#0077cc);
+    background: linear-gradient(90deg,#00aaff,#0077cc);
     color: #fff;
     padding: 14px 18px;
     width: 90%;
@@ -716,6 +716,7 @@ main.container{
 @media (min-width: 1367px) {
    règles desktop large
 }*/
+
 
 
 
