@@ -632,6 +632,9 @@ main.container{
   .modal-body {
     padding: 18px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
   .contact-grid {
     display: grid;
@@ -719,6 +722,7 @@ main.container{
 @media (min-width: 1367px) {
    règles desktop large
 }*/
+
 
 
 
