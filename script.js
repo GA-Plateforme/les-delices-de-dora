@@ -700,6 +700,29 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
 
 
 
+document.querySelector('.contact-btn').addEventListener('click', () => {
+  document.getElementById('contactModal').style.display = 'flex';
+  document.getElementById('contactOverlay').style.display = 'block';
+});
+
+// Fermer la modale si on clique en dehors (sur l'overlay)
+document.getElementById('contactOverlay').addEventListener('click', (event) => {
+  const modal = document.getElementById('contactModal');
+  if (!modal.contains(event.target)) {
+    closeContactModal();
+  }
+});
+
+function closeContactModal() {
+  document.getElementById('contactModal').style.display = 'none';
+  document.getElementById('contactOverlay').style.display = 'none';
+}
+
+
+
+
+
+
 
 
 
