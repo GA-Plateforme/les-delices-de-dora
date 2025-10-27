@@ -698,33 +698,29 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
   })();
 
 
-const overlay = document.getElementById('contactOverlay');
-const modal = document.getElementById('contactModal');
-const openBtn = document.getElementById('openContactBtn');
-const closeBtn = document.getElementById('modalCloseBtn');
 
-function openContactModal() {
-  overlay.classList.add('show');
-  modal.classList.add('show');
-  closeBtn.focus();
-}
+
+document.querySelector('.contact-btn').addEventListener('click', () => {
+  document.getElementById('contactModal').style.display = 'flex';
+  document.getElementById('contactOverlay').style.display = 'block';
+});
+
+// Fermer la modale si on clique en dehors (sur l'overlay)
+document.getElementById('contactOverlay').addEventListener('click', (event) => {
+  const modal = document.getElementById('contactModal');
+  if (!modal.contains(event.target)) {
+    closeContactModal();
+  }
+});
 
 function closeContactModal() {
-  overlay.classList.remove('show');
-  modal.classList.remove('show');
-  openBtn.focus();
+  document.getElementById('contactModal').style.display = 'none';
+  document.getElementById('contactOverlay').style.display = 'none';
 }
 
-function escHandler(e) {
-  if (e.key === 'Escape') closeContactModal();
-}
 
-openBtn.addEventListener('click', openContactModal);
-closeBtn.addEventListener('click', closeContactModal);
-overlay.addEventListener('click', function(e) {
-  if (e.target === overlay) closeContactModal();
-});
-document.addEventListener('keydown', escHandler);
+
+
 
 
 
