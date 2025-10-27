@@ -559,189 +559,148 @@ main.container{
 
 
 
+:root {
+  --overlay-bg: rgba(0,0,0,0.45);
+  --modal-bg: #fff;
+  --card-bg: #f7fbff;
+  --accent: #0077cc;
+  --radius: 10px;
+}
 
+.open-btn {
+  padding: 10px 14px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
 
-
-
-
-
-
-
-
-
-
-/* Overlay */
 .overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background-color: rgba(0,0,0,0.45);
+  background-color: var(--overlay-bg);
   z-index: 1000;
   align-items: center;
   justify-content: center;
   padding: 20px;
 }
 
-/* Modal principale, compacte et responsive */
+.overlay.show { display: flex; }
+
 .contact-modal {
-  display: none;
-  width: 100%;
-  max-width: 720px;
-  max-height: 80vh;
-  background: #fff;
-  border-radius: 12px;
+  background: var(--modal-bg);
+  border-radius: 16px;
   box-shadow: 0 20px 60px rgba(2,6,23,0.25);
+  max-width: 760px;
+  width: 100%;
+  max-height: 84vh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  z-index: 1001;
+  opacity: 0;
+  transform: translateY(8px) scale(.99);
+  transition: transform .18s ease, opacity .18s ease;
 }
 
-/* En-tête */
+.contact-modal.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 .modal-header {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 18px;
   background: linear-gradient(90deg,#00aaff,#0077cc);
   color: #fff;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-weight: 700;
 }
 
-/* Bouton fermer accessible */
 .modal-close {
   background: transparent;
-  border: none;
+  border: 1px solid rgba(255,255,255,0.18);
   color: #fff;
-  font-size: 20px;
+  font-size: 18px;
   cursor: pointer;
-  line-height: 1;
-  padding: 6px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
 }
 
-/* Corps */
 .modal-body {
   padding: 18px;
-  background: #ffffff;
   overflow-y: auto;
 }
 
-/* Grille flexible: horizontal sur grand écran, empile sur petit écran */
 .contact-grid {
   display: grid;
   gap: 14px;
-  align-items: start;
   grid-template-columns: 1fr;
 }
 
-/* Carte de contact compacte */
-.contact-card {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  background: #f7fbff;
-  border-radius: 10px;
-  padding: 12px 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-  min-height: 64px;
+@media (min-width: 520px) {
+  .contact-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Icône */
+.contact-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+}
+
 .contact-icon {
-  font-size: 28px;
-  width: 44px;
-  height: 44px;
+  font-size: 34px;
+  width: 72px;
+  height: 72px;
   display: grid;
   place-items: center;
   background: linear-gradient(180deg, rgba(0,170,255,0.12), rgba(0,119,204,0.08));
-  border-radius: 8px;
+  border-radius: 12px;
+  flex-shrink: 0;
 }
 
-/* Titres et texte */
 .contact-card h4 {
   margin: 0;
-  font-size: 14px;
-  color: #06324b;
+  font-size: 15px;
   font-weight: 700;
-}
-.contact-card p {
-  margin: 0;
-  font-size: 13px;
-  color: #264048;
-  line-height: 1.25;
-  opacity: 0.95;
+  color: #06324b;
 }
 
-/* Ligne d'action ou note */
+.contact-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #264048;
+}
+
+.contact-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.contact-link:hover,
+.contact-link:focus {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 .modal-note {
   text-align: center;
   margin-top: 14px;
   font-size: 13px;
   color: #3b5564;
 }
-
-/* Responsive: 2 colonnes à tablettes, 4 colonnes sur large écran */
-@media (min-width: 520px) {
-  .contact-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 920px) {
-  .contact-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* Ouverture : utilitaire */
-.overlay.show { display: flex; }
-.contact-modal.show { display: flex; }
-
-/* Petite animation d'apparition */
-.contact-modal {
-  transform-origin: center;
-  transition: transform .18s ease, opacity .18s ease;
-  opacity: 0;
-  transform: translateY(8px) scale(.99);
-}
-.contact-modal.show {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* Accessibilité : focus visible pour le bouton fermer */
-.modal-close:focus {
-  outline: 2px solid rgba(0,170,255,0.6);
-  outline-offset: 2px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -768,3 +727,4 @@ main.container{
 @media (min-width: 1367px) {
    règles desktop large
 }*/
+
