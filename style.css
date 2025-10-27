@@ -565,7 +565,7 @@ main.container{
 }
 
 /* Modale : avant-plan, centrée, invisible au départ */
-.contact-modal {
+.conWWWtact-modal {
   display: none;
   position: fixed;
   top: 50%;
@@ -581,6 +581,41 @@ main.container{
   z-index: 1000; /* Avant-plan */
   display: flex;
 }
+
+
+
+
+
+.contact-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(2,6,23,0.25);
+  width: 94%;
+  max-width: 640px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+/* Quand la modale est visible */
+.contact-modal.is-open {
+  display: flex;
+  flex-direction: row; /* alignement horizontal */
+  flex-wrap: wrap;     /* retour à la ligne si manque de place */
+  gap: 16px;           /* espacement entre éléments */
+  padding: 16px;
+}
+
+
+
+
+
+
+
 
 /* En-tête de la modale */
 .modal-header {
