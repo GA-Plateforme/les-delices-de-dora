@@ -14,9 +14,9 @@ const PRODUCTS = [
   {id:'p06', name:"Asperge Africaine", subtitle:"(paquet)", price:10.00, img:'assets/images/asperge-africaine.png', alt: "🖼️"},
   {id:'p07', name:"Poisson Fumé - Nzombo", subtitle:"(1kg)", price:40.00, img:'assets/images/poisson-nzombo.png',alt: "🖼️"},
   {id:'p08', name:"Poisson - Sol", subtitle:"(carton)", price:80.00, img:'assets/images/sol.jpg', alt: "🖼️"},
-  {id:'p09', name:"Poisson Salée - Congo ya sika", subtitle:"(carton)", price:28.00, img:'assets/images/bouaka-boueni.png', alt: "🖼️"},
+  {id:'p09', name:"Poisson Salée", subtitle:"(carton)", price:28.00, img:'assets/images/bouaka-boueni.png', alt: "🖼️"},
   {id:'p10', name:"Arachides", subtitle:"(sac)", price:20.00, img:'assets/images/arachides.jpg', alt: "🖼️"},
-  {id:'p11', name:"Foufou", subtitle:"(1kg)", price:8.00, img:'assets/images/foufou.jpeg', alt: "🖼️"},
+  {id:'p11', name:"Foufou", subtitle:"(1kg)", price:8.50, img:'assets/images/foufou.jpeg', alt: "🖼️"},
   {id:'p12', name:"Piment Africain", subtitle:"(1kg)", price:6.00, img:'assets/images/piment.jpg', alt: "🖼️"},
   {id:'p13', name:"Gombo / Oka", subtitle:"(1kg)", price:6.00, img:'assets/images/gombo.jpg', alt: "🖼️"},
   {id:'p14', name:"Petit Kola", subtitle:"(paquet)", price:10.00, img:'assets/images/kola.jpg', alt: "🖼️"},
@@ -25,11 +25,11 @@ const PRODUCTS = [
   {id:'p17', name:"Citronnelle", subtitle:"(1kg)", price:5.00, img:'assets/images/citronnelle.png', alt: "🖼️"},
   {id:'p18', name:"Boukouloutou", subtitle:"(1kg)", price:5.00, img:'assets/images/boukouloutou.jpg', alt: "🖼️"},
   {id:'p19', name:"NGaï NGaï", subtitle:"(sac)", price:5.00, img:'assets/images/ngaï-ngaï.png', alt: "🖼️"},
-  {id:'p20', name:"Poisson Salée - Mboto", subtitle:"(carton)", price:28.00, img:'assets/images/mboto.png', alt: "🖼️"},
+  {id:'p20', name:"Poisson Salée - Congo ya sika", subtitle:"(1kg)", price:28.00, img:'assets/images/mboto.png', alt: "🖼️"},
   {id:'p21', name:"Tilapia rouge", subtitle:"(carton)", price:50.00, img:'assets/images/Tilapiarouge.png', alt: "🖼️"},
   {id:'p22', name:"Tilapia", subtitle:"(carton)", price:50.00, img:'assets/images/Tilapia.png', alt: "🖼️"},
   {id:'p23', name:"Poisson chat", subtitle:"(carton)", price:50.00, img:'assets/images/Poissonchat.png', alt: "🖼️"},
-  {id:'p24', name:"Bissap", subtitle:"(sac)", price:10.00, img:'assets/images/Bissap.png', alt: "🖼️"},
+  {id:'p24', name:"Feuille de bissap", subtitle:"(sac)", price:10.00, img:'assets/images/Bissap.png', alt: "🖼️"},
   {id:'p25', name:"Poisson Maquerelle", subtitle:"(carton)", price:50.00, img:'assets/images/PoissonMaquerelle.jpg', alt: "🖼️"},
   {id:'p26', name:"Banane plantain", subtitle:"(1kg)", price:1.80, img:'assets/images/Bananeplantain.jpg', alt: "🖼️"},
   {id:'p27', name:"Attiéké", subtitle:"(1kg)", price:5.00, img:'assets/images/attiéké.png', alt: "🖼️"},
@@ -732,6 +732,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
       if (e.target === overlayy) closeContactModal();
     });
     document.addEventListener('keydown', escHandler);
+
 
 
 
