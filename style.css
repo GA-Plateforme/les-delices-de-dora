@@ -579,7 +579,7 @@ main.container{
     position: fixed;
     inset: 0;
     background-color: var(--overlay-bg);
-    z-index: 1000;
+    z-index: 9998;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -591,12 +591,15 @@ main.container{
     background: var(--modal-bg);
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(2,6,23,0.25);
-    max-width: 760px;
-    width: 100%;
-    max-height: 84vh;
+    max-width: 90%;
+    width: auto;
+    height: auto;
+    position: relative;
+    z-index: 9999;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     opacity: 0;
     transform: translateY(8px) scale(.99);
     transition: transform .18s ease, opacity .18s ease;
@@ -713,6 +716,7 @@ main.container{
 @media (min-width: 1367px) {
    règles desktop large
 }*/
+
 
 
 
