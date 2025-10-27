@@ -591,8 +591,7 @@ main.container{
     background: var(--modal-bg);
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(2,6,23,0.25);
-    max-width: 90%;
-    width: auto;
+    width: 90%;
     height: auto;
     position: relative;
     z-index: 9999;
@@ -612,6 +611,7 @@ main.container{
     background: linear-gradient(90deg,#00aaff,#0077cc);
     color: #fff;
     padding: 14px 18px;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -716,6 +716,7 @@ main.container{
 @media (min-width: 1367px) {
    règles desktop large
 }*/
+
 
 
 
