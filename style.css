@@ -552,101 +552,185 @@ main.container{
 
 
 
-/* Fenêtre modal : contacter */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Overlay */
 .overlay {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 100; /* Arrière-plan */
+  inset: 0;
+  background-color: rgba(0,0,0,0.45);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-/* Modale : avant-plan, centrée, invisible au départ */
+/* Modal principale, compacte et responsive */
 .contact-modal {
   display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 720px;
+  max-height: 80vh;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(2,6,23,0.25);
-  width: 94%;
-  max-width: 640px;
   overflow: hidden;
-  flex-direction: column;
-  z-index: 1000; /* Avant-plan */
   display: flex;
+  flex-direction: column;
+  z-index: 1001;
 }
 
-/* En-tête de la modale */
+/* En-tête */
 .modal-header {
   display: flex;
-  justify-content: space-between;
+  gap: 12px;
   align-items: center;
-  padding: 16px 18px;
-  background: linear-gradient(90deg, #00aaff, #0077cc);
-  color: white;
-  font-weight: bold;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: linear-gradient(90deg,#00aaff,#0077cc);
+  color: #fff;
+  font-weight: 700;
 }
 
-/* Bouton de fermeture */
+/* Bouton fermer accessible */
 .modal-close {
-  background: none;
+  background: transparent;
   border: none;
+  color: #fff;
   font-size: 20px;
   cursor: pointer;
-  color: white;
+  line-height: 1;
+  padding: 6px;
 }
 
-/* Corps de la modale */
+/* Corps */
 .modal-body {
-  padding: 20px;
-  background: #fff;
+  padding: 18px;
+  background: #ffffff;
+  overflow-y: auto;
 }
 
-/* Grille de contact */
+/* Grille flexible: horizontal sur grand écran, empile sur petit écran */
 .contact-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  display: grid;
+  gap: 14px;
+  align-items: start;
+  grid-template-columns: 1fr;
 }
 
-/* Carte de contact */
+/* Carte de contact compacte */
 .contact-card {
-  background: #f9f9f9;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: #f7fbff;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  padding: 20px;
-  text-align: center;
-  flex: 1;
-  min-width: 200px;
-  max-width: 240px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  min-height: 64px;
 }
 
-/* Icône de contact */
+/* Icône */
 .contact-icon {
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-size: 28px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(0,170,255,0.12), rgba(0,119,204,0.08));
+  border-radius: 8px;
 }
 
-/* Titre de carte */
+/* Titres et texte */
 .contact-card h4 {
-  margin: 10px 0 5px;
-  font-size: 16px;
-  color: #06324b;
-}
-
-/* Texte de carte */
-.contact-card p {
   margin: 0;
   font-size: 14px;
-  color: #333;
+  color: #06324b;
+  font-weight: 700;
 }
+.contact-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #264048;
+  line-height: 1.25;
+  opacity: 0.95;
+}
+
+/* Ligne d'action ou note */
+.modal-note {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 13px;
+  color: #3b5564;
+}
+
+/* Responsive: 2 colonnes à tablettes, 4 colonnes sur large écran */
+@media (min-width: 520px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 920px) {
+  .contact-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Ouverture : utilitaire */
+.overlay.show { display: flex; }
+.contact-modal.show { display: flex; }
+
+/* Petite animation d'apparition */
+.contact-modal {
+  transform-origin: center;
+  transition: transform .18s ease, opacity .18s ease;
+  opacity: 0;
+  transform: translateY(8px) scale(.99);
+}
+.contact-modal.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Accessibilité : focus visible pour le bouton fermer */
+.modal-close:focus {
+  outline: 2px solid rgba(0,170,255,0.6);
+  outline-offset: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
