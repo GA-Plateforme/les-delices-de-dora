@@ -150,39 +150,18 @@
         <input id="address" name="address" class="input" required />
         <div id="err-address" class="field-error">Adresse de livraison requise.</div>
       </div>
-
-
-
-
-
-
-
-
-
-
-<div style="margin-top:6px">
-  <div class="label-row">
-    <label class="small">Mode de livraison <span class="required" aria-hidden>*</span></label>
-    <div class="small" style="color:var(--muted)">Choisir Livraison ou Ramassage</div>
-  </div>
-  <select id="deliveryMode" name="delivery_mode" class="input" required>
-    <option value="">Sélectionnez...</option>
-    <option value="Livraison">Livraison</option>
-    <option value="Ramassage">Ramassage</option>
-  </select>
-  <div id="err-deliveryMode" class="field-error">Veuillez sélectionner le mode de commande.</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-      
+      <div style="margin-top:6px">
+        <div class="label-row">
+          <label class="small">Mode de livraison <span class="required" aria-hidden>*</span></label>
+          <div class="small" style="color:var(--muted)">Choisir Livraison ou Ramassage</div>
+        </div>
+        <select id="deliveryMode" name="delivery_mode" class="input" required>
+          <option value="">Sélectionnez...</option>
+          <option value="Livraison">Livraison</option>
+          <option value="Ramassage">Ramassage</option>
+        </select>
+        <div id="err-deliveryMode" class="field-error">Veuillez sélectionner le mode de commande.</div>
+      </div>
       <div style="margin-top:6px">
         <div class="label-row">
           <label class="small">Autre demande</label>
@@ -195,6 +174,7 @@
     <input type="hidden" name="items_html" id="itemsHtmlField" />
     <input type="hidden" name="total" id="totalField" />
     <input type="hidden" name="created_at" id="createdAtField" />
+    <input type="hidden" name="delivery_mode" id="deliveryModeField" />
     <div class="modal-actions">
       <button type="button" id="orderCancel" class="btn-ghost">Annuler</button>
       <button type="button" id="orderSend" class="btn-primary">Envoyer la commande</button>
@@ -265,6 +245,7 @@
   
 </body>
 </html>
+
 
 
 
