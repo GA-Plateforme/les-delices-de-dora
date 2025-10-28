@@ -556,7 +556,19 @@ orderSend && orderSend.addEventListener('click', async ()=>{
         <div style="margin-bottom:10px;">Les Délices de Dora vous contactera dès que possible pour confirmer votre demande.</div>
       </div>`;
       showAlert(successMessage);
-      CART = {}; persist(CART_KEY, CART); updateCartUI(); orderForm.reset(); setTimeout(()=>{ closeOrderModal(); }, 900);
+      CART = {}; persist(CART_KEY, CART); updateCartUI();
+      orderForm.reset();
+      
+      // vider le hidden si présent
+      const dmField = document.getElementById('deliveryModeField');
+      if (dmField) dmField.value = '';
+      
+      // forcer le select à la valeur par défaut
+      const dmSelect = document.getElementById('deliveryMode');
+      if (dmSelect) dmSelect.selectedIndex = 0;
+      
+      setTimeout(()=>{ closeOrderModal(); }, 900);
+
       return;
     }
   } catch (sdkErr) {
@@ -599,7 +611,19 @@ orderSend && orderSend.addEventListener('click', async ()=>{
         <div style="margin-bottom:10px;">Les Délices de Dora vous contactera sous peu pour confirmer votre demande.</div>
       </div>`;
       showAlert(successMessage);
-      CART = {}; persist(CART_KEY, CART); updateCartUI(); orderForm.reset(); setTimeout(()=>{ closeOrderModal(); }, 900);
+      CART = {}; persist(CART_KEY, CART); updateCartUI();
+      orderForm.reset();
+      
+      // vider le hidden si présent
+      const dmField = document.getElementById('deliveryModeField');
+      if (dmField) dmField.value = '';
+      
+      // forcer le select à la valeur par défaut
+      const dmSelect = document.getElementById('deliveryMode');
+      if (dmSelect) dmSelect.selectedIndex = 0;
+      
+      setTimeout(()=>{ closeOrderModal(); }, 900);
+
       return;
     } else {
       orderFeedback.classList.add('error');
@@ -736,6 +760,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
       if (e.target === overlayy) closeContactModal();
     });
     document.addEventListener('keydown', escHandler);
+
 
 
 
