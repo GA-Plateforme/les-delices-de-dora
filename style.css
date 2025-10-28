@@ -356,7 +356,8 @@ main.container{
   grid-template-columns:1fr 360px;
 }
 .order-summary{
-  max-height:420px;
+  Width: 100%;
+  height:auto;
   overflow:auto;
   border-radius:8px;
   border:1px solid #f1f4f8;
