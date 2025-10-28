@@ -603,6 +603,7 @@ main.container{
     transform: translateY(8px) scale(.99);
     transition: transform .18s ease, opacity .18s ease;
   }
+
   .contact-modal.show {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -722,6 +723,7 @@ main.container{
 @media (min-width: 1367px) {
    règles desktop large
 }*/
+
 
 
 
