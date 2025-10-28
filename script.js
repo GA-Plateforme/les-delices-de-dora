@@ -437,6 +437,63 @@ function updateCartUI(){
   }
 }
 
+
+// helper pour effacer un seul champ
+function clearFieldError(id){
+  const el = document.getElementById('err-' + id);
+  if(el){ el.textContent = ''; el.style.display = 'none'; }
+}
+
+// remplacer l'ancienne clearFieldErrors par celle-ci
+function clearFieldErrors(){
+  ['fullName','phone','email','address','deliveryMode','notes'].forEach(clearFieldError);
+  if(window.orderFeedback){
+    orderFeedback.classList.remove('error');
+    orderFeedback.textContent = '';
+  }
+}
+
+// attacher validation en temps réel
+(function attachRealTimeValidation() {
+  const validators = {
+    fullName: () => normalizedLettersCount(document.getElementById('fullName').value.trim()) >= 4,
+    phone:    () => isValidCanadianPhone(document.getElementById('phone').value.trim()),
+    email:    () => {
+      const v = document.getElementById('email').value.trim();
+      return v === '' || isValidEmail(v);
+    },
+    address:  () => document.getElementById('address').value.trim().length > 0,
+    deliveryMode: () => document.getElementById('deliveryMode').value.trim().length > 0,
+    notes:    () => true
+  };
+
+  function checkAndMaybeClear(id){
+    try {
+      if(validators[id] && validators[id]()){
+        clearFieldError(id);
+        const anyVisible = ['fullName','phone','email','address','deliveryMode','notes'].some(fid => {
+          const el = document.getElementById('err-' + fid);
+          return el && el.style.display !== 'none' && el.textContent.trim() !== '';
+        });
+        if(!anyVisible && window.orderFeedback){
+          orderFeedback.classList.remove('error');
+          orderFeedback.textContent = '';
+        }
+      }
+    } catch(e){ /* ignore */ }
+  }
+
+  Object.keys(validators).forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    const eventType = el.tagName.toLowerCase() === 'select' ? 'change' : 'input';
+    el.addEventListener(eventType, () => checkAndMaybeClear(id));
+    el.addEventListener('blur', () => checkAndMaybeClear(id));
+  });
+})();
+
+
+    
 /* Ouverture / fermeture panier & modal */
 function toggleCart(){ if(cartPanel.classList.contains('open')) closeCart(); else openCart(); }
 function openCart(){ cartPanel.classList.add('open'); cartPanel.setAttribute('aria-hidden','false'); }
@@ -480,9 +537,7 @@ function clearFieldError(id){
   const el = document.getElementById('err-'+id);
   if(el){ el.style.display = 'none'; }
 }
-function clearFieldErrors(){
-  ['fullName','phone','email','address'].forEach(clearFieldError);
-}
+
 
 /* Récapitulatif commande */
 function renderOrderSummary(){
@@ -760,23 +815,6 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
       if (e.target === overlayy) closeContactModal();
     });
     document.addEventListener('keydown', escHandler);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
