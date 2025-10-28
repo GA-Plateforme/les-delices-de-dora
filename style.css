@@ -364,7 +364,7 @@ main.container{
   padding:12px;
   background:#fff;
 }
-.modal-actions{ display:flex; gap:8px; justify-content:flex-end; margin-top:12px; grid-column:1 / -1; }
+.modal-actions{ display:flex; gap:8px; justify-content:flex-end; margin-top:12px; grid-column:1 / -1; justify-content: center; align-items: center;}
 
 /* Inputs & labels */
 .form-row{ display:grid; gap:12px; grid-template-columns:1fr; }
