@@ -39,6 +39,7 @@ const PRODUCTS = [
   {id:'p31', name:"Moseka, chinchard", subtitle:"(carton)", price:50.00, img:'assets/images/moseka.png', alt: "🖼️"},
   {id:'p32', name:"Crevette surgelées", subtitle:"", price:10.00, img:'assets/images/Crevettesurgelées.png', alt: "🖼️"},
   {id:'p33', name:"Moussaka, Mwmaba", subtitle:"(paquet)", price:5.00, img:'assets/images/moussaka.png', alt: "🖼️"},
+  {id:'p34', name:"Pistache Africaine - Graine de courge ecrasée", subtitle:"(paquet)", price:10.00, img:'assets/images/courges.png', alt: "🖼️"},
 ];
 
 const CART_KEY = 'demo_cart_v4';
@@ -815,6 +816,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
       if (e.target === overlayy) closeContactModal();
     });
     document.addEventListener('keydown', escHandler);
+
 
 
 
