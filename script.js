@@ -538,6 +538,8 @@ orderSend && orderSend.addEventListener('click', async ()=>{
   totalField.value = formatCurrency(cartAmount());
   createdAtField.value = new Date().toISOString();
 
+  document.getElementById('deliveryModeField').value = deliveryMode;
+  
   const serviceID = 'service_zuxbk1u';
   const templateID = 'template_694b5mh';
   const PUBLIC_KEY = 'Q7rxLkalpH60S-9BU';
@@ -568,6 +570,7 @@ orderSend && orderSend.addEventListener('click', async ()=>{
       full_name: document.getElementById('fullName').value.trim(),
       phone: document.getElementById('phone').value.trim(),
       email: document.getElementById('email').value.trim(),
+      delivery_mode: document.getElementById('deliveryMode').value.trim(),
       address: document.getElementById('address').value.trim(),
       notes: document.getElementById('notes').value.trim() || '',
       total: totalField.value,
@@ -733,6 +736,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
       if (e.target === overlayy) closeContactModal();
     });
     document.addEventListener('keydown', escHandler);
+
 
 
 
