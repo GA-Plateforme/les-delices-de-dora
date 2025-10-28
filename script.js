@@ -514,13 +514,14 @@ orderSend && orderSend.addEventListener('click', async ()=>{
   const phone = document.getElementById('phone').value.trim();
   const email = document.getElementById('email').value.trim();
   const address = document.getElementById('address').value.trim();
+  const deliveryMode = document.getElementById('deliveryMode').value.trim();
 
   let hasError = false;
   if(normalizedLettersCount(fullName) < 4){ setFieldError('fullName','Le nom doit contenir au moins 4 lettres.'); hasError = true; }
   if(!isValidCanadianPhone(phone)){ setFieldError('phone','Numéro invalide pour le Canada.'); hasError = true; }
   if(email && !isValidEmail(email)){ setFieldError('email','Adresse courriel invalide.'); hasError = true; }
   if(address.length === 0){ setFieldError('address','Adresse de livraison requise.'); hasError = true; }
-
+  if(!deliveryMode){ setFieldError('deliveryMode','Veuillez sélectionner le mode de commande.'); hasError = true; }
   if(hasError){ orderFeedback.classList.add('error'); orderFeedback.textContent = 'Veuillez corriger les erreurs indiquées.'; return; }
 
   const items = Object.values(CART);
@@ -732,6 +733,7 @@ document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ closeCart();
       if (e.target === overlayy) closeContactModal();
     });
     document.addEventListener('keydown', escHandler);
+
 
 
 
