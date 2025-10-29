@@ -1,268 +1,3121 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-
-  
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Les Délices de Dora — Boutique</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestions 🔐</title>
+<style>
+  
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+  
+.container {  
+  transition: all 0.3s ease; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+  
+input, button, textarea {
+  display: block;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  font-size: 16px;
+  align-items: center;
+  width: 90%;
+  box-sizing: border-box;
+}
+  
+input:focus, textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+  
+button {
+  background-color: #008CBA;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  width: auto;
+}
+  
+button:hover {
+  background-color: #005A9C;
+  transform: scale(1.05);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+  
+button:active {
+  transform: scale(0.95);
+}
+  
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #3366cc;
+  transition: all 0.3s ease;
+}
+  
+a:hover {
+  color: #ff6600;
+  font-weight: bold;
+  text-shadow: 0 0 25px rgba(255, 102, 0, 0.6);
+  animation: pulseGlow 1.5s infinite;
+  text-decoration: underline;
+}
+  
+a.active {
+  color: red;
+  text-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+}
+  
+@keyframes pulseGlow {
+  0%   { text-shadow: 0 0 5px rgba(255, 102, 0, 0.3); }
+  50%  { text-shadow: 0 0 15px rgba(255, 102, 0, 0.6); }
+  100% { text-shadow: 0 0 5px rgba(255, 102, 0, 0.3); }
+}
+  
+.hidden { display: none; }
+  
+.separator {
+  height: 2px;
+  background-color: #ccc;
+  width: 90%;
+  margin: 16px auto;
+}
+  
+.account {
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin: 10px 0;
+  text-align: left;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+  
+.account img {
+  max-width: 90%;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+  
+.account a {
+  color: #007bff;
+  text-decoration: underline;
+}
+  
+.account a:hover {
+  text-decoration: none;
+}
+  
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+  
+#image-preview {
+  margin-top: 10px;
+  display: none;
+  max-width: 95%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: block;             
+  margin-left: auto;          
+  margin-right: auto;
+}
+  
+#form-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+  
+#form-wrapper.active {
+  max-height: 5000px; 
+}
+  
+#form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 20px auto;
+}
+  
+#account-form input,
+#account-form textarea,
+#account-form button {
+  margin: 8px 0;
+  width: 90%;
+}
+  
+#app-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+  
+@media screen and (max-width: 768px) {
+  #app-container {
+    padding: 10px;
+  }
+  
+input, button, textarea {
+    max-width: 100%;
+  }
+}
+  
+#menuContainer {
+  position: fixed;  
+  top: 3px;        
+  right: 15px; 
+  z-index: 1000;
+  cursor: pointer;
+}
+  
+#inactivity-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+#inactivity-modal.hidden {
+  display: none;
+}
+  
+#password-requirements {
+  text-align: left;        
+  list-style: none;     
+  margin: 6px 0;
+  padding-left: 12px;     
+  width: 50%;        
+}
+  
+#alert-modal {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background: transparent
+}
+  
+#alert-modal.hidden {
+  display: none;
+}
+  
+#alert-modal .modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+  
+.accounts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+  justify-content: center;      
+  align-items: start;
+  margin: 10px auto;              
+  width: 100%;
+}
+  
+.account {
+  flex: 0 0 auto;
+}
+  
+.button-group {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 15px; 
+}
+  
+.button-group button {
+  width: auto; 
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+  
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 18px;
+}
+  
+.imgcrtl img {
+  max-width: 95%;
+  height: auto;
+  width:auto
+}
+  
+.imgcrtl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.menu-container {
+  position: relative;
+  display: inline-block;
+}
+  
+.menu-button {
+  padding: 10px 20px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+  
+.menu-items {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  width: auto;
+  padding: 24px;
+  max-width: 90vw;
+  box-sizing: border-box;
+  gap: 10px;
+}
+  
+.menu-items.show {
+  display: flex;
+  opacity: 1;
+}
+  
+.menu-items button {
+  padding: 12px 20px;
+  background-color: transparent;
+  border: none;
+  font-size: 15px;
+  color: #333;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  margin: 0;
+  width: 100%;
+  line-height: 2; 
+}
+  
+.menu-items button:hover {
+  background-color: #f5f5f5;
+  color: #000;
+}
+  
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  scrollbar: none;
+}
+  
+.loader {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: linear-gradient(0deg, #FFFFFF 50%, #005A9C 100%);
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+  
+.inner-circle {
+  width: 90%;
+  height: 90%;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+  
+.loader-text {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #005A9C;
+  font-family: sans-serif;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+  
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+  
+@media (max-width: 599px) {
+.responsive-width {
+  width: 90%; 
+}}
+  
+@media (min-width: 600px) and (max-width: 1024px) {
+    .responsive-width {
+  width: 70%; 
+}}
+  
+@media (min-width: 1025px) {
+ .responsive-width {
+  width: 30%;
+}}
+  
+.countdown-container {
+  text-align: center;
+  color: #f0f0f0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0a0a1a;
+  padding: 20px;
+  border-radius: 12px;
+}
+  
+.countdown-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+  
+.countdown-circles {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+  
+.circle {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+  
+.circle-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+  
+.circle-label span {
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+  color: #ffffff;
+}
+  
+.circle-label p {
+  font-size: 12px;
+  margin: 0;
+  color: #cccccc;
+}
+  
+#progress-hours,
+#progress-minutes,
+#progress-seconds {
+  stroke-dasharray: 282.6;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+}
+  
+#search {
+  padding: 12px 16px;
+  font-size: 18px;
+  border: 2px solid #007BFF;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+  
+#search:focus {
+  border-color: #005A9C;
+  box-shadow: 0 0 10px rgba(0, 90, 156, 0.3);
+  outline: none;
+}
+  
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+  background: rgba(0,0,0,0.45);
+  padding: 20px;
+  box-sizing: border-box;
+}
+  
+.modal .modal-content {
+  position: relative;
+  z-index: 20001;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  max-width: 90vw;
+  width: 720px;
+  max-height: 85vh;
+  overflow: auto;
+  padding: 18px;
+  box-sizing: border-box;
+}
+  
+.modal.small .modal-content {
+  width: min(520px, 95vw);
+  max-height: 80vh;
+}
+  
+.dynamic-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 21000;
+}
+  
+#historiqueConnexionModal .modal-content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+  
+#historiqueConnexionModal .modal-content th,
+#historiqueConnexionModal .modal-content td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+@media (max-width: 480px) {
+  #historiqueConnexionModal .modal-content { padding: 12px; font-size: 13px; }
+  #historiqueConnexionModal .modal-content th, #historiqueConnexionModal .modal-content td { padding: 6px; }
+}
+  
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+  
+@media (max-width: 480px) {
+  #historiqueConnexionModal .modal-content { width: 100%; padding: 12px; font-size: 13px; }
+  #historiqueConnexionModal .modal-content th, #historiqueConnexionModal .modal-content td { padding: 6px; }
+}
+
+#nipUpdateModal .modal-content,
+#updateAccountModal .modal-content {
+  margin: 0 auto;           
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  justify-content: center; 
+  text-align: center; 
+}
+#nipUpdateModal .modal-content input,
+#updateAccountModal .modal-content input {
+  width: 80%;  
+  margin: 6px auto;
+}
+  
+#nipUpdateModal .modal-buttons,
+#updateAccountModal .modal-buttons {
+  justify-content: center; 
+  gap: 10px;
+}
+
+
+#historiqueConnexionModal .modal-buttons {
+  justify-content: center; 
+}
+
+#form-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+  
+#form-wrapper.active {
+  max-height: 5000px;
+}
+
+  #form-wrapper.active {
+  display: block;
+}
+
+.calendar {
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:center;
+  width:100%;
+}
+  
+.calendar-controls {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+}
+  
+.calendar-grid {
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap:6px;
+  width:100%;
+  max-width:520px;
+}
+  
+.calendar-day {
+  padding:8px 6px;
+  text-align:center;
+  border-radius:6px;
+  background:#f5f7fb;
+  color:#333;
+  cursor:default;
+  font-size:14px;
+  user-select:none;
+  border:1px solid transparent;
+}
+  
+.calendar-day.disabled {
+  opacity:0.35;
+  filter:grayscale(30%);
+}
+  
+.calendar-day.available {
+  background:linear-gradient(180deg,#e8f7ff,#d7efff);
+  cursor:pointer;
+  border:1px solid #28a0ff;
+  box-shadow: 0 2px 6px rgba(40,160,255,0.12);
+}
+  
+.calendar-day.selected {
+  background:#007bff;
+  color:#fff;
+  border-color:#005ab8;
+  box-shadow: 0 6px 18px rgba(0,90,156,0.18);
+}
+  
+.calendar-weekday {
+  font-weight:600;
+  font-size:12px;
+  color:#666;
+  text-align:center;
+}
+  
+.calendar-month-title {
+  font-weight:700;
+  font-size:16px;
+  color:#222;
+}
+  
+.calendar-nav-btn {
+  padding:6px 10px;
+  border-radius:6px;
+  border:1px solid #ddd;
+  background:#fff;
+  cursor:pointer;
+}
+
+
+  
+</style>
 </head>
-
-  
 <body>
-<header class="appbar">
-  <div class="brand">
-    <div class="logo" aria-hidden>🛍️</div>
-    <div class="title">
-      <div class="name emph">Les Délices de Dora</div>
-      <div class="tag">Produits africains</div>
-    </div>
-  </div>
-  <div class="actions">
-    <button id="openCart" class="icon-btn" aria-label="Ouvrir le panier">🛒 
-      <span id="cartBadge" class="cart-badge">0</span>
-    </button>
-    <button id="openContactBtn" class="icon-btn"> 📞 </button>
-  </div>
-</header>
-
-
-<button id="openCartFloat" class="fab-cart" aria-label="Ouvrir le panier" style="display:none;">
-  🛒 <span style="font-weight:700;margin-left:6px">Panier</span>
-  <span id="cartBadgeFloat" class="badge">0</span>
-</button>
 
   
-<main class="container" role="main">
+<!-- Connexion -->
+<div class="container" id="login-container">
+  <h1 style="font-size:40px; color: #333;">🛡️ Accès sécurisé</h1>
+  <div class="separator"></div><br/><br/><br/><br/>
+  
+  <h2 style="color: #333;">🔐 Ouvrir une session</h2>
+  <form class="container" id="login-form" style="width: 100%">
+    <input autocomplete="off" class="responsive-width" id="login-username" placeholder="Nom d'utilisateur" style="margin: 2px 0 2px" type="text"/>
+    <input autocomplete="off" class="responsive-width" id="login-password" placeholder="Mot de passe" type="password"/>
+    <p class="responsive-width" style="font-size: 15px; display: flex; justify-content: flex-start; margin: 5px 0 0 0; font-weight: none; font-style: italic;">
+      <a href="#" onclick="showRecovery()">Identifiant ou mot de passe oublié ?</a>
+    </p><br/>
+    <button class="responsive-width" onclick="login()" type="button">Se connecter</button>
+  </form><br/><br/>
+  <!-- À placer sous le bouton "Se connecter" -->
+<button id="bioFacLoginBtn" class="responsive-width hidden" onclick="tryBioFacLogin()">🔐 Connexion bio/fac</button>
 
-
-<section class="hero" id="heroBlock" aria-hidden="false">
-  <div style="z-index:2;max-width:960px;padding:0 8px">
-    <div class="top-title" style="color:#05293a;">Bienvenu chez</div>
-    <h1 style="color:#05293a;">Les Délices de Dora</h1>
-    <p class="subtitle" style="color:#05293a;"><b>Produits africains authentiques — chikwangue et spécialités</b></p>
-    <div class="search" style="margin-top:6px; width: 100%">
-      <input style="width: 80%" id="searchInput" placeholder=" 🔍 Rechercher un produit" aria-label="Rechercher" autocomplete="off" />
-      <button style="width: 20%" id="clearSearch" class="btn-ghost" aria-label="Effacer la recherche">Effacer</button>
-      <div class="suggestions" id="suggestions" role="listbox" aria-label="Suggestions de produit"></div>
-    </div>
-  </div>
-</section>
-
-
-<section>
-  <div class="grid" id="productGrid" aria-live="polite"></div>
-</section>
+  <br/><br/><br/>
+  <p>Pas de compte ?
+    <a href="#" onclick="showRegister()" style="margin: 0 10px 0 10px">Crée un compte</a> 
+    ou  📥 
+    <a href="#" onclick="importEncryptedVault()" style="margin: 0 0 0 5px">Importer</a>
+  </p>
+</div>
 
   
-<section style="grid-column:1/-1; margin-top:28px;">
-  <div class="about">
-    <button class="about-toggle" aria-expanded="false" aria-controls="about-content">
-      <strong>À propos de l’entreprise</strong>
-      <span class="caret">▸</span>
-    </button>
-    <div id="about-content" class="about-content" hidden>
-      <p><strong>Les Délices de Dora</strong> a été fondée en 2025 pour importer et distribuer des produits alimentaires africains authentiques, avec comme produit phare la chikwangue, aliment de base d'Afrique centrale.</p>
-      <p><strong>Vision :</strong> Devenir la référence de la chikwangue authentique au Canada.</p>
-      <p><strong>Mission :</strong> Offrir à la diaspora africaine et aux curieux des produits traditionnels de qualité, accessibles et fidèles au goût d'origine.</p>
-      <p><strong>Valeurs :</strong> Qualité et authenticité; proximité avec la clientèle; esprit familial et collaboration.</p>
-      <h4>Faits saillants</h4>
-      <p>Mme Raïssa, immigrée au Canada en 2012, a constaté l'absence de chikwangue authentique. En 2019, la redécouverte du produit via une visite familiale a inspiré le projet. En 2024 elle décide d'importer en s'inspirant de modèles européens. En juin 2025, la première importation de 3 400 unités s'est vendue en une semaine à 3,25 $ l'unité.</p>
-      <h4>Objectifs</h4>
-      <ul>
-        <li><strong>Court terme (1 an)</strong> : présence dans au moins 10 épiceries africaines au Québec et en Ontario, volume régulier de 3 000 unités toutes les deux semaines.</li>
-        <li><strong>Moyen terme (2–3 ans)</strong> : élargir le portefeuille client dans tout le Québec et l'Ontario.</li>
-        <li><strong>Long terme (5 ans)</strong> : positionner Les Délices de Dora comme acteur de référence au Canada, avec distribution en grandes surfaces.</li>
-      </ul>
-    </div>
-  </div>
-</section>
+<!-- Modifier ID -->
+<div class="container hidden" id="recovery-container">
+  <h1 style="font-size:40px; color: #333;">🛡️ Accès sécurisé</h1>
+  <div class="separator"></div><br/><br/><br/>
+  
+  <h2 style="color: #333;">📝 Modifier un ID</h2>
+  <form class="container" style="width: 100%">
+    <select autocomplete="off" class="responsive-width" id="recovery-type" style="padding: 12px 16px;font-size: 16px;border: 2px solid #007BFF;color: #333;box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1); margin: 0 0 5px">
+      <option value=""> — Select ID a modifier — </option>
+      <option value="username">Nom d'utilisateur oublié</option>
+      <option value="password">Mot de passe oublié</option>
+    </select>
+    <input autocomplete="off" class="responsive-width" id="recovery-known" placeholder="Entrez l'information connue" style="margin: 2px 0 2px" type="text"/>
+    <input autocomplete="off" class="responsive-width" id="recovery-mastercode" placeholder="NIP" type="password"/><br/>
+    <button class="responsive-width" onclick="recoverIdentity()" type="button">Valider</button>
+  </form><br/><br/><br/><br/><br/>
+  <p><a href="#" onclick="showLogin()">Retour à la connexion</a></p>
+</div>
 
   
-</main>
-
-  
-<div class="cart-panel" id="cartPanel" aria-hidden="true">
-  <div style="display:flex;justify-content:space-between;align-items:center">
-    <strong>Votre panier</strong>
-    <button id="closeCart" class="btn-ghost" aria-label="Fermer le panier">Fermer</button>
-  </div>
-  <div id="cartItems" style="display:flex;flex-direction:column;gap:8px;padding-top:8px"></div>
-  <div style="margin-top:auto">
-    <div class="cart-footer">
-      <div>
-        <div class="small muted">Articles : <strong id="cartCount">0</strong></div>
-        <div class="small muted">Total : <strong id="cartTotal">0.00 $</strong></div>
+<!-- Inscription -->
+<div class="container hidden" id="register-container">
+  <h1 style="font-size:45px; color: #333;">🛡️ Accès sécurisé</h1>
+  <div class="separator"></div><br/><br/><br/>
+  <div style="display: bloc;justify-content: center; align-items: center; width:100%  ">
+    <h2 style="color: #333;">🧑‍💻 Crée un compte</h2>
+    <form class="container" id="register-form" style="width: 100%">
+      <input autocomplete="off" class="responsive-width" id="register-fullname" placeholder="Nom du détenteur du compte" type="text"/>
+      <input autocomplete="off" class="responsive-width" id="register-username" placeholder="Nom d'utilisateur" style="margin: 2px 0 2px" type="text"/>
+      <input autocomplete="off" class="responsive-width" id="register-password" placeholder="Mot de passe" type="password"/>
+      <span onclick="checklist_mp('password-requirements-container1')" style="cursor: pointer; color: gray; font-style: italic; display: inline-block; margin-left: 0;">
+        💡<u>Checklist du mot de passe</u></span>
+      <div id="password-requirements-container1" style="display: none;">
+        <ul id="password-requirements1" style="margin: 2px 0 2px 25px; text-align: left; font-size: 14px; list-style: none; padding-left: 0;">
+          <li id="req-length-register">❌ Au moins 8 caractères</li>
+          <li id="req-digit-register">❌ Inclure un chiffre</li>
+          <li id="req-special-register">❌ Inclure un caractère spécial (Ex: .!@#$%^&amp;*(),?:{}|&lt;&gt;)</li>
+          <li id="req-lowercase-register">❌ Inclure une lettre minuscule</li>
+          <li id="req-uppercase-register">❌ Inclure une lettre majuscule</li>
+        </ul>
       </div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
-        <button id="clearCart" class="btn-ghost">Vider</button>
-        <button id="checkoutCart" class="btn-primary">Valider la commande</button>
-      </div>
+      <input autocomplete="off" class="responsive-width" id="nip" maxlength="10" name="nip" pattern="^[^\s]{4,10}$" placeholder="NIP (facultatif)" type="text"/>
+      <input autocomplete="off" class="responsive-width" id="register-mastercode" placeholder="Code unique" type="password"/><br/>
+      <button class="responsive-width" onclick="register()" style="display: block; margin: 0 auto; ">Valider</button>
+    </form><br/><br/><br/><br/><br/>
+    <p><a href="#" onclick="showLogin()">Retour à la connexion</a></p>
+  </div>
+</div>
+
+  
+<!-- App -->
+<div class="container hidden" id="app-container" style="top:0">
+  <h1 style="position: fixed; top: 0; z-index: 1000; width: 100%; padding-left: 10px;        
+    text-align: left; font-size: 25px; color: #333; margin-top: 0; background-color: #ffffff;">
+    <div style="height: 15px;"></div>        
+    🛡️ Accès sécurisé        
+    <div class="separator"></div>
+  </h1><br/><br/><br/><br/>
+  
+  <!-- Barre de recherche -->
+  <div style="display: flex; justify-content: center; align-items: center; gap: 10px; width:100%">
+    <span style="font-size:30px;  margin-left: -20px;">🔍</span>
+    <input autocomplete="off" id="search" oninput="renderAccounts()" placeholder="Rechercher un compte..." style="width: 50%;  margin-left: -8px;" type="text"/>
+  </div><br/>
+  <div id="login-info" style="margin: 10px; font-style: italic; color: #555;"></div>
+  
+  <!-- Nombre de compte -->
+  <div id="account-count" style="position: fixed; top: 11px;            
+    right: 120px; width:auto; z-index: 1000; font-size: 16px; cursor: pointer;      
+    min-width: auto; background-color: #007bff;color: white;padding: 10px 15px;     
+    border-radius: 20px;font-size: 18px;font-weight: bold;display: inline-block; text-align: center;">0   
+  </div>
+  
+  <!-- Apk save -->
+  <div class="accounts-container" id="accounts-list"></div>
+  
+  <!-- Menu -->
+  <div class="menu-container" id="menuContainer">
+    <button class="menu-button" id="menu-toggle">☰ Menu</button>
+    <div class="menu-items" id="menuItems">     
+      <div id="greeting-message" style="font-weight: bold; font-size: 18px; color: #333; text-align: center;"></div> 
+      <button id="menu-add-account" onclick="openAccountModal(false)" style="width: auto; white-space: nowrap;">📝 Ajouter un compte</button>
+      <button onclick="verifierExpiration()" style="width: auto; white-space: nowrap;">📅 Gestions de suivi</button>
+      <button onclick="afficherDerniereConnexion()" style="width: auto; white-space: nowrap;">⚙️ Paramètre de connexion</button>
+      <button id="top-right-button" onclick="logout()" style="width: auto; white-space: nowrap;">🔒 Déconnexion</button>    
+    <br><br><!-- À placer en bas du menuItems -->
+<button id="bioFacToggleBtn" class="hidden" onclick="toggleBioFac()">⚙️ Activer bio/fac</button>
+
+    </div>  
+  </div>
+</div>
+
+
+<!-- Historique de connxion -->
+<div class="modal hidden" id="historiqueConnexionModal">
+  <div class="modal-content">
+    <h3>📜 Historique de connexion</h3>
+    <label>Choisir une date :</label>
+    <div id="calendar-container" style="margin-top:8px;"></div>
+    <div id="periode-affichee" style="margin-top:8px; font-style: italic; color: #555;"></div>
+    <div id="historique-connexion-content" style="text-align:left; font-size:15px;"></div>
+    <div class="modal-buttons">
+      <button onclick="confirmerSuppressionHistorique()">🗑️ Supprimer</button>
+      <button onclick="fermerHistoriqueConnexion()">Fermer</button>
     </div>
   </div>
 </div>
 
   
-<!-- Superposition pour la modal (state hidden inline to avoid flash) -->
-<div class="overlay" id="overlay" aria-hidden="true" style="display:none"></div>
-
-
-<div class="payment-modal" id="orderModal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none">
-  <div class="modal-header">
-    <strong>Finaliser la commande</strong>
-    <button id="closeOrder" class="modal-close" aria-label="Fermer la commande">✖</button>
+<!-- Decompte -->
+<div class="hidden" id="inactivity-modal">
+  <div class="countdown-container">
+    <h2 class="countdown-title">DÉCONNEXION DANS ⌛</h2>
+    <div class="countdown-circles">
+      <div class="circle" id="circle-hours">
+        <svg height="100" width="100">
+          <circle cx="50" cy="50" fill="none" r="45" stroke="#333" stroke-width="8"></circle>
+          <circle cx="50" cy="50" fill="none" id="progress-hours" r="45" stroke="#00ffcc" stroke-linecap="round" stroke-width="8" transform="rotate(-90 50 50)"></circle>
+        </svg>
+        <div class="circle-label">
+          <span id="hours-value">00</span><p>HEURES</p>
+        </div>
+      </div>
+      <div class="circle" id="circle-minutes">
+        <svg height="100" width="100">
+          <circle cx="50" cy="50" fill="none" r="45" stroke="#333" stroke-width="8"></circle>
+          <circle cx="50" cy="50" fill="none" id="progress-minutes" r="45" stroke="#00ffcc" stroke-linecap="round" stroke-width="8" transform="rotate(-90 50 50)"></circle>
+        </svg>
+        <div class="circle-label">
+          <span id="minutes-value">00</span><p>MINUTES</p>
+        </div>
+      </div>
+      <div class="circle" id="circle-seconds">
+        <svg height="100" width="100">
+          <circle cx="50" cy="50" fill="none" r="45" stroke="#333" stroke-width="8"></circle>
+          <circle cx="50" cy="50" fill="none" id="progress-seconds" r="45" stroke="#00ffcc" stroke-linecap="round" stroke-width="8" transform="rotate(-90 50 50)"></circle>
+        </svg>
+        <div class="circle-label">
+          <span id="seconds-value">00</span><p>SECONDES</p>
+        </div>
+      </div>  
+    </div>  
+    <p><u style="font-size: 14px;text-decoration:none">          
+      💡 Cliquer sur l'ecran pour l'arreter!</u></p>
   </div>
-  <form id="orderForm" class="modal-body" autocomplete="off" novalidate>
-    <!-- Gauche : champs du formulaire -->
-    <div class="form-row" style="grid-column:1">
-      <div>
-        <div class="label-row">
-          <label class="small">Nom au complet <span class="required" aria-hidden>*</span></label>
-          <div class="small" style="color:var(--muted)">Obligatoire</div>
-        </div>
-        <input id="fullName" name="full_name" class="input" required />
-        <div id="err-fullName" class="field-error">Le nom doit contenir au moins 4 lettres.</div>
+</div>
+
+  
+<!-- Alert -->
+<div class="hidden" id="alert-modal">
+  <div class="modal-content" id="alert-message"></div>
+</div>
+  
+<div class="loader-container" id="loader" style="display: none;">
+  <div class="loader"><div class="inner-circle"></div></div>
+  <div class="loader-text" id="loader-text">📥 Chargement en cours...</div>
+</div>
+
+  
+<!-- Fenêtres modales -->
+<div class="modal" id="nipModal" style="display: none;">
+  <div class="modal-content">
+    <h3>Créer votre NIP</h3>
+    <input id="nipInput" maxlength="10" placeholder="4 à 10 caractères, sans espace" type="text"/>
+    <div class="modal-buttons">
+      <button onclick="validateNipModal()">Valider</button>
+      <button onclick="closeNipModal()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modifier ID -->
+<div class="modal hidden" id="updateAccountModal">
+  <div class="modal-content">
+    <h3>⚙️ Modifier mon compte</h3>
+    <input id="update-new-username" placeholder="Nouveau nom d'utilisateur" type="text"/>
+    <input id="update-new-password" placeholder="Nouveau mot de passe" type="password"/>
+    <div style="text-align:left; margin-top:8px;">
+      <span onclick="checklist_mp('password-requirements-update-modal')" style="cursor:pointer; color:gray; font-style:italic;">💡 Checklist du mot de passe</span>
+      <div id="password-requirements-update-modal" style="display:none; margin-top:6px;">
+        <ul style="list-style:none; padding-left:0; font-size:14px;">
+        <li id="req-length-modal">❌ Au moins 8 caractères</li>
+        <li id="req-digit-modal">❌ Inclure un chiffre</li>
+        <li id="req-special-modal">❌ Inclure un caractère spécial</li>
+        <li id="req-lowercase-modal">❌ Inclure une lettre minuscule</li>
+        <li id="req-uppercase-modal">❌ Inclure une lettre majuscule</li>
+        </ul>
       </div>
-      <div class="two-cols" style="margin-top:6px">
-        <div>
-          <div class="label-row">
-            <label class="small">Numéro de téléphone (Canada) <span class="required" aria-hidden>*</span></label>
+    </div>
+    <input id="update-nip" placeholder="NIP (validation requise)" type="password"/>
+    <div class="modal-buttons" style="margin-top:14px;">
+      <button onclick="submitUpdateAccount()">Valider</button>
+      <button onclick="closeUpdateAccountModal()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Reset -->
+<div class="modal hidden" id="nipConfirmModal">
+  <div class="modal-content">
+    <h3>Entrez votre NIP pour confirmer la réinitialisation</h3>
+    <input id="nipConfirmInput" maxlength="10" placeholder="Votre NIP" type="password"/>
+    <div class="modal-buttons">
+      <button onclick="validerReinitialisation()">Valider</button>
+      <button onclick="fermerModalReinitialisation()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Cree NAME -->
+<div class="modal hidden" id="fullnameModal">
+  <div class="modal-content">
+    <h3>Ajouter votre nom complet</h3>
+    <input id="fullnameInput" placeholder="Nom complet (min. 4 lettres)" type="text"/>
+    <div class="modal-buttons">
+      <button onclick="validateFullname()">Valider</button>
+      <button onclick="closeFullnameModal()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Mod NIP -->
+<div class="modal hidden" id="nipUpdateModal">
+  <div class="modal-content">
+    <h3>Modifier votre NIP</h3>
+    <input id="oldNipInput" placeholder="Ancien NIP" type="password"/>
+    <input id="newNipInput" placeholder="Nouveau NIP (min. 4 chiffres)" type="password"/>
+    <div class="modal-buttons">
+      <button onclick="updateNip()">Valider</button>
+      <button onclick="closeNipUpdateModal()">Annuler</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Ajout d'un compte -->
+<div class="modal hidden" id="accountModal">
+  <div class="modal-content" style="width: min(720px, 95vw); max-height: 85vh; overflow-y: auto;">
+    <h3 id="accountModalTitle">📝 Ajouter un compte</h3>
+    <form id="account-form" style="display: flex; flex-direction: column; align-items: center; width:100%">
+      <input id="account-name" placeholder="Nom du compte" type="text" required />
+      <input id="account-user" placeholder="Nom d'utilisateur" type="text" />
+      <div style="display: flex; justify-content: center; gap: 5px;">
+        <input id="account-pass" placeholder="Mot de passe" type="text" required />
+        <input id="account-nip" placeholder="NIP" style="width: 20%;" type="text" />
+      </div>
+      <input id="account-expiry" placeholder="Date d'expiration" type="date" />
+      <textarea id="account-note" placeholder="Note"></textarea>
+      <input id="account-link" placeholder="Lien (https://...)" type="text" />
+      <input accept="image/*" id="account-photo" onchange="previewImage()" type="file" />
+      <input id="existing-photo" type="hidden" />
+      <img id="image-preview" alt="Aperçu de l'image" src="#" style="display:none; max-width:95%; margin-top:10px;" />
+      <div class="modal-buttons" style="margin-top: 20px;">
+        <button type="submit">💾 Enregistrer</button>
+        <button type="button" onclick="closeAccountModal()">❌ Annuler</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+  
+<script>
+/* --------------- Données / état --------------- */
+let vaultData = { users: [], accounts: [] };
+let fileHandle = null;
+let currentUser = null;
+let editingIndex = null;
+let cryptoKey = null;
+let isLoggedIn = false;
+
+/* --------------- Utilitaires cryptographiques --------------- */
+async function hashMasterCode(code) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(code);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+/* Valeur attendue du hash maître */
+async function recupererHashDecrypte() {
+  // Remplacer si vous avez le hash exact du "code maître"
+  return "97adb0a1f731d74ae248cece0c59026d9a615db4eca7c070dadc91c599891cbc";
+}
+
+function getMasterString() {
+  return atob("bmV3MjEwMTIw"); // "new210120"
+}
+
+async function getCryptoKey(master) {
+  const encoder = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey("raw", encoder.encode(master), { name: "PBKDF2" }, false, ["deriveKey"]);
+  return crypto.subtle.deriveKey({
+    name: "PBKDF2",
+    salt: encoder.encode("vault_salt"),
+    iterations: 100000,
+    hash: "SHA-256"
+  }, keyMaterial, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+}
+
+/* --------------- File save / load avec fallback --------------- */
+async function saveVault() {
+  if (!cryptoKey) return;
+  const encoder = new TextEncoder();
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encoded = encoder.encode(JSON.stringify(vaultData));
+  const encrypted = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, cryptoKey, encoded);
+  const blob = new Blob([iv, encrypted]);
+
+  if (!window.showSaveFilePicker) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "vault_data.enc";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+    return;
+  }
+
+  try {
+    if (!fileHandle) {
+      fileHandle = await window.showSaveFilePicker({
+        suggestedName: "vault_data.enc",
+        types: [{ description: "Encrypted Vault", accept: { "application/octet-stream": [".enc"] } }]
+      });
+    }
+    const writable = await fileHandle.createWritable();
+    await writable.write(blob);
+    await writable.close();
+  } catch (e) {
+    console.warn("saveVault error:", e);
+  }
+}
+
+async function loadVault() {
+  try {
+    if (!window.showOpenFilePicker) return await loadVaultFromInputFallback();
+    const [handle] = await window.showOpenFilePicker();
+    fileHandle = handle;
+    const file = await fileHandle.getFile();
+    const buffer = await file.arrayBuffer();
+    const iv = buffer.slice(0, 12);
+    const data = buffer.slice(12);
+    const decrypted = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, cryptoKey, data);
+    vaultData = JSON.parse(new TextDecoder().decode(decrypted));
+    return true;
+  } catch (e) {
+    console.warn("loadVault error:", e);
+    vaultData = { users: [], accounts: [] };
+    return false;
+  }
+}
+
+function loadVaultFromInputFallback() {
+  return new Promise(resolve => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.enc,application/octet-stream';
+    input.onchange = async (ev) => {
+      const f = ev.target.files[0];
+      if (!f) { resolve(false); return; }
+      const buffer = await f.arrayBuffer();
+      const iv = buffer.slice(0, 12);
+      const data = buffer.slice(12);
+      try {
+        const decrypted = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, cryptoKey, data);
+        vaultData = JSON.parse(new TextDecoder().decode(decrypted));
+        resolve(true);
+      } catch (e) {
+        console.warn("loadVaultFromInputFallback decrypt error:", e);
+        resolve(false);
+      }
+    };
+    input.click();
+  });
+}
+
+/* --------------- Helpers UI --------------- */
+function safeEl(id) {
+  try { return document.getElementById(id) || null; } catch (e) { return null; }
+}
+
+function showAlert(message) {
+  closeAllWindowsAndModals();
+  const alertBox = document.createElement("div");
+  alertBox.className = "dynamic-alert";
+  alertBox.innerHTML = message;
+  alertBox.style.backgroundColor = "#fff";
+  alertBox.style.color = "#000";
+  alertBox.style.padding = "20px";
+  alertBox.style.border = "2px solid #333";
+  alertBox.style.borderRadius = "8px";
+  alertBox.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
+  alertBox.style.zIndex = "21000";
+  alertBox.style.maxHeight = "80vh";
+  alertBox.style.overflowY = "auto";
+  alertBox.style.width = "80%";
+  alertBox.style.maxWidth = "600px";
+  alertBox.style.fontSize = "16px";
+  document.body.appendChild(alertBox);
+  function onDocClickClose(e) {
+    if (!alertBox.contains(e.target)) {
+      alertBox.remove();
+      document.removeEventListener('click', onDocClickClose);
+    }
+  }
+  setTimeout(() => document.addEventListener('click', onDocClickClose), 50);
+}
+
+function showTimedAlert(message, duration = 3000) {
+  showAlert(message);
+  setTimeout(() => {
+    const last = document.querySelector('.dynamic-alert');
+    if (last) last.remove();
+  }, duration);
+}
+
+function showConfirm(message, onConfirm, onCancel) {
+  closeAllWindowsAndModals();
+  const alertBox = document.createElement("div");
+  alertBox.className = "dynamic-alert";
+  alertBox.innerHTML = `
+    <div style="text-align:center;">
+      <div style="margin-bottom:12px;">${message}</div>
+      <div style="margin-top:10px; display:flex; justify-content:center; gap:10px;">
+        <button id="confirm-yes">Oui</button>
+        <button id="confirm-no">Non</button>
+      </div>
+    </div>
+  `;
+  alertBox.style.backgroundColor = "#fff";
+  alertBox.style.color = "#000";
+  alertBox.style.padding = "20px";
+  alertBox.style.border = "2px solid #333";
+  alertBox.style.borderRadius = "8px";
+  alertBox.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3)";
+  alertBox.style.zIndex = "21000";
+  alertBox.style.width = "80%";
+  alertBox.style.maxWidth = "600px";
+  document.body.appendChild(alertBox);
+  document.getElementById("confirm-yes").onclick = () => { alertBox.remove(); if (onConfirm) onConfirm(); };
+  document.getElementById("confirm-no").onclick = () => { alertBox.remove(); if (onCancel) onCancel(); };
+}
+
+function closeAllWindowsAndModals() {
+  document.querySelectorAll('.modal').forEach(modal => { modal.classList.add('hidden'); modal.style.display = 'none'; });
+  document.querySelectorAll('.dynamic-alert').forEach(el => el.remove());
+  const menu = document.getElementById('menuItems');
+  if (menu && menu.classList.contains('show')) menu.classList.remove('show');
+  const inactivity = document.getElementById('inactivity-modal');
+  if (inactivity) { inactivity.classList.add('hidden'); inactivity.style.display = 'none'; }
+}
+
+/* --------------- Core : Auth / Register / Login --------------- */
+async function register() {
+  const loader = document.getElementById("loader");
+  const loaderText = document.getElementById("loader-text");
+  const fullname = document.getElementById("register-fullname").value.trim();
+  const username = document.getElementById("register-username").value.trim();
+  const password = document.getElementById("register-password").value;
+  const inputCode = document.getElementById("register-mastercode").value;
+  const nip = document.getElementById("nip").value.trim();
+
+  if (!fullname || fullname.length < 4 || (fullname.replace(/[^a-zA-ZÀ-ÿ]/g, "").length < 4)) {
+    return showTimedAlert("❌ Le nom complet doit contenir au moins 4 lettres.");
+  }
+  if (!username || !password || !inputCode) return showAlert("⚠️ Tous les champs doivent être complétés pour continuer.");
+  if (username.length < 4) return showTimedAlert("❌ Le nom d'utilisateur doit contenir au moins 4 caractères.");
+
+  const validPassword = password.length >= 8 && /\d/.test(password) && /[.!@#$%^&*(),?":{}|<>]/.test(password) && /[a-z]/.test(password) && /[A-Z]/.test(password);
+  if (!validPassword) return showTimedAlert("⚠️ Le mot de passe saisi ne respecte pas les critères de sécurité requis.");
+
+  const hashUtilisateur = await hashMasterCode(inputCode);
+  const hashAttendu = await recupererHashDecrypte();
+  if (hashUtilisateur !== hashAttendu) return showTimedAlert("🔐 Authentification échouée : code maître non reconnu.");
+
+  if (vaultData.users.length > 0) return showAlert("⚠️ Un compte existe déjà. Connectez-vous ou actualisez la page sans importer de fichier.");
+
+  const newUser = nip ? { username, password, nip, fullname } : { username, password, fullname };
+  vaultData.users.push(newUser);
+
+  loader.style.display = "flex";
+  loaderText.textContent = "🛠️ Création du compte en cours...";
+  await new Promise(resolve => setTimeout(resolve, 300));
+  loaderText.textContent = "🎉 Félicitations, compte créé avec succès !";
+  await saveVault();
+  loader.style.display = "none";
+  showLogin();
+  viderChamp();
+}
+
+function login() {
+  const usernameInput = document.getElementById("login-username");
+  const passwordInput = document.getElementById("login-password");
+  const username = usernameInput.value.trim().toLowerCase();
+  const password = passwordInput.value;
+
+  if (!username || !password) return showTimedAlert("Oups ! Nom d’utilisateur ou mot de passe manquant. Compléter et essayons à nouveau 😊");
+
+  const user = vaultData.users.find(u => u.username.toLowerCase() === username && u.password === password);
+  if (!user) return showTimedAlert("❌ Identifiants invalides. Veuillez réessayer.");
+
+  const now = new Date();
+  vaultData.lastLogin = vaultData.lastLogin || {};
+  if (vaultData.lastLogin.current) vaultData.lastLogin.previous = vaultData.lastLogin.current;
+  vaultData.lastLogin.current = now.toISOString();
+  vaultData.loginHistory = vaultData.loginHistory || [];
+  vaultData.loginHistory.push({ login: now.toISOString(), logout: null, device: navigator.userAgent });
+
+  saveVault();
+  currentUser = user.username;
+  isLoggedIn = true;
+  document.getElementById("login-container").classList.add("hidden");
+  document.getElementById("app-container").classList.remove("hidden");
+  renderAccounts();
+  startInactivityTimerUnified();
+
+  const loginInfoDiv = document.getElementById("login-info");
+  const formatDate = d => new Date(d).toLocaleString("fr-CA", {
+    weekday: "long", year: "numeric", month: "long", day: "numeric",
+    hour: "2-digit", minute: "2-digit", second: "2-digit"
+  });
+
+
+  const greetingDiv = document.getElementById("greeting-message");
+  const hour = now.getHours();
+  let salutation = "";
+  if (hour >= 5 && hour < 8) salutation = "Bon matin 🌄";
+  else if (hour >= 8 && hour < 13) salutation = "Bonjour 🌞";
+  else if (hour >= 13 && hour < 18) salutation = "Bon après-midi ⛅";
+  else if (hour >= 18 && hour < 22) salutation = "Bonsoir 🌇";
+  else salutation = "Bonne nuit 💤";
+  const name = user.fullname?.trim() || currentUser;
+  const today = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = today.toLocaleDateString('fr-CA', options);
+  greetingDiv.textContent = `${salutation}, ${name} en ce ${formattedDate}`;
+  viderChamp();
+}
+
+function logout() {
+  if (isLoggedIn) {
+    const now = new Date().toISOString();
+    vaultData.lastLogin = vaultData.lastLogin || {};
+    vaultData.lastLogin.logout = now;
+    vaultData.loginHistory = vaultData.loginHistory || [];
+    const lastEntry = vaultData.loginHistory[vaultData.loginHistory.length - 1];
+    if (lastEntry && !lastEntry.logout) lastEntry.logout = now;
+    saveVault();
+    isLoggedIn = false;
+    document.getElementById("app-container").classList.add("hidden");
+    document.getElementById("login-container").classList.remove("hidden");
+    showTimedAlert("✔️ Déconnexion réussie.");
+  }
+}
+
+/* --------------- Account CRUD --------------- */
+document.addEventListener("DOMContentLoaded", () => {
+  // --- Liaison preview image (sécurisé)
+  const accountPhoto = document.getElementById("account-photo");
+  if (accountPhoto && !accountPhoto._previewAttached) {
+    accountPhoto.addEventListener("change", previewImage);
+    accountPhoto._previewAttached = true;
+  }
+
+  // --- Navigation par Enter : inputs du login et register
+  const formInputs = document.querySelectorAll("#login-container input, #register-container input");
+  formInputs.forEach((input, index, arr) => {
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const next = arr[index + 1];
+        if (next) next.focus();
+      }
+    });
+  });
+
+  // --- Liaison du bouton "Ajouter un compte" dans le menu
+  const menuAddBtn = document.getElementById("menu-add-account");
+  if (menuAddBtn && !menuAddBtn._addedListener) {
+    menuAddBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      // Ouvre form et ferme le menu
+      toggleForm();
+    });
+    menuAddBtn._addedListener = true;
+  }
+
+  // --- Sécuriser l'attachement d'autres listeners utiles (ex: bouton du menu principal)
+  const menuButton = document.querySelector(".menu-button");
+  if (menuButton && !menuButton._attached) {
+    menuButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      toggleMenu();
+    });
+    menuButton._attached = true;
+  }
+
+  
+  // --- Assurer l'input focus sur le premier champ si modal d'ajout est déjà ouvert
+  const accountModal = document.getElementById("accountModal");
+  if (accountModal && accountModal.style.display === "flex") {
+    const first = accountModal.querySelector("input, textarea, button");
+    if (first) first.focus();
+  }
+
+  // --- Toutes les autres initialisations légères qui doivent se produire au chargement
+  // Par exemple, s'assurer que l'image preview est cachée par défaut
+  const preview = document.getElementById("image-preview");
+  if (preview) { preview.style.display = preview.src && preview.src !== "#" ? "block" : "none"; }
+
+  // --- N'affecte pas le submit du formulaire ici ; laisser un handler unique séparé.
+});
+
+
+
+// Handler unique et fiable pour l'envoi du formulaire account-form
+(function attachSingleAccountFormHandler() {
+  const form = document.getElementById("account-form");
+  if (!form) return;
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // Récupérer explicitement l'index d'édition depuis l'attribut data (si présent)
+    const idxRaw = form.dataset.editingIndex;
+    const idx = (typeof idxRaw === "string" && idxRaw !== "") && !isNaN(parseInt(idxRaw, 10))
+      ? parseInt(idxRaw, 10)
+      : null;
+
+    const nameEl = document.getElementById("account-name");
+    const passEl = document.getElementById("account-pass");
+
+    const name = (nameEl?.value || "").trim();
+    const pass = (passEl?.value || "");
+
+    // Validation claire et unique
+    if (!name || !pass) {
+      showTimedAlert("🛑 Nom de compte & mot de passe sont requis.");
+      return;
+    }
+
+    // Construire l'objet compte
+    const newAccount = {
+      name,
+      user: (document.getElementById("account-user")?.value || "").trim(),
+      pass,
+      nip: (document.getElementById("account-nip")?.value || "").trim(),
+      expiry: document.getElementById("account-expiry")?.value || "",
+      note: (document.getElementById("account-note")?.value || "").trim(),
+      link: (document.getElementById("account-link")?.value || "").trim(),
+      photo: document.getElementById("existing-photo")?.value || ""
+    };
+
+    // Gestion de la photo (si fournie)
+    const photoFile = document.getElementById("account-photo")?.files?.[0];
+
+    const persistAndClose = (photoDataUrl) => {
+      if (photoDataUrl) newAccount.photo = photoDataUrl;
+
+      if (idx !== null && vaultData.accounts[idx]) {
+        // édition
+        vaultData.accounts[idx] = newAccount;
+      } else {
+        // ajout : vérifier l'unicité du nom (insensible à la casse)
+        const exists = vaultData.accounts.some(acc => (acc.name || "").toLowerCase() === name.toLowerCase());
+        if (exists) {
+          showTimedAlert(`⚠️ Le nom de compte "${name}" existe déjà.`);
+          return;
+        }
+        vaultData.accounts.push(newAccount);
+      }
+
+      // Trier, sauvegarder, rafraîchir UI
+      vaultData.accounts.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+      saveVault();
+      renderAccounts();
+
+      // Reset et fermeture modal
+      form.reset();
+      delete form.dataset.editingIndex;
+      const preview = document.getElementById("image-preview");
+      if (preview) { preview.style.display = "none"; preview.src = ""; }
+      const existingPhoto = document.getElementById("existing-photo");
+      if (existingPhoto) existingPhoto.value = "";
+      editingIndex = null;
+      closeAccountModal();
+    };
+
+    if (photoFile) {
+      const reader = new FileReader();
+      reader.onload = (ev) => persistAndClose(ev.target.result);
+      reader.readAsDataURL(photoFile);
+    } else {
+      persistAndClose(newAccount.photo);
+    }
+  });
+})();
+
+
+
+// ✅ Fix du bouton ☰ Menu
+(function attachMenuToggleHandler() {
+  const menuBtn = document.getElementById("menu-toggle");
+  const menuItems = document.getElementById("menuItems");
+
+  if (!menuBtn || !menuItems) return;
+
+  menuBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const isOpen = menuItems.classList.contains("show");
+    if (isOpen) {
+      menuItems.classList.remove("show");
+      menuItems.style.opacity = "0";
+      menuItems.style.display = "none";
+    } else {
+      menuItems.classList.add("show");
+      menuItems.style.opacity = "1";
+      menuItems.style.display = "flex";
+    }
+  });
+
+  // Fermer le menu si clic à l'extérieur
+  document.addEventListener("click", function (e) {
+    if (!menuItems.contains(e.target) && !menuBtn.contains(e.target)) {
+      menuItems.classList.remove("show");
+      menuItems.style.opacity = "0";
+      menuItems.style.display = "none";
+    }
+  });
+
+  // Fermer avec Échap
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      menuItems.classList.remove("show");
+      menuItems.style.opacity = "0";
+      menuItems.style.display = "none";
+      menuBtn.focus();
+    }
+  });
+})();
+
+  
+/* Sauvegarde/lecture d'un compte */
+function saveAccount(account) {
+  if (editingIndex !== null) {
+    vaultData.accounts[editingIndex] = account;
+    editingIndex = null;
+  } else {
+    vaultData.accounts.push(account);
+  }
+  vaultData.accounts.sort((a, b) => {
+    const nameA = (a.name || "").toLowerCase();
+    const nameB = (b.name || "").toLowerCase();
+    return nameA.localeCompare(nameB);
+  });
+  saveVault();
+  renderAccounts();
+}
+
+function renderAccounts() {
+  const list = document.getElementById("accounts-list");
+  const search = (document.getElementById("search")?.value || "").toLowerCase();
+  list.innerHTML = "";
+  const filteredAccounts = (vaultData.accounts || [])
+    .map((acc, index) => ({ acc, index }))
+    .filter(({ acc }) =>
+      (acc.name || "").toLowerCase().includes(search) ||
+      (acc.user || "").toLowerCase().includes(search) ||
+      (acc.note || "").toLowerCase().includes(search)
+    );
+  document.getElementById("account-count").textContent = filteredAccounts.length;
+  filteredAccounts.forEach(({ acc, index }) => {
+    const div = document.createElement("div");
+    div.className = "account";
+    const noteFormatted = (acc.note || "").replace(/\n/g, "<br>");
+    div.innerHTML = `
+      <div style="text-align: center; font-weight: bold; font-size: 25px; color: #333;">
+        ${acc.name || ""}
+      </div><br>
+      <div style="font-size: 18px; word-wrap: break-word; white-space: normal;">
+        <u><b>User</b></u>: ${acc.user || ""}<br>
+        <u><b>Mot de passe</b></u>: ${acc.pass || ""}<br>
+        <u><b>NIP</b></u>: ${acc.nip || ""}<br>
+        <u><b>Expiration</b>⌛</u>: ${acc.expiry ? formatDate(acc.expiry) : ""}<br>
+        <div style="background-color: rgba(0, 123, 255, 0.1);padding: 10px;border-radius: 8px;margin-top: 5px;">
+        <u><b>Note</b></u> :<br>${noteFormatted}</div>
+        ${acc.link ? `<a href="${acc.link}" target="_blank">${acc.link}</a><br>` : ""}<br>
+      </div>
+      <div class="imgcrtl">
+        ${acc.photo ? `<img src="${acc.photo}" alt="photo">` : `<span style="font-size: 60px;">🖼️</span>`}
+      </div>
+      <div class="actions">
+        <button onclick="openAccountModal(true, ${index})">⚙️ Modifier</button>
+        <button onclick="deleteAccount(${index})">🗑️ Supprimer</button>
+      </div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function editAccount(index) {
+  const acc = vaultData.accounts[index];
+  document.getElementById("account-name").value = acc.name || "";
+  document.getElementById("account-user").value = acc.user || "";
+  document.getElementById("account-pass").value = acc.pass || "";
+  document.getElementById("account-nip").value = acc.nip || "";
+  if (acc.nip) document.getElementById("account-nip").disabled = true;
+  document.getElementById("account-expiry").value = acc.expiry || "";
+  document.getElementById("account-note").value = acc.note || "";
+  document.getElementById("account-link").value = acc.link || "";
+  document.getElementById("existing-photo").value = acc.photo || "";
+  const preview = document.getElementById("image-preview");
+  if (acc.photo && preview) {
+    preview.src = acc.photo;
+    preview.style.display = "block";
+  } else if (preview) {
+    preview.src = "#";
+    preview.style.display = "none";
+  }
+  const panel = document.getElementById("form-wrapper");
+  const button = document.getElementById("toggle-form-button");
+  if (!panel.classList.contains("active")) {
+    panel.classList.add("active");
+    if (button) button.innerHTML = "❌ Fermer le formulaire";
+  }
+  editingIndex = index;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function deleteAccount(index) {
+  const accountName = vaultData.accounts[index].name;
+  showConfirm(
+    `🤔 Êtes-vous sûr de vouloir supprimer le compte <b>"${accountName}"</b> ?`,
+    () => {
+      vaultData.accounts.splice(index, 1);
+      saveVault();
+      renderAccounts();
+      showTimedAlert(`✔️ Le compte <b>"${accountName}"</b> a été supprimé avec succès.`);
+    },
+    () => showTimedAlert(`❌ Suppression annulée.`)
+  );
+}
+
+/* --------------- UI small helpers --------------- */
+function toggleMenu() {
+  const menu = document.getElementById("menuItems");
+  if (menu) menu.classList.toggle("show");
+}
+
+
+
+function filtrerParNom(nomCompte) {
+  const searchInput = document.getElementById("search");
+  if (!searchInput) return;
+  searchInput.value = nomCompte;
+  renderAccounts(); // Cette fonction doit déjà exister et filtrer selon la valeur du champ #search
+}
+
+
+function previewImage() {
+  const input = safeEl("account-photo");
+  const preview = safeEl("image-preview");
+  if (!input || !preview) return;
+  const file = input.files && input.files[0];
+  if (!file) { preview.src = "#"; preview.style.display = "none"; return; }
+  const reader = new FileReader();
+  reader.onload = function (e) { preview.src = e.target.result; preview.style.display = "block"; };
+  reader.onerror = function () { preview.src = "#"; preview.style.display = "none"; };
+  reader.readAsDataURL(file);
+}
+
+function viderChamp() {
+  document.querySelectorAll("input").forEach(input => input.value = "");
+  document.querySelectorAll("textarea").forEach(textarea => textarea.value = "");
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const options = { day: 'numeric', month: 'long', year: 'numeric' };
+  return date.toLocaleDateString('fr-FR', options);
+}
+
+/* --------------- Inactivity timer unifié --------------- */
+(function setupInactivityLogic() {
+  const WARNING_DELAY_MS = 30 * 1000;    // afficher l'avertissement après 30s
+  const MAX_INACTIVITY_MS = 120 * 1000;  // déconnecter après 120s
+
+  let lastInteraction = Date.now();
+  let warningShown = false;
+  let inactivityIntervalId = null;
+
+  function updateLastInteraction() {
+    lastInteraction = Date.now();
+    if (warningShown) {
+      const modal = document.getElementById("inactivity-modal");
+      if (modal) {
+        modal.classList.add("hidden");
+        modal.style.display = "none";
+      }
+      warningShown = false;
+    }
+  }
+
+  function tick() {
+    if (!isLoggedIn) return;
+    const elapsed = Date.now() - lastInteraction;
+
+    if (elapsed >= WARNING_DELAY_MS && elapsed < MAX_INACTIVITY_MS) {
+      if (!warningShown) {
+        const modal = document.getElementById("inactivity-modal");
+        if (modal) {
+          modal.classList.remove("hidden");
+          modal.style.display = "flex";
+        }
+        warningShown = true;
+      }
+      const remaining = Math.max(0, Math.floor((MAX_INACTIVITY_MS - elapsed) / 1000));
+      const hours = Math.floor(remaining / 3600);
+      const minutes = Math.floor((remaining % 3600) / 60);
+      const seconds = remaining % 60;
+      const hrsEl = document.getElementById("hours-value");
+      const minEl = document.getElementById("minutes-value");
+      const secEl = document.getElementById("seconds-value");
+      if (hrsEl) hrsEl.textContent = String(hours).padStart(2, '0');
+      if (minEl) minEl.textContent = String(minutes).padStart(2, '0');
+      if (secEl) secEl.textContent = String(seconds).padStart(2, '0');
+      const ph = document.getElementById("progress-hours");
+      const pm = document.getElementById("progress-minutes");
+      const ps = document.getElementById("progress-seconds");
+      if (ph) ph.style.strokeDashoffset = 282.6 * (1 - (hours / Math.max(1, hours)));
+      if (pm) pm.style.strokeDashoffset = 282.6 * (1 - (minutes / 60));
+      if (ps) ps.style.strokeDashoffset = 282.6 * (1 - (seconds / 60));
+    }
+
+    if (elapsed >= MAX_INACTIVITY_MS) {
+      clearInterval(inactivityIntervalId);
+      inactivityIntervalId = null;
+      const modal = document.getElementById("inactivity-modal");
+      if (modal) { modal.classList.add("hidden"); modal.style.display = 'none'; }
+      warningShown = false;
+      logout();
+      showAlert("⏱️ Vous étiez déconnecté après 2 minutes d'inactivité.");
+    }
+  }
+
+  function start() {
+    if (inactivityIntervalId) clearInterval(inactivityIntervalId);
+    lastInteraction = Date.now();
+    warningShown = false;
+    const modal = document.getElementById("inactivity-modal");
+    if (modal) { modal.classList.add("hidden"); modal.style.display = "none"; }
+    inactivityIntervalId = setInterval(tick, 1000);
+  }
+
+  // Exposer contrôles publics
+  window.startInactivityTimerUnified = function() {
+    if (!isLoggedIn) return;
+    start();
+  };
+  window.resetInactivityTimerUnified = function() {
+    if (!isLoggedIn) return;
+    updateLastInteraction();
+  };
+
+  // Événements globaux
+  ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'].forEach(evt => {
+    document.addEventListener(evt, () => {
+      if (isLoggedIn) updateLastInteraction();
+    }, { passive: true });
+  });
+
+  // Cliquer sur la modal arrête le décompte
+  document.addEventListener('click', (e) => {
+    const modal = document.getElementById('inactivity-modal');
+    if (!modal) return;
+    if (!modal.classList.contains('hidden') && modal.contains(e.target)) {
+      updateLastInteraction();
+    }
+  });
+})();
+
+/* --------------- Historique & affichages --------------- */
+function afficherDerniereConnexion() {
+  const user = vaultData.users.find(u => u.username === currentUser);
+  const topButtons = [];
+  if (!user?.fullname) topButtons.push(`<button onclick="openFullnameModal()" style="background:#007bff;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;margin:6px;font-weight:bold;">🧾 Nom du détenteur du compte</button>`);
+  if (!user?.nip) topButtons.push(`<button onclick="openNipCreation()" style="background:#cc0000;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;margin:6px;font-weight:bold;">🔐 Créer un NIP</button>`);
+  if (user?.nip) topButtons.push(`<button onclick="openNipUpdateModal()" style="background:#ff9800;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;margin:6px;font-weight:bold;">🔁 Modifier le NIP</button>`);
+  topButtons.push(`<button onclick="toggleFormulaireModification()" style="background:#4285f4;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;margin:6px;font-weight:bold;">⚙️ Modifier ID du compte</button>`);
+  const buttonsHtml = `<div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;margin:12px 0;">${topButtons.join("")}</div>`;
+
+  const jours = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+  const mois = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+  let message = `<div style="width:100%;box-sizing:border-box;">${buttonsHtml}<table style="text-align:left;width:100%;border-collapse:collapse;">`;
+  const previous = vaultData.lastLogin?.previous ? new Date(vaultData.lastLogin.previous) : null;
+  const logoutDate = vaultData.lastLogin?.logout ? new Date(vaultData.lastLogin.logout) : null;
+  let infoTexte = `
+  <h3 style="font-size:20px;margin:0 0 10px 0;">
+    <strong>🕒 <u>Historique de connexion</u></strong>
+  </h3>
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+    Votre dernière session date du<br>
+  </div>`;
+
+  if (previous) {
+    const jour = jours[previous.getDay()], jourNum = previous.getDate(), moisNom = mois[previous.getMonth()], annee = previous.getFullYear(), heure = previous.toLocaleTimeString("fr-CA", { hour12: false });
+    infoTexte += `🟢 ${jour} ${jourNum} ${moisNom} ${annee} à ${heure} <br>`;
+  }
+  if (logoutDate) {
+    const jour = jours[logoutDate.getDay()], jourNum = logoutDate.getDate(), moisNom = mois[logoutDate.getMonth()], annee = logoutDate.getFullYear(), heure = logoutDate.toLocaleTimeString("fr-CA", { hour12: false });
+    infoTexte += `🔴 ${jour} ${jourNum} ${moisNom} ${annee} à ${heure}. `;
+  }
+  if (!infoTexte) infoTexte = "💡 Aucune connexion précédente enregistrée.";
+  
+  message += `<tr><td colspan="2"><div style="padding:8px 12px;background-color:#fff3cd;border-radius:6px;text-align:center;"> ${infoTexte} <br><div style="display:flex;justify-content:center;align-items:center;margin-top:8px;">
+  <button onclick="afficherHistoriqueConnexion()" style="color:white;background-color:#007bff;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;">
+    📜 Voir l'historique complet
+  </button>
+</div>
+</div><br></td></tr>`;
+  const lastMod = vaultData.lastModification;
+  const lastModHtml = lastMod ? (() => {
+    const modifDate = new Date(lastMod.date);
+    const modifJour = jours[modifDate.getDay()], modifJourNum = modifDate.getDate(), modifMois = mois[modifDate.getMonth()], modifAnnee = modifDate.getFullYear(), modifHeure = modifDate.toLocaleTimeString("fr-CA", { hour12: false });
+    return `<tr><td colspan="2">
+      <div style="padding:8px 12px;background-color:#e6f0ff;border-radius:6px;text-align:center;">
+        <h3 style="font-size:20px;margin:0 0 10px 0;"><strong><u>⚙️ Gestion des mots de passe</u></strong></h3>
+        <div style="margin-bottom:6px;"><strong>User :</strong> <span>${lastMod.user || ""}</span></div>
+        <div style="margin-bottom:6px;">
+          <strong>Mot de passe :</strong> <span id="masked-password"> *****</span><br>
+          <div style="display:flex;flex-direction:column;align-items:center;margin-top:10px;">
+            <input type="password" id="nip-verification" placeholder="NIP requise pour afficher le 🔓" style="padding:6px 10px;height:34px;font-size:14px;border-radius:4px;border:1px solid #ccc;width:75%;text-align:center;margin-bottom:8px;">
+            <div style="display:flex; gap:8px; justify-content:center; width:100%; box-sizing:border-box;">
+              <button onclick="validerNipAffichage()" style="color:white;background-color:#4CAF50;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;">Valider</button>
+            </div>
           </div>
-          <input id="phone" name="phone" class="input" placeholder="+1 000 000 0000" required />
-          <div id="err-phone" class="field-error">Numéro invalide, vérifiez et réessayez</div>
         </div>
-        <div>
-          <div class="label-row">
-            <label class="small">Adresse courriel</label>
-            <div class="small" style="color:var(--muted)">Facultatif</div>
-          </div>
-          <input id="email" name="email" class="input" type="email" />
-          <div id="err-email" class="field-error">Adresse courriel invalide.</div>
-        </div>
+        <div><strong>Dat. Mod. :</strong> <span>${modifJour} ${modifJourNum} ${modifMois} ${modifAnnee} à ${modifHeure}</span></div>
+      </div><br></td></tr>`;
+  })() : `<tr><td colspan="2"><div style="padding:8px 12px;background-color:#f0f4ff;border-radius:6px;text-align:center;">Aucune modification enregistrée.</div><br></td></tr>`;
+  message += lastModHtml;
+  message += `<tr><td colspan="2">
+    <div style="display:flex;justify-content:center;margin-top:12px;">
+      <button onclick="openReinitConfirm()" style="background:#cc0000;color:white;padding:10px 16px;border:none;border-radius:6px;cursor:pointer;font-weight:bold;">🧹 Supprimer le compte</button>
+    </div>
+  </td></tr>`;
+  message += `</table></div>`;
+  toggleMenu();
+  showAlert(message);
+}
+
+
+function afficherHistoriqueConnexion() {
+  closeAllWindowsAndModals();
+  const modal = document.getElementById("historiqueConnexionModal");
+  const content = document.getElementById("historique-connexion-content");
+  const formatDateStr = d => new Date(d).toLocaleString("fr-CA", {
+    weekday: "long", year: "numeric", month: "long", day: "numeric",
+    hour: "2-digit", minute: "2-digit", second: "2-digit"
+  });
+  const history = (vaultData.loginHistory || []).slice().reverse();
+  let html = `<div style="max-height: 70vh; overflow-y: auto;">`;
+  if (history.length === 0) html += `<p style="text-align:center; padding:12px 8px;">💡 Aucune entrée d'historique disponible.</p>`;
+  else {
+    html += `<table><thead><tr><th style="width:33%;">🟢 Connexion</th><th style="width:33%;">🔴 Déconnexion</th><th style="width:34%;">💻 Appareil</th></tr></thead><tbody>`;
+    history.forEach(entry => {
+      const login = entry.login ? formatDateStr(entry.login) : "—";
+      const logout = entry.logout ? formatDateStr(entry.logout) : "—";
+      const device = entry.device || "—";
+      html += `<tr><td>${login}</td><td>${logout}</td><td style="word-break:break-word;">${device}</td></tr>`;
+    });
+    html += `</tbody></table>`;
+  }
+  html += `</div>`;
+  content.innerHTML = html;
+  if (modal) { modal.classList.remove("hidden"); modal.style.display = "flex"; modal.style.zIndex = 20000; const inner = modal.querySelector('.modal-content'); if (inner) inner.style.zIndex = 20001; }
+  function onOutsideClick(e) { if (e.target === modal) { modal.classList.add('hidden'); modal.style.display = 'none'; modal.removeEventListener('click', onOutsideClick); } }
+  modal.removeEventListener('click', onOutsideClick);
+  modal.addEventListener('click', onOutsideClick);
+}
+
+/* --------------- Récupération / réinitialisation --------------- */
+function showRecovery() {
+  document.getElementById("login-container").classList.add("hidden");
+  document.getElementById("recovery-container").classList.remove("hidden");
+  document.getElementById("recovery-type").value = "";
+  viderChamp();
+}
+
+
+
+  function isBioFacSupported() {
+  return window.PublicKeyCredential !== undefined;
+}
+
+  window.addEventListener("DOMContentLoaded", () => {
+  if (isBioFacSupported()) {
+    document.getElementById("bioFacLoginBtn")?.classList.remove("hidden");
+    document.getElementById("bioFacToggleBtn")?.classList.remove("hidden");
+  }
+});
+
+  function getDeviceFingerprint() {
+  return btoa(navigator.userAgent + screen.width + screen.height + navigator.language);
+}
+
+  function toggleBioFac() {
+  const fingerprint = getDeviceFingerprint();
+  let savedDevices = JSON.parse(localStorage.getItem("sava.data") || "[]");
+
+  const existing = savedDevices.find(d => d.fingerprint === fingerprint);
+  if (existing) {
+    savedDevices = savedDevices.filter(d => d.fingerprint !== fingerprint);
+    localStorage.setItem("sava.data", JSON.stringify(savedDevices));
+    showAlert("Appareil désactivé pour bio/fac.");
+    document.getElementById("bioFacToggleBtn").innerText = "⚙️ Activer bio/fac";
+    return;
+  }
+
+  const publicKeyOptions = {
+    challenge: new Uint8Array(32),
+    rp: { name: "Gestions 🔐" },
+    user: {
+      id: new Uint8Array(16),
+      name: currentUser?.username || "utilisateur",
+      displayName: currentUser?.fullname || currentUser?.username || "Compte"
+    },
+    pubKeyCredParams: [{ type: "public-key", alg: -7 }],
+    authenticatorSelection: { authenticatorAttachment: "platform", userVerification: "required" },
+    timeout: 60000,
+    attestation: "none"
+  };
+
+  navigator.credentials.create({ publicKey: publicKeyOptions })
+    .then(cred => {
+      savedDevices.push({ fingerprint, username: currentUser.username, publicKeyOptions });
+      localStorage.setItem("sava.data", JSON.stringify(savedDevices));
+      showAlert("Appareil activé pour bio/fac.");
+      document.getElementById("bioFacToggleBtn").innerText = "⚙️ Désactiver bio/fac";
+    })
+    .catch(() => {
+      showAlert("Impossible d'activer bio/fac sur cet appareil.");
+    });
+}
+
+
+  function tryBioFacLogin() {
+  const savedDevices = JSON.parse(localStorage.getItem("sava.data") || "[]");
+  if (!savedDevices.length) {
+    showAlert("Veuillez ajouter votre appareil en vous connectant, puis cliquer sur 'Activer bio/fac' dans le menu.");
+    return;
+  }
+
+  if (!vaultData || !vaultData.users) {
+    showAlert("Importez d'abord votre fichier sécurisé avant d'utiliser la connexion bio/fac.");
+    return;
+  }
+
+  const fingerprint = getDeviceFingerprint();
+  const match = savedDevices.find(d => d.fingerprint === fingerprint);
+  if (!match) {
+    showAlert("Appareil non reconnu. Veuillez l'ajouter via le menu.");
+    return;
+  }
+
+  navigator.credentials.get({ publicKey: match.publicKeyOptions })
+    .then(() => {
+      loginWithBioFac(match.username);
+    })
+    .catch(() => {
+      showAlert("Échec de l'authentification biométrique.");
+    });
+}
+
+
+  function loginWithBioFac(username) {
+  const user = vaultData.users.find(u => u.username === username);
+  if (!user) {
+    showAlert("Utilisateur introuvable dans le fichier importé.");
+    return;
+  }
+  currentUser = user;
+  isLoggedIn = true;
+  showApp();
+}
+
+async function recoverIdentity() {
+  const type = document.getElementById("recovery-type").value;
+  const known = document.getElementById("recovery-known").value.trim();
+  const nip = document.getElementById("recovery-mastercode").value;
+  if (!type || !known || !nip) return showTimedAlert("⚠️ Tous les champs doivent être remplis.");
+  const user = vaultData.users.find(u =>
+    (type === "username" && u.password === known && u.nip === nip) ||
+    (type === "password" && u.username === known && u.nip === nip)
+  );
+  if (!user) return showTimedAlert("❌ Aucun utilisateur correspondant trouvé ou NIP incorrect.");
+  showAlert(`
+    <h2>🔧 Modifier ${type === "username" ? "le nom d'utilisateur" : "le mot de passe"}</h2>
+    <input style="display: block; margin: 0 auto;" type="text" id="new-value" placeholder="Nouveau ${type === "username" ? "nom d'utilisateur" : "mot de passe"}">
+    ${type === "password" ? `
+      <div id="password-requirements-container-recovery" style="text-align: center;">
+        <ul id="password-requirements-recovery" style="display: inline-block; font-size: 14px; list-style: none; text-align: left;">
+          <li id="req-length-recovery">❌ Au moins 8 caractères</li>
+          <li id="req-digit-recovery">❌ Inclure un chiffre</li>
+          <li id="req-special-recovery">❌ Inclure un caractère spécial</li>
+          <li id="req-lowercase-recovery">❌ Inclure une lettre minuscule</li>
+          <li id="req-uppercase-recovery">❌ Inclure une lettre majuscule</li>
+        </ul>
+      </div><br>
+    ` : ""}
+    <br><button style="display: block; margin: 0 auto;" onclick="applyRecovery('${type}', '${user.username}')">Mettre à jour</button>
+  `);
+  if (type === "password") {
+    document.addEventListener("input", function (e) {
+      if (e.target.id === "new-value") {
+        const value = e.target.value;
+        const set = (id, ok, text) => { const el = document.getElementById(id); if (el) el.textContent = (ok ? "✔️ " : "❌ ") + text; };
+        set("req-length-recovery", value.length >= 8, "Au moins 8 caractères");
+        set("req-digit-recovery", /\d/.test(value), "Inclure un chiffre");
+        set("req-special-recovery", /[.!@#$%^&*(),?\":{}|<>]/.test(value), "Inclure un caractère spécial");
+        set("req-lowercase-recovery", /[a-z]/.test(value), "Inclure une lettre minuscule");
+        set("req-uppercase-recovery", /[A-Z]/.test(value), "Inclure une lettre majuscule");
+      }
+    });
+  }
+}
+
+
+function openAccountModal(isEdit = false, index = null) {
+  const modal = safeEl("accountModal");
+  const title = safeEl("accountModalTitle");
+
+  // stocker l'index d'édition dans l'attribut du formulaire (utile et fiable)
+  const form = safeEl("account-form");
+  if (form) {
+    form.dataset.editingIndex = (isEdit && index !== null) ? String(index) : "";
+  }
+  safeEl("account-form").dataset.editingIndex = String(index);
+
+  editingIndex = isEdit ? index : null;
+
+  if (isEdit && vaultData.accounts[index]) {
+    const acc = vaultData.accounts[index];
+    safeEl("account-name").value = acc.name || "";
+    safeEl("account-user").value = acc.user || "";
+    safeEl("account-pass").value = acc.pass || "";
+    safeEl("account-nip").value = acc.nip || "";
+    if (acc.nip) safeEl("account-nip").disabled = true;
+    safeEl("account-expiry").value = acc.expiry || "";
+    safeEl("account-note").value = acc.note || "";
+    safeEl("account-link").value = acc.link || "";
+    safeEl("existing-photo").value = acc.photo || "";
+    safeEl("image-preview").src = acc.photo || "#";
+    safeEl("image-preview").style.display = acc.photo ? "block" : "none";
+    title.textContent = "⚙️ Modifier un compte";
+  } else {
+    if (form) form.reset();
+    safeEl("image-preview").style.display = "none";
+    safeEl("existing-photo").value = "";
+    title.textContent = "📝 Ajouter un compte";
+  }
+
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.style.display = "flex";
+    const first = modal.querySelector("input, textarea, button");
+    if (first) first.focus();
+  }
+}
+
+  
+
+function closeAccountModal() {
+  const modal = safeEl("accountModal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.style.display = "none";
+  }
+  // Réinitialiser le formulaire et l'aperçu
+  const form = safeEl("account-form");
+  if (form) form.reset();
+  const preview = safeEl("image-preview");
+  if (preview) { preview.style.display = "none"; preview.src = ""; }
+  const existing = safeEl("existing-photo");
+  if (existing) existing.value = "";
+  editingIndex = null;
+}
+
+
+
+  
+function applyRecovery(type, username) {
+  const newValue = (document.getElementById("new-value")?.value || "").trim();
+  if (!newValue) return showTimedAlert("💡 Veuillez entrer une nouvelle valeur.");
+  if (type === "username") {
+    if (newValue.length < 4) return showTimedAlert("❌ Le nom d'utilisateur doit contenir au moins 4 caractères.");
+  } else {
+    const validPassword = newValue.length >= 8 && /\d/.test(newValue) && /[.!@#$%^&*(),?":{}|<>]/.test(newValue) && /[a-z]/.test(newValue) && /[A-Z]/.test(newValue);
+    if (!validPassword) return showTimedAlert("⚠️ Le mot de passe ne respecte pas les critères de sécurité.");
+  }
+  if (!vaultData || !Array.isArray(vaultData.users)) return showTimedAlert("⚠️ Les données utilisateur ne sont pas disponibles. Veuillez importer le fichier vault_data.");
+  const user = vaultData.users.find(u => u.username === username);
+  if (!user) return showTimedAlert("❌ Utilisateur introuvable. Assurez-vous d'avoir importé le fichier vault_data.");
+  if (type === "username") user.username = newValue; else user.password = newValue;
+  currentUser = user.username;
+  saveVault();
+  showTimedAlert("✔️ Identifiant mis à jour avec succès !");
+  showLogin();
+}
+
+/* --------------- NIP unify / Modales NIP --------------- */
+function openNipCreation() {
+  closeAllWindowsAndModals();
+  const modal = document.getElementById("nipModal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.style.display = "flex";
+    const nipInput = document.getElementById("nipInput");
+    if (nipInput) nipInput.value = "";
+  }
+}
+
+
+
+
+
+
+
+// Fix robuste pour le bouton ☰ Menu
+(function attachRobustMenuButton() {
+  const menuBtn = document.querySelector(".menu-button") || document.getElementById("menu-toggle");
+  const menuItems = document.getElementById("menuItems");
+  const menuContainer = document.getElementById("menuContainer");
+
+  if (!menuBtn || !menuItems || !menuContainer) {
+    // éléments manquants — rien à faire
+    return;
+  }
+
+  // Handler unique : toggle propre de la classe "show" et gestion d'accessibilité
+  function onMenuClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    // Fermer toutes les modales/alerts visibles (optionnel, mais utile)
+    closeAllWindowsAndModals();
+
+    const wasOpen = menuItems.classList.contains("show");
+    // Fermer tout panneau ouvert avant d'ouvrir
+    document.querySelectorAll(".menu-items.show").forEach(el => {
+      if (el !== menuItems) el.classList.remove("show");
+    });
+
+    if (!wasOpen) {
+      menuItems.classList.add("show");
+      menuItems.style.display = "flex";
+      // focus sur le premier bouton pour accessibilité
+      const first = menuItems.querySelector("button, a, [tabindex]");
+      if (first) first.focus();
+    } else {
+      menuItems.classList.remove("show");
+      // laisser le css gérer display via .show, mais s'assurer de none pour compatibilité
+      menuItems.style.display = "";
+    }
+  }
+
+  // Retirer ancien listener s'il existe (sécurité)
+  if (menuBtn._menuHandlerAttached) {
+    menuBtn.removeEventListener("click", menuBtn._menuHandlerAttached);
+    delete menuBtn._menuHandlerAttached;
+  }
+
+  menuBtn.addEventListener("click", onMenuClick);
+  menuBtn._menuHandlerAttached = onMenuClick;
+
+  // Fermer le menu si clic à l'extérieur
+  document.addEventListener("click", function (e) {
+    if (!menuItems.classList.contains("show")) return;
+    if (!menuContainer.contains(e.target) && !menuItems.contains(e.target)) {
+      menuItems.classList.remove("show");
+      menuItems.style.display = "";
+    }
+  }, { passive: true });
+
+  // Fermer le menu avec Échap
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && menuItems.classList.contains("show")) {
+      menuItems.classList.remove("show");
+      menuItems.style.display = "";
+      menuBtn.focus();
+    }
+  });
+})();
+
+  
+function afficherHistorique(data) {
+  const container = document.getElementById("historique-connexion-content");
+  if (!data || data.length === 0) {
+    container.innerHTML = "<p>Aucune donnée trouvée.</p>";
+    return;
+  }
+
+  const table = document.createElement("table");
+  const header = document.createElement("tr");
+  header.innerHTML = "<th>Compte</th><th>Date</th><th>IP</th>";
+  table.appendChild(header);
+
+  data.forEach(entry => {
+    const row = document.createElement("tr");
+    row.innerHTML = `<td>${entry.nom || "?"}</td><td>${entry.date}</td><td>${entry.ip || "?"}</td>`;
+    table.appendChild(row);
+  });
+
+  container.appendChild(table);
+}
+
+
+
+  // Construire et afficher un calendrier qui n'autorise que les dates présentes dans vaultData.loginHistory
+function buildAvailableDatesCalendar() {
+  const container = document.getElementById("calendar-container");
+  if (!container) return;
+  container.innerHTML = "";
+
+  // Extraire jours uniques depuis vaultData.loginHistory (format YYYY-MM-DD)
+  const history = Array.isArray(vaultData.loginHistory) ? vaultData.loginHistory : [];
+  const daySet = new Set();
+  history.forEach(entry => {
+    if (!entry || !entry.login) return;
+    const d = new Date(entry.login);
+    if (isNaN(d)) return;
+    const key = d.toISOString().slice(0,10);
+    daySet.add(key);
+  });
+
+  if (daySet.size === 0) {
+    container.innerHTML = "<div style='text-align:center;color:#666;padding:10px;'>Aucune date d'historique disponible.</div>";
+    document.getElementById("periode-affichee").textContent = "";
+    return;
+  }
+
+  // Déterminer période min/max à afficher (montrer mois entre min et max)
+  const days = Array.from(daySet).sort();
+  const minDay = new Date(days[0]);
+  const maxDay = new Date(days[days.length - 1]);
+
+  // Générer interface : navigation par mois
+  const state = { year: minDay.getFullYear(), month: minDay.getMonth() };
+  // si min et max dans des mois différents, on commence par min; sinon start same
+  const nav = document.createElement("div");
+  nav.className = "calendar-controls";
+  nav.innerHTML = `
+    <button class="calendar-nav-btn" id="cal-prev">&lt;</button>
+    <div class="calendar-month-title" id="cal-month-title"></div>
+    <button class="calendar-nav-btn" id="cal-next">&gt;</button>
+  `;
+  container.appendChild(nav);
+  const gridWrap = document.createElement("div");
+  gridWrap.className = "calendar";
+  container.appendChild(gridWrap);
+
+  function renderMonth(year, month) {
+    const monthTitle = document.getElementById("cal-month-title");
+    const dt = new Date(year, month, 1);
+    const title = dt.toLocaleString("fr-CA", { month: "long", year: "numeric" });
+    if (monthTitle) monthTitle.textContent = title;
+
+    // Clear previous grid
+    gridWrap.innerHTML = `
+      <div style="width:100%;max-width:520px;">
+        <div class="calendar-grid" id="calendar-grid-weekdays"></div>
+        <div class="calendar-grid" id="calendar-grid-days"></div>
       </div>
-      <div style="margin-top:6px">
-        <div class="label-row">
-          <label class="small">Adresse de livraison <span class="required" aria-hidden>*</span></label>
-          <div class="small" style="color:var(--muted)">Indiquez rue, ville, code postal</div>
-        </div>
-        <input id="address" name="address" class="input" required />
-        <div id="err-address" class="field-error">Adresse de livraison requise.</div>
+    `;
+    // weekdays header
+    const wk = ['Di','Lu','Ma','Me','Je','Ve','Sa'];
+    const weekdaysEl = document.getElementById("calendar-grid-weekdays");
+    wk.forEach(w => {
+      const el = document.createElement("div");
+      el.className = "calendar-weekday";
+      el.textContent = w;
+      weekdaysEl.appendChild(el);
+    });
+
+    const daysEl = document.getElementById("calendar-grid-days");
+    // first day index
+    const firstDayIndex = new Date(year, month, 1).getDay(); // 0..6
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // fill leading blanks
+    for (let i=0;i<firstDayIndex;i++) {
+      const empty = document.createElement("div");
+      empty.className = "calendar-day disabled";
+      empty.textContent = "";
+      daysEl.appendChild(empty);
+    }
+
+    // fill days
+    for (let d=1; d<=daysInMonth; d++) {
+      const dayDate = new Date(year, month, d);
+      const key = dayDate.toISOString().slice(0,10);
+      const dayEl = document.createElement("div");
+      dayEl.className = "calendar-day";
+      dayEl.textContent = String(d);
+      if (daySet.has(key)) {
+        dayEl.classList.add("available");
+        dayEl.tabIndex = 0;
+        dayEl.addEventListener("click", () => {
+          // deselect prev
+          document.querySelectorAll(".calendar-day.selected").forEach(e => e.classList.remove("selected"));
+          dayEl.classList.add("selected");
+          // afficher période pour la journée : début = jour 00:00, fin = jour+1 00:00
+          const debut = new Date(year, month, d);
+          const fin = new Date(debut.getTime() + 24*60*60*1000);
+          document.getElementById("periode-affichee").textContent = `🔎 Affichage du ${debut.toLocaleDateString()}`;
+          afficherHistoriqueFiltreLoginHistory(debut, fin);
+        });
+      } else {
+        dayEl.classList.add("disabled");
+      }
+      daysEl.appendChild(dayEl);
+    }
+  }
+
+  // navigation
+  function clampToRange(y, m) {
+    // clamp month/year to interval [minDay, maxDay]
+    const candidate = new Date(y, m, 1);
+    if (candidate < new Date(minDay.getFullYear(), minDay.getMonth(), 1)) {
+      return { y: minDay.getFullYear(), m: minDay.getMonth() };
+    }
+    if (candidate > new Date(maxDay.getFullYear(), maxDay.getMonth(), 1)) {
+      return { y: maxDay.getFullYear(), m: maxDay.getMonth() };
+    }
+    return { y: y, m: m };
+  }
+
+  document.getElementById("cal-prev")?.addEventListener("click", () => {
+    let ny = state.year, nm = state.month - 1;
+    if (nm < 0) { nm = 11; ny--; }
+    const cl = clampToRange(ny, nm);
+    state.year = cl.y; state.month = cl.m;
+    renderMonth(state.year, state.month);
+  });
+  document.getElementById("cal-next")?.addEventListener("click", () => {
+    let ny = state.year, nm = state.month + 1;
+    if (nm > 11) { nm = 0; ny++; }
+    const cl = clampToRange(ny, nm);
+    state.year = cl.y; state.month = cl.m;
+    renderMonth(state.year, state.month);
+  });
+
+  // render initial (start at min month)
+  renderMonth(state.year, state.month);
+
+  // Optionnel : sélectionner automatiquement la dernière date enregistrée
+  const lastDayKey = Array.from(daySet).sort().pop();
+  if (lastDayKey) {
+    const last = new Date(lastDayKey);
+    // si last in rendered month, trigger click programmatically après rendu
+    if (last.getFullYear() === state.year && last.getMonth() === state.month) {
+      setTimeout(() => {
+        const days = document.querySelectorAll(".calendar-day.available");
+
+        days.forEach(el => { if (el.textContent === String(last.getDate())) el.click(); });
+      }, 60);
+    }
+  }
+}
+
+// appeler buildAvailableDatesCalendar() quand la modal est ouverte
+// Modifier afficherHistoriqueConnexion pour appeler le builder après l'ouverture
+(function patchAfficherHistoriqueConnexionToBuildCalendar(){
+  const orig = window.afficherHistoriqueConnexion;
+  window.afficherHistoriqueConnexion = function() {
+    orig(); // ouvre la modal et remplit le contenu
+    setTimeout(() => {
+      buildAvailableDatesCalendar();
+    }, 80);
+  };
+})();
+ 
+function filtrerHistoriqueParPeriode() {
+  const select = document.getElementById("filtre-periode");
+  const periode = select.value;
+  const affichage = document.getElementById("periode-affichee");
+  const maintenant = new Date();
+  let debut = null;
+  let fin = null; // fin exclusive
+
+  // Par défaut : fin = maintenant + 1ms pour inclure "maintenant"
+  fin = new Date(maintenant.getTime() + 1);
+
+  switch (periode) {
+    case "aujourdhui":
+      debut = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate());
+      fin = new Date(debut.getTime() + 24 * 60 * 60 * 1000);
+      affichage.textContent = `📅 Connexions du ${debut.toLocaleDateString()}`;
+      break;
+    case "hier":
+      debut = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() - 1);
+      fin = new Date(debut.getTime() + 24 * 60 * 60 * 1000);
+      affichage.textContent = `📅 Connexions du ${debut.toLocaleDateString()}`;
+      break;
+    case "semaine":
+      debut = new Date(maintenant.getFullYear(), maintenant.getMonth(), maintenant.getDate() - 7);
+      affichage.textContent = `📅 Connexions depuis le ${debut.toLocaleDateString()}`;
+      break;
+    case "1mois":
+      debut = new Date(maintenant.getFullYear(), maintenant.getMonth() - 1, maintenant.getDate());
+      affichage.textContent = `📅 Connexions depuis le ${debut.toLocaleDateString()}`;
+      break;
+    case "3mois":
+      debut = new Date(maintenant.getFullYear(), maintenant.getMonth() - 3, maintenant.getDate());
+      affichage.textContent = `📅 Connexions depuis le ${debut.toLocaleDateString()}`;
+      break;
+    case "6mois":
+      debut = new Date(maintenant.getFullYear(), maintenant.getMonth() - 6, maintenant.getDate());
+      affichage.textContent = `📅 Connexions depuis le ${debut.toLocaleDateString()}`;
+      break;
+    case "1an":
+      debut = new Date(maintenant.getFullYear() - 1, maintenant.getMonth(), maintenant.getDate());
+      affichage.textContent = `📅 Connexions depuis le ${debut.toLocaleDateString()}`;
+      break;
+    case "tous":
+      debut = null;
+      fin = null;
+      affichage.textContent = `📅 Toutes les connexions affichées`;
+      break;
+    default:
+      affichage.textContent = "";
+      // si aucune période sélectionnée, on vide le contenu
+      document.getElementById("historique-connexion-content").innerHTML = "";
+      return;
+  }
+
+  afficherHistoriqueFiltreLoginHistory(debut, fin);
+}
+
+function afficherHistoriqueFiltreLoginHistory(debut, fin) {
+  const container = document.getElementById("historique-connexion-content");
+  container.innerHTML = ""; // reset
+
+  const history = Array.isArray(vaultData.loginHistory) ? vaultData.loginHistory.slice().reverse() : [];
+
+  const filtrées = history.filter(entry => {
+    if (!entry || !entry.login) return false;
+    const d = new Date(entry.login);
+    if (!debut && !fin) return true;
+    if (debut && fin) return d >= debut && d < fin;
+    if (debut && !fin) return d >= debut;
+    return true;
+  });
+
+  if (filtrées.length === 0) {
+    container.innerHTML = "<p>Aucune connexion trouvée pour cette période.</p>";
+    return;
+  }
+
+  // Construire un tableau propre
+  const table = document.createElement("table");
+  table.style.width = "100%";
+  table.style.borderCollapse = "collapse";
+  table.innerHTML = `<thead><tr><th style="padding:8px;border-bottom:1px solid #ddd;">🟢 Connexion</th><th style="padding:8px;border-bottom:1px solid #ddd;">🔴 Déconnexion</th><th style="padding:8px;border-bottom:1px solid #ddd;">💻 Appareil</th></tr></thead>`;
+  const tbody = document.createElement("tbody");
+
+  filtrées.forEach(entry => {
+    const tr = document.createElement("tr");
+    const login = entry.login ? new Date(entry.login).toLocaleString("fr-CA", { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit" }) : "—";
+    const logout = entry.logout ? new Date(entry.logout).toLocaleString("fr-CA", { hour: "2-digit", minute: "2-digit", second: "2-digit", year: "numeric", month: "long", day: "numeric" }) : "—";
+    const device = entry.device || "—";
+    tr.innerHTML = `<td style="padding:8px;border-bottom:1px solid #f0f0f0;">${login}</td><td style="padding:8px;border-bottom:1px solid #f0f0f0;">${logout}</td><td style="padding:8px;border-bottom:1px solid #f0f0f0;word-break:break-word;">${device}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(tbody);
+  container.appendChild(table);
+}
+
+
+  function afficherHistoriqueFiltré(debut, fin) {
+  const container = document.getElementById("historique-connexion-content");
+  container.innerHTML = ""; // reset
+
+  const connexions = vaultData?.accounts?.filter(acc => acc.dateConnexion); // exemple
+  const filtrées = connexions.filter(acc => {
+    const date = new Date(acc.dateConnexion);
+    if (!debut) return true;
+    return date >= debut && date < fin;
+  });
+
+  if (filtrées.length === 0) {
+    container.innerHTML = "<p>Aucune connexion trouvée pour cette période.</p>";
+    return;
+  }
+
+  filtrées.forEach(acc => {
+    const ligne = document.createElement("div");
+    ligne.textContent = `🔐 ${acc.nom} — ${new Date(acc.dateConnexion).toLocaleString()}`;
+    container.appendChild(ligne);
+  });
+}
+
+
+// Ouvre la confirmation de suppression adaptée à la période actuellement affichée
+function confirmerSuppressionHistorique() {
+  // Récupère la période affichée (si calendrier -> on prend la date affichée, sinon null)
+  const periodeTexte = (document.getElementById("periode-affichee")?.textContent || "").trim();
+  // Déterminer la période cible : si le texte contient "Affichage du" on interprète une journée
+  let cible = { type: "all", debut: null, fin: null };
+  if (periodeTexte.startsWith("🔎 Affichage du")) {
+    // Ex : "🔎 Affichage du 16/10/2025" ou selon locale
+    const dateStr = periodeTexte.replace("🔎 Affichage du", "").trim();
+    const parsed = new Date(dateStr);
+    if (!isNaN(parsed)) {
+      const debut = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate(), 0, 0, 0, 0);
+      const fin = new Date(debut.getTime() + 24 * 60 * 60 * 1000);
+      cible = { type: "day", debut, fin };
+    } else {
+      // tenter format fr-CA si nécessaire
+      const tryIso = new Date(periodeTexte.replace("🔎 Affichage du", "").trim());
+      if (!isNaN(tryIso)) {
+        const debut = new Date(tryIso.getFullYear(), tryIso.getMonth(), tryIso.getDate(), 0, 0, 0, 0);
+        const fin = new Date(debut.getTime() + 24 * 60 * 60 * 1000);
+        cible = { type: "day", debut, fin };
+      }
+    }
+  } else if (periodeTexte.includes("Toutes les connexions") || periodeTexte.includes("Toutes")) {
+    cible = { type: "all", debut: null, fin: null };
+  } else {
+    // fallback : si aucune période sélectionnée, empêcher suppression globale accidentelle
+    return showAlert(`<div style="padding:12px;text-align:center;">
+      <strong>⚠️ Aucune période ciblée</strong><br/>Sélectionnez d'abord une date dans le calendrier ou un filtre avant de supprimer.</div>`);
+  }
+
+  // Construire la modale de confirmation avec champ NIP
+  const modal = document.createElement("div");
+  modal.className = "modal";
+  modal.style.display = "flex";
+  modal.innerHTML = `
+    <div class="modal-content" style="max-width:520px;text-align:center;">
+      <h3>Confirmer la suppression</h3>
+      <p style="margin-top:6px;">
+        ${cible.type === "day" ? `Supprimer toutes les connexions du <strong>${cible.debut.toLocaleDateString()}</strong> ?` : `Supprimer <strong>toutes</strong> les connexions enregistrées ?`}
+      </p>
+      <p style="font-size:13px;color:#555;margin-top:6px;">Entrez votre NIP pour confirmer la suppression.</p>
+      <input id="nipSuppressionInput" type="password" placeholder="Votre NIP" style="padding:8px 10px;margin-top:8px;width:80%;border-radius:6px;border:1px solid #ccc;">
+      <div class="modal-buttons" style="margin-top:14px;">
+        <button id="confirmerSuppBtn" style="background:#cc0000;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;">Valider</button>
+        <button id="annulerSuppBtn" style="background:#aaa;color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;">Annuler</button>
       </div>
-      <div style="margin-top:6px">
-        <div class="label-row">
-          <label class="small">Mode de commande <span class="required" aria-hidden>*</span></label>
-          <div class="small" style="color:var(--muted)">Choisir: Livraison ou Ramassage</div>
-        </div>
-        <select id="deliveryMode" name="delivery_mode" class="input" required>
-          <option value="">Sélectionnez...</option>
-          <option value="Livraison">Livraison</option>
-          <option value="Ramassage">Ramassage</option>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  // Handlers
+  document.getElementById("annulerSuppBtn").onclick = () => { modal.remove(); showTimedAlert("❌ Suppression annulée."); };
+
+  document.getElementById("confirmerSuppBtn").onclick = () => {
+    const nip = (document.getElementById("nipSuppressionInput")?.value || "").trim();
+    if (!nip || nip.length < 1) {
+      return showAlert("<div style='padding:10px;text-align:center;'>❌ Veuillez entrer votre NIP.</div>");
+    }
+    const user = vaultData.users.find(u => u.username === currentUser);
+    if (!user) {
+      modal.remove();
+      return showAlert("<div style='padding:10px;text-align:center;'>❌ Utilisateur introuvable.</div>");
+    }
+    if (!user.nip) {
+      modal.remove();
+      return showAlert("<div style='padding:10px;text-align:center;'>⚠️ Aucun NIP associé à ce compte. Créez un NIP avant de pouvoir supprimer.</div>");
+    }
+    if (nip !== user.nip) {
+      return showAlert("<div style='padding:10px;text-align:center;'>❌ NIP incorrect. Suppression annulée.</div>");
+    }
+
+    // Effectuer la suppression sur vaultData.loginHistory selon la cible
+    if (!Array.isArray(vaultData.loginHistory)) vaultData.loginHistory = [];
+
+    if (cible.type === "day") {
+      const avantCount = vaultData.loginHistory.length;
+      vaultData.loginHistory = vaultData.loginHistory.filter(entry => {
+        if (!entry || !entry.login) return true; // garder les entrées malformées par sécurité
+        const d = new Date(entry.login);
+        return !(d >= cible.debut && d < cible.fin); // garder si en dehors du jour cible
+      });
+      const supprimées = avantCount - vaultData.loginHistory.length;
+      // persister
+      vaultData.lastModification = { user: currentUser, date: new Date().toISOString(), action: `suppression_jour_${cible.debut.toISOString().slice(0,10)}`, count: supprimées };
+      saveVault();
+      modal.remove();
+      // rafraîchir l'affichage : reconstruire calendrier + table
+      buildAvailableDatesCalendar?.();
+      // si modal d'historique est ouverte, re-render du contenu pour la période actuelle
+      document.getElementById("periode-affichee").textContent = `🔎 Suppression effectuée pour ${cible.debut.toLocaleDateString()}`;
+      afficherHistoriqueFiltreLoginHistory(cible.debut, cible.fin);
+      showTimedAlert(`✔️ ${supprimées} entrée(s) supprimée(s) pour le ${cible.debut.toLocaleDateString()}.`);
+      return;
+    } else {
+      // suppression globale (rare) — demander une confirmation finale
+      const ok = confirm("⚠️ Vous allez supprimer toutes les entrées d'historique. Confirmez-vous ?");
+      if (!ok) { modal.remove(); return showTimedAlert("❌ Suppression globale annulée."); }
+      const count = vaultData.loginHistory.length;
+      vaultData.loginHistory = [];
+      vaultData.lastModification = { user: currentUser, date: new Date().toISOString(), action: "suppression_historique_complet", count };
+      saveVault();
+      modal.remove();
+      buildAvailableDatesCalendar?.();
+      document.getElementById("periode-affichee").textContent = `🔎 Aucune entrée disponible`;
+      document.getElementById("historique-connexion-content").innerHTML = "<p>Aucune connexion trouvée pour cette période.</p>";
+      showTimedAlert(`✔️ ${count} entrée(s) supprimée(s).`);
+      return;
+    }
+  };
+}
+
+
+
+function toggleForm() {
+  // ferme le menu si ouvert
+  const menu = document.getElementById("menuItems");
+  if (menu && menu.classList.contains("show")) menu.classList.remove("show");
+
+  // affiche le modal d'ajout (non-édition)
+  openAccountModal(false, null);
+}
+
+  
+function validerSuppressionHistorique(dateFiltre) {
+  const nip = document.getElementById("nipSuppression").value;
+  if (!nip || nip.length < 4) {
+    showAlert("❌ NIP invalide. Veuillez entrer un NIP valide.");
+    return;
+  }
+
+  const contenu = document.getElementById("historique-connexion-content");
+  const lignes = contenu.querySelectorAll("tr");
+  let suppression = false;
+
+  lignes.forEach(row => {
+    const dateCell = row.querySelector("td");
+    if (!dateCell) return;
+    const dateTexte = dateCell.textContent.trim();
+    if (!dateFiltre || dateTexte.includes(dateFiltre)) {
+      row.remove();
+      suppression = true;
+    }
+  });
+
+  if (!currentUser?.nip || currentUser.nip.length < 4) {
+  showAlert("⚠️ Ce compte ne possède pas de NIP. Veuillez en créer un avant de pouvoir supprimer.");
+  return;
+}
+
+  document.querySelector(".modal").remove();
+  if (suppression) {
+    showAlert(`✔️ Historique ${dateFiltre ? "du " + dateFiltre : "complet"} supprimé avec succès.`);
+  } else {
+    showAlert("ℹ️ Aucun historique à supprimer pour cette date.");
+  }
+}
+
+
+function verifierExpiration() {
+  closeAllWindowsAndModals();
+  const comptes = Array.isArray(vaultData.accounts) ? vaultData.accounts.slice() : [];
+  if (comptes.length === 0) {
+    return showTimedAlert("💡 Aucun compte enregistré.");
+  }
+  const today = new Date();
+  const parseDate = (d) => d ? new Date(d) : null;
+
+  // Interface filtre
+  let html = `
+    <div style="text-align:left;">
+      <h3>📅 Gestions de suivi</h3>
+      <div style="font-size:14px; color:#555; margin-bottom:10px;">
+        Aperçu des dates d’expiration (plus proches en premier).
+        <select id="expiration-filter" style="margin-left:10px; padding:4px;">
+          <option value="all">Tous</option>
+          <option value="1m">Moins de 1 mois</option>
+          <option value="3m">Moins de 3 mois</option>
+          <option value="6m">Moins de 6 mois</option>
+          <option value="1y">Moins de 1 an</option>
+          <option value="expired">Expirés</option>
+          <option value="none">Non disponible</option>
         </select>
-        <div id="err-deliveryMode" class="field-error">Veuillez sélectionner le mode de commande.</div>
       </div>
-      <div style="margin-top:6px">
-        <div class="label-row">
-          <label class="small">Autre demande</label>
-          <div class="small" style="color:var(--muted)">Ex: horaires de livraison, instructions</div>
-        </div>
-        <textarea id="notes" name="notes" class="input" rows="4" style="resize:vertical"></textarea>
+      <div id="expiration-table"></div>
+      <div style="text-align:center; margin-top:15px;">
+        <button onclick="closeAllWindowsAndModals()">Fermer</button>
       </div>
     </div>
-    <div class="order-summary" id="orderSummary" aria-live="polite"></div>
-    <input type="hidden" name="items_html" id="itemsHtmlField" />
-    <input type="hidden" name="total" id="totalField" />
-    <input type="hidden" name="created_at" id="createdAtField" />
-    <input type="hidden" name="delivery_mode" id="deliveryModeField" />
-    <div class="modal-actions">
-      <button type="button" id="orderCancel" class="btn-ghost">Annuler</button>
-      <button type="button" id="orderSend" class="btn-primary">Envoyer la commande</button>
-    </div>
-    <div id="orderFeedback" class="feedback" aria-live="polite"></div>
-  </form>
+  `;
+
+  showAlert(html);
+
+  // Rendu dynamique selon filtre
+  document.getElementById("expiration-filter").addEventListener("change", (e) => {
+    renderExpirationTable(e.target.value);
+  });
+  renderExpirationTable("all");
+
+  function renderExpirationTable(filter) {
+    let rows = "";
+    comptes.forEach(acc => {
+      const dt = parseDate(acc.expiry);
+      const name = acc.name || "(Sans nom)";
+      if (!dt) {
+        if (filter !== "none" && filter !== "all") return;
+        if (filter === "none" || filter === "all") {
+          rows += `<tr><td><a href="#" onclick="filtrerParNom('${name}')">${name}</a></td><td>—</td><td>Non disponible</td></tr>`;
+        }
+        return;
+      }
+      const daysLeft = Math.ceil((dt - today) / (1000*60*60*24));
+      let statut = "";
+      if (daysLeft < 0) statut = "Expiré";
+      else if (daysLeft <= 30) statut = `Expire dans ${daysLeft} j`;
+      else if (daysLeft <= 90) statut = `Expire dans ${daysLeft} j`;
+      else if (daysLeft <= 180) statut = `Expire dans ${daysLeft} j`;
+      else if (daysLeft <= 365) statut = `Expire dans ${daysLeft} j`;
+      else statut = `Valide (${daysLeft} j)`;
+
+      if (filter === "expired" && daysLeft >= 0) return;
+      if (filter === "1m" && !(daysLeft >= 0 && daysLeft <= 30)) return;
+      if (filter === "3m" && !(daysLeft >= 0 && daysLeft <= 90)) return;
+      if (filter === "6m" && !(daysLeft >= 0 && daysLeft <= 180)) return;
+      if (filter === "1y" && !(daysLeft >= 0 && daysLeft <= 365)) return;
+
+      rows += `<tr>
+        <td><a href="#" onclick="focusAccount('${name}')">${name}</a></td>
+        <td>${dt.toLocaleDateString()}</td>
+        <td>${statut}</td>
+      </tr>`;
+    });
+    const table = `
+      <table style="width:100%; border-collapse:collapse;">
+        <thead><tr>
+          <th>Compte</th><th>Date d’expiration</th><th>Statut</th>
+        </tr></thead>
+        <tbody>${rows || "<tr><td colspan='3'>Aucun résultat</td></tr>"}</tbody>
+      </table>
+    `;
+    document.getElementById("expiration-table").innerHTML = table;
+  }
+}
+
+  
+function focusAccount(name) {
+  const cards = document.querySelectorAll("#accounts-list .account");
+  for (let card of cards) {
+    if (card.textContent.includes(name)) {
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.style.outline = "3px solid #007bff";
+      setTimeout(() => card.style.outline = "", 2000);
+      break;
+    }
+  }
+}
+
+
+function fermerHistoriqueConnexion() {
+  const modal = document.getElementById("historiqueConnexionModal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.style.display = "none";
+  }
+  // Nettoyage visuel éventuel
+  const container = document.getElementById("historique-connexion-content");
+  if (container) container.innerHTML = "";
+  const periode = document.getElementById("periode-affichee");
+  if (periode) periode.textContent = "";
+}
+
+
+function checklist_mp(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const isHidden = (el.style.display === "none" || el.style.display === "");
+  el.style.display = isHidden ? "block" : "none";
+}
+
+
+function ouvrirModalReinitialisation() {
+  closeAllWindowsAndModals();
+  const modal = document.getElementById("nipConfirmModal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.style.display = "flex";
+    const input = document.getElementById("nipConfirmInput");
+    if (input) input.value = "";
+  }
+}
+
+  
+function fermerModalReinitialisation() {
+  const modal = document.getElementById("nipConfirmModal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.style.display = "none";
+  }
+}
+
+  
+function validerReinitialisation() {
+  const nip = (document.getElementById("nipConfirmInput")?.value || "").trim();
+  const user = vaultData.users.find(u => u.username === currentUser);
+  if (!user?.nip) return showTimedAlert("⚠️ Aucun NIP associé. Veuillez en créer un d’abord.");
+  if (nip !== user.nip) return showTimedAlert("❌ NIP incorrect. Suppression annulée.");
+  const confirmationFinale = confirm("⚠️ Êtes-vous sûr de vouloir effacer toutes les données ? Cette action est irréversible.");
+  if (!confirmationFinale) {
+    fermerModalReinitialisation();
+    return showTimedAlert("❌ Suppression annulée.");
+  }
+  vaultData = { users: [], accounts: [], lastLogin: {}, lastModification: {} };
+  saveVault();
+  localStorage.clear();
+  sessionStorage.clear();
+  logout();
+  fermerModalReinitialisation();
+  showTimedAlert("🗑️ Toutes les données ont été supprimées avec succès.");
+}
+
+  
+(function patchOpenReinitConfirmFlow(){
+  window.openReinitConfirm = function() {
+    const user = vaultData.users.find(u => u.username === currentUser);
+    if (!user?.nip) return showTimedAlert("⚠️ Impossible de réinitialiser le fichier: aucun NIP associé. Veuillez en créer un d'abord.");
+    ouvrirModalReinitialisation();
+  };
+})();
+
+  
+
+function validateNipModal() {
+  const nipValue = document.getElementById("nipInput").value.trim();
+  const user = vaultData.users.find(u => u.username === currentUser);
+  if (!/^[a-zA-Z]{4,15}$/.test(nipValue)) return showTimedAlert("❌ Le NIP saisi ne respecte pas les critères. Entre 4 à 15 caractères [a-z, A-Z] sans espaces.");
+  if (user) { user.nip = nipValue; vaultData.lastModification = { user: currentUser, date: new Date().toISOString() }; saveVault(); closeNipModal(); showTimedAlert("✔️ NIP enregistré avec succès !"); afficherDerniereConnexion(); }
+}
+
+  
+function closeNipModal() {
+  const modal = document.getElementById("nipModal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.style.display = "none";
+  }
+  afficherDerniereConnexion();
+}
+
+  
+function openNipUpdateModal() {
+  closeAllWindowsAndModals();
+  const modal = document.getElementById("nipUpdateModal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.style.display = "flex";
+    const oldNip = document.getElementById("oldNipInput");
+    const newNip = document.getElementById("newNipInput");
+    if (oldNip) oldNip.value = "";
+    if (newNip) newNip.value = "";
+  }
+}
+
+  
+function closeNipUpdateModal() {
+  const modal = document.getElementById("nipUpdateModal");
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.style.display = "none";
+  }
+  afficherDerniereConnexion();
+}
+
+  
+function updateNip() {
+  const oldNip = document.getElementById("oldNipInput").value.trim();
+  const newNip = document.getElementById("newNipInput").value.trim();
+  if (!oldNip || !newNip || newNip.length < 4) {
+    return showTimedAlert("❌ NIP invalide ou trop court.");
+  }
+  const user = vaultData.users.find(u => u.username === currentUser);
+  if (!user || user.nip !== oldNip) {
+    return showTimedAlert("❌ Ancien NIP incorrect. Veuillez réessayez");
+  }
+  user.nip = newNip;
+  saveVault();
+  closeNipUpdateModal();
+  showTimedAlert("✔️ NIP mis à jour avec succès.");
+}
+
+  
+function toggleFormulaireModification() {
+  closeAllWindowsAndModals();
+  const modal = document.getElementById('updateAccountModal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    modal.style.display = 'flex';
+    const u = document.getElementById('update-new-username');
+    const p = document.getElementById('update-new-password');
+    const n = document.getElementById('update-nip');
+    if (u) u.value = '';
+    if (p) p.value = '';
+    if (n) n.value = '';
+    setTimeout(() => { if (u) u.focus(); }, 100);
+    const menu = document.getElementById('menuItems');
+    if (menu) menu.classList.remove('show');
+    scrollToTop();
+  } else {
+    showTimedAlert('⚠️ Modale de modification introuvable.');
+  }
+}
+
+  
+function submitUpdateAccount() {
+  const newUsername = document.getElementById("update-new-username").value.trim();
+  const newPassword = document.getElementById("update-new-password").value;
+  const nip = document.getElementById("update-nip").value.trim();
+  const user = vaultData.users.find(u => u.username === currentUser);
+  if (!user || user.nip !== nip) {
+    return showTimedAlert("❌ NIP incorrect.");}
+  if (newUsername) user.username = newUsername;
+  if (newPassword) {
+    const ok = newPassword.length >= 8 && /\d/.test(newPassword) && /[.!@#$%^&*(),?":{}|<>]/.test(newPassword) && /[a-z]/.test(newPassword) && /[A-Z]/.test(newPassword);
+    if (!ok) return showTimedAlert("⚠️ Le nouveau mot de passe ne respecte pas les critères de securité, veuillez réessayez");
+    user.password = newPassword;}
+  saveVault();
+  closeUpdateAccountModal();
+  showTimedAlert("✔️ Compte mis à jour.");
+}
+
+  
+function closeUpdateAccountModal() {
+  const modal = document.getElementById("updateAccountModal");
+  if (modal) modal.classList.add("hidden");
+  afficherDerniereConnexion();
+}
+
+  
+function openReinitConfirm() {
+  closeAllWindowsAndModals();
+  showConfirm("⚠️ Cette action supprimera TOUTES vos données enregistrées, voulez-vous continuez ?.",
+    () => {
+      const user = vaultData.users.find(u => u.username === currentUser);
+      if (!user?.nip) return showTimedAlert("⚠️ Impossible de réinitialiser le fichier <br>Aucun NIP associé a ce compte, veuillez en créer un d'abord.");
+      const nip = prompt("Entrez votre NIP pour confirmer la suppression complète :");
+      if (nip !== user.nip) return showTimedAlert("❌ NIP incorrect. Suppression annulée.");
+      const confirmationFinale = confirm("⚠️ Êtes-vous sûr de vouloir effacer toutes les données ? Cette action est irréversible.");
+      if (!confirmationFinale) return showTimedAlert("❌ Suppression annulée.");
+      vaultData = { users: [], accounts: [], lastLogin: {}, lastModification: {} };
+      saveVault();
+      localStorage.clear();
+      sessionStorage.clear();
+      logout();
+      showTimedAlert("🗑️ Toutes les données ont été supprimées avec succès.");
+    },
+    () => showTimedAlert("❌ Suppression annulée.")
+  );
+}
+
+  
+function validerNipAffichage() {
+  const nipEntré = document.getElementById("nip-verification").value.trim();
+  const user = vaultData.users.find(u => u.username === currentUser);
+  if (user?.nip === nipEntré) {
+    document.getElementById("masked-password").textContent = user.password || "inconnu";
+  } else showTimedAlert("❌ NIP incorrect, vérifiez le NIP ou réessayez.");
+}
+
+  
+async function importEncryptedVault() {
+  const loader = document.getElementById("loader");
+  const loaderText = document.getElementById("loader-text");
+  try {
+    loader.style.display = "flex";
+    loaderText.textContent = "⌛ Chargement en cours...";
+    const masterString = getMasterString();
+    cryptoKey = await getCryptoKey(masterString);
+    const vaultLoaded = await loadVault();
+    if (vaultLoaded) {
+      loaderText.textContent = "✔️ Chargement terminé.";
+      sessionStorage.setItem("vaultImported", "true");
+      renderAccounts();
+      await new Promise(resolve => setTimeout(resolve, 300));
+    } else {
+      loaderText.textContent = "❌ Échec du chargement, vérifiez le fichier ou réessayez.";
+      await new Promise(resolve => setTimeout(resolve, 300));
+    }
+  } catch (e) {
+    loaderText.textContent = `⚠️ Erreur : ${e.message}. Vérifiez le fichier ou réessayez.`;
+    console.error("Erreur détectée :", e);
+    await new Promise(resolve => setTimeout(resolve, 400));
+  } finally {
+    loader.style.display = "none";
+  }
+}
+
+  
+function openFullnameModal() {
+  closeAllWindowsAndModals();
+  const modal = document.getElementById("fullnameModal");
+  if (modal) modal.classList.remove("hidden");
+}
+
+  
+function closeFullnameModal() {
+  const modal = document.getElementById("fullnameModal");
+  if (modal) modal.classList.add("hidden");
+  document.getElementById("fullnameInput").value = "";
+  afficherDerniereConnexion();
+}
+
+  
+function validateFullname() {
+  const name = document.getElementById("fullnameInput").value.trim();
+  if (name.length < 4 || name.replace(/[^a-zA-ZÀ-ÿ]/g, "").length < 4) {
+    return showTimedAlert("❌ Le nom doit contenir au moins 4 lettres.");
+  }
+  const user = vaultData.users.find(u => u.username === currentUser);
+  if (!user) return showTimedAlert("❌ Utilisateur introuvable.");
+  user.fullname = name;
+  saveVault();
+  closeFullnameModal();
+  showTimedAlert("✔️ Nom de compte a été enregistré avec succès !");
+  afficherDerniereConnexion();
+}
+
+  
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+  
+(function ensureChecklistListeners() {
+  function attach() {
+    const registerPasswordInput = document.getElementById("register-password");
+    if (registerPasswordInput && !registerPasswordInput._attachedChecklist) {
+      registerPasswordInput.addEventListener("input", function () {
+        const value = this.value || "";
+        const set = (id, cond, text) => { const el = document.getElementById(id); if (el) el.textContent = (cond ? "✔️ " : "❌ ") + text; };
+        set("req-length-register", value.length >= 8, "Au moins 8 caractères");
+        set("req-digit-register", /\d/.test(value), "Inclure un chiffre");
+        set("req-special-register", /[.!@#$%^&*(),?\":{}|<>]/.test(value), "Inclure un caractère spécial (Ex: .!@#$%^&*(),?:{}|<>)");
+        set("req-lowercase-register", /[a-z]/.test(value), "Inclure une lettre minuscule");
+        set("req-uppercase-register", /[A-Z]/.test(value), "Inclure une lettre majuscule");
+      });
+      registerPasswordInput._attachedChecklist = true;}
+    const updatePasswordInput = document.getElementById("update-new-password");
+    if (updatePasswordInput && !updatePasswordInput._attachedChecklist) {
+      updatePasswordInput.addEventListener("input", function () {
+        const value = this.value || "";
+        const set = (id, cond, text) => { const el = document.getElementById(id); if (el) el.textContent = (cond ? "✔️ " : "❌ ") + text; };
+        set("req-length-modal", value.length >= 8, "Au moins 8 caractères");
+        set("req-digit-modal", /\d/.test(value), "Inclure un chiffre");
+        set("req-special-modal", /[.!@#$%^&*(),?\":{}|<>]/.test(value), "Inclure un caractère spécial");
+        set("req-lowercase-modal", /[a-z]/.test(value), "Inclure une lettre minuscule");
+        set("req-uppercase-modal", /[A-Z]/.test(value), "Inclure une lettre majuscule");
+      });
+      updatePasswordInput._attachedChecklist = true;
+    }}
+  attach();
+  const retryId = setInterval(() => {
+    attach();
+    const r = document.getElementById("register-password") && document.getElementById("update-new-password");
+    if (r) { clearInterval(retryId); }
+  }, 150);
+})();
+
+  
+(function attachGlobalClickHandlers() {
+  function onDocClick(e) {
+    const menu = document.getElementById("menuItems");
+    const container = document.getElementById("menuContainer");
+    if (!menu || !container) return;
+    if (menu.classList.contains("show") && !menu.contains(e.target) && !container.contains(e.target)) {
+      menu.classList.remove("show");
+    }}
+  document.addEventListener("click", onDocClick, { passive: true });
+  document.addEventListener("click", function (e) {
+    document.querySelectorAll('.modal').forEach(modal => {
+      if (!modal.classList.contains('hidden') && e.target === modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+      }});
+  }, { passive: true });
+})();
+
+  
+document.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "visible" && isLoggedIn) {
+    window.resetInactivityTimerUnified?.();
+}});
+
+  
+window.addEventListener("beforeunload", () => {
+  if (isLoggedIn && vaultData && vaultData.lastLogin) {
+    logout();
+    vaultData.lastLogin.logout = new Date().toISOString();
+    try { saveVault(); } catch (e) { console.warn("beforeunload saveVault error:", e); }
+}});
+
+  
+window.toggleForm = toggleForm;
+window.toggleMenu = toggleMenu;
+window.showRegister = function() { document.getElementById("login-container").classList.add("hidden"); document.getElementById("register-container").classList.remove("hidden"); viderChamp(); };
+window.showLogin = function() { document.getElementById("register-container").classList.add("hidden"); document.getElementById("recovery-container").classList.add("hidden"); document.getElementById("login-container").classList.remove("hidden"); viderChamp(); };
+window.importEncryptedVault = importEncryptedVault;
+window.register = register;
+window.login = login;
+window.logout = logout;
+window.previewImage = previewImage;
+window.cancelEdit = cancelEdit;
+window.afficherDerniereConnexion = afficherDerniereConnexion;
+window.afficherHistoriqueConnexion = afficherHistoriqueConnexion;
+window.closeUpdateAccountModal = closeUpdateAccountModal;
+window.submitUpdateAccount = submitUpdateAccount;
+window.openNipUpdateModal = openNipUpdateModal;
+window.closeNipUpdateModal = closeNipUpdateModal;
+window.updateNip = updateNip;
+window.openNipCreation = openNipCreation;
+window.validateNipModal = validateNipModal;
+window.closeNipModal = closeNipModal;
+window.openReinitConfirm = openReinitConfirm;
+window.validateFullname = validateFullname;
+window.openFullnameModal = openFullnameModal;
+window.closeFullnameModal = closeFullnameModal;
+
+  
+//2510191250🔐
+</script>
+
+<div style='margin-top:20px;'>
+    <button id='activateBio' style='padding:10px;background:#4CAF50;color:white;border:none;border-radius:5px;'>Activer biométrie 🔐</button>
+    <button id='bioLogin' style='padding:10px;background:#2196F3;color:white;border:none;border-radius:5px;display:none;'>Connexion biométrique 🔑</button>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const vaultKey = 'vault.data';
+    const activateBtn = document.querySelector('#activateBio');
+    const bioLoginBtn = document.querySelector('#bioLogin');
 
-<div class="overlayy" id="contactOverlay" role="dialog" aria-modal="true">
-  <div class="contact-modal" id="contactModal">
-    <div class="modal-header">
-      <strong>📞 Contactez-nous</strong>
-      <button class="modal-close" id="modalCloseBtn" aria-label="Fermer">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="contact-grid">
-        <div class="contact-card">
-          <div class="contact-icon">📍</div>
-          <div>
-            <h4>Adresse</h4>
-            <p>
-              <a class="contact-link" href="https://www.google.com/maps/search/?api=1&query=40 Rue Arboit, L'Assomption, QC J5W 4P5, CA" target="_blank">
-                40 Rue Arboit, L'Assomption, QC J5W 4P5, CA
-              </a>
-            </p>
-          </div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-icon">☎️</div>
-          <div>
-            <h4>Téléphone</h4>
-            <p>
-              <a class="contact-link" href="tel:+12633841618">+1 (263) 384‑1618</a>
-            </p>
-          </div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-icon">📧</div>
-          <div>
-            <h4>Courriel</h4>
-            <p>
-              <a class="contact-link" href="mailto:lesdelices2dora@gmail.com">lesdelices2dora@gmail.com</a>
-            </p>
-          </div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-icon">🕒</div>
-          <div>
-            <h4>Heures d'ouverture</h4>
-            <p>Lun–Ven : 9h – 17h · Sam–Dim : Fermé<br>Livraisons possibles hors heures</p>
-          </div>
-        </div>
-      </div>
-      <p class="modal-note">🚚 Notre équipe est disponible pour répondre à toutes vos questions.</p>
-    </div>
-  </div>
-</div>
+    let vaultData = JSON.parse(localStorage.getItem(vaultKey)) || {};
 
-  
-<footer class="footer">
-  <div><strong style="color:var(--accent-dark)">Les Délices de Dora .Inc</strong><br>&copy; 2025 GA_PlateForme Tous droits réservés.</div>
-</footer>
+    if (vaultData.bio === true) {
+        bioLoginBtn.style.display = 'inline-block';
+    }
 
-  
-<script src="script.js" defer></script>
+    activateBtn.addEventListener('click', async () => {
+        try {
+            const publicKey = {
+                challenge: new Uint8Array(32),
+                rp: { name: "Secure Login" },
+                user: {
+                    id: new Uint8Array(16),
+                    name: "user@example.com",
+                    displayName: "Utilisateur"
+                },
+                pubKeyCredParams: [{ type: "public-key", alg: -7 }],
+                authenticatorSelection: { userVerification: "required" },
+                timeout: 60000
+            };
 
-  
+            const credential = await navigator.credentials.create({ publicKey });
+            vaultData.bio = true;
+            vaultData.credentialId = btoa(String.fromCharCode(...new Uint8Array(credential.rawId)));
+            localStorage.setItem(vaultKey, JSON.stringify(vaultData));
+            alert('Biométrie activée ✅');
+            bioLoginBtn.style.display = 'inline-block';
+        } catch (err) {
+            alert('Erreur activation biométrie : ' + err);
+        }
+    });
+
+    bioLoginBtn.addEventListener('click', async () => {
+        try {
+            const publicKey = {
+                challenge: new Uint8Array(32),
+                allowCredentials: [{
+                    type: "public-key",
+                    id: Uint8Array.from(atob(vaultData.credentialId), c => c.charCodeAt(0))
+                }],
+                userVerification: "required",
+                timeout: 60000
+            };
+
+            const assertion = await navigator.credentials.get({ publicKey });
+            alert('Connexion biométrique réussie 🔐');
+        } catch (err) {
+            alert('Échec authentification biométrique ❌ : ' + err);
+        }
+    });
+});
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
